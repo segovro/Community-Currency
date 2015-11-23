@@ -1,7 +1,6 @@
-```javascript
-//http://desperado-theory.blogspot.be/2015/05/what-hell-is-p2p-_credit.html
-//http://desperado-theory.blogspot.com.es/2015/08/moneda-con-pagos-y-_creditos-p2p-sin.html
-contract communityCurrency {
+    //http://desperado-theory.blogspot.be/2015/05/what-hell-is-p2p-_credit.html
+    //http://desperado-theory.blogspot.com.es/2015/08/moneda-con-pagos-y-_creditos-p2p-sin.html
+    contract communityCurrency {
 	
 	//communityCurrency currency general variables
 	address _treasury; //the address of the treasury of the DAO. The creator and minter of the currency

@@ -33,7 +33,7 @@ warning: it increases the monetary mass
 ##mintAssignReputation
 the community account can issue as much Reputation it likes and send it to any Member 
 ##transfer
-make a payment: anybody can make a payment if he has sufficient CCUs and / or credit
+make a payment: anybody can make a payment if he has sufficient CCUs and / or credit  
 every payment will update the credit status
 ##credit
 only members can authorize or get a credit

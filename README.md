@@ -2,7 +2,7 @@
 A community currency with zero reserve mutual credit and adjustable parameters  
 #Purpose  
 This is not intended to be a global currency. It is intended to become an ecosystem of community currencies, each of them with different parameters according to the needs of each community.  
-The type of community we mean is local communities (for example a municipality) or communities with charitable, service, participatory or empowering orientation, that run mixed economies with **free market** combined with community **public budget** and public redistributive works. Examples can be local authorities, social movements associations, social economy businesses, workers unions, etc. It includes therefore an (optional) *taxation* fucntion. Each community is supposed to name their currency with a different name. 
+The type of community we mean is local communities (for example a municipality) or communities with charitable, service, participatory or empowering orientation, that run mixed economies with **free market** combined with community **public budget** and public redistributive works. Examples can be local authorities, social movements associations, social economy businesses, workers unions, etc. It includes therefore an (optional) *taxation* function. Each community is supposed to name their currency with a different name. 
 #Decission process
 We decouple the contract running the decission process in the DAO and the currency contract running the monetary mechanics.
 The DAO may use whatever more or less traditional or more innovative democracy to take decissions.   

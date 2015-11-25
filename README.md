@@ -1,5 +1,13 @@
 # Community-Currency
 A community currency with zero reserve mutual credit and adjustable parameters  
+#Purpose  
+This is not intended to be a global currency. It is intended to become an ecosystem of community currencies, each of them with different parameters according to the needs of each community.  
+The type of community we mean is local communities (for example a municipality) or communities with charitable, service, participatory or empowering orientation, that run mixed economies with **free market** combined with community public budget and public redistributive works. Examples can be local authorities, social movements associations, social economy businesses, workers unions, etc. It includes therefore an (optional) *taxation* fucntion. Each community is supposed to name their currency with a different name. 
+#Decission process
+We decouple the contract running the decission process in the DAO and the currency contract running the monetary mechanics.
+The DAO may use whatever more or less traditional or more innovative democracy to take decissions.   
+Once the DAO has taken the main monetary decissions it passes the wished parameters to the currency contract through the two accounts allowed to change the settings of the currency: the treasury account and the community account.
+At creating the currency contract you may set who they are.
 #Theory  
 [What the hell is p2p credit](http://desperado-theory.blogspot.be/2015/05/what-hell-is-p2p-credit.html)  
 [Moneda con pagos y creditos p2p sin reserva](http://desperado-theory.blogspot.com.es/2015/08/moneda-con-pagos-y-creditos-p2p-sin.html)  

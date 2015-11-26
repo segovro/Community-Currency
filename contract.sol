@@ -35,7 +35,7 @@ contract communityCurrency {
 	event Transfer(uint _payment, int _myBalanceCCUs, address indexed _to);
 	event Credit(uint _credit, uint _blocks, uint _myunitsOfTrust, uint _myReputationBalance, address indexed _borrower);
 
-//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
+	//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	//a community can opt to name itself member or not and therefore give credits or not
 	function acceptMember (address _newMember) {
         if (msg.sender != _community) return;
@@ -43,7 +43,7 @@ contract communityCurrency {
         balancesOf[_newMember]._communityCUnits = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
         balancesOf[_newMember]._since = block.number;
-       }
+       	}
 	//the community account can kick out members
 	function kickOutMember (address _oldMember) {
         if (msg.sender != _community) return;
@@ -52,9 +52,9 @@ contract communityCurrency {
         balancesOf[_oldMember]._credit = 0;
         balancesOf[_oldMember]._deadline = 0;
         balancesOf[_oldMember]._since = block.number;
-       }
+       	}
 
-//the treasury account can change the currency parameters;
+	//the treasury account can change the currency parameters;
 	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR) {
 		_vatRate = _newVatRate;
 		_rewardRate = _newRewardRate;
@@ -62,7 +62,7 @@ contract communityCurrency {
 		_iniMemberReputation = _newIniR;
 	}
 	
-//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
+	//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
 	//mint communityCurrency
 	//warning: it increases the monetary mass. 
 	function mintAssignCCUs (address _beneficiary, int _createCCUs) {
@@ -71,7 +71,7 @@ contract communityCurrency {
 		balancesOf[_beneficiary]._communityCUnits += _createCCUs;
 	}
 
-//the community account can issue as much Reputation it likes and send it to any Member; 
+	//the community account can issue as much Reputation it likes and send it to any Member; 
 	//mint Reputation
 	function mintAssignReputation (address _beneficiary, uint _createReputation) {
         if (msg.sender != _community) return;
@@ -79,7 +79,7 @@ contract communityCurrency {
         balancesOf[_beneficiary]._reputation += _createReputation;
        }
 	
-//function make a payment
+	//function make a payment
 	//anybody can make a payment if he has sufficient CCUs and or credit
 	function transfer(address _payee, uint _payment) {
 	//update the credit status
@@ -133,11 +133,11 @@ contract communityCurrency {
 		}
 
 	//myWallet
-    function myWallet() constant returns (int _myCCUs, uint _myReputation, uint _myCredit, uint _myDeadline, bool _amIMember) {
+    	function myWallet() constant returns (int _myCCUs, uint _myReputation, uint _myCredit, uint _myDeadline, bool _amIMember) {
         _myCCUs = balancesOf[msg.sender]._communityCUnits;
 		_myReputation = balancesOf[msg.sender]._reputation;
 		_myCredit = balancesOf[msg.sender]._credit;
 		_myDeadline = balancesOf[msg.sender]._deadline;
 		_amIMember = balancesOf[msg.sender]._isMember;
-    }
+    	}
 }

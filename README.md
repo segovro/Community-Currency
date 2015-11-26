@@ -1,9 +1,11 @@
 #Community-Currency
 A community currency **template** with zero reserve mutual credit and adjustable parameters  
+
 #Purpose  
 This is not intended to be a global currency. It is intended to become an ecosystem of community currencies using this template, each of them with different parameters according to the needs of each community.  
 The type of community we mean is local communities (for example a municipality) or communities with charitable, service, participatory or empowering orientation, that run mixed economies with **free market** combined with community **public budget** and public redistributive works. Examples can be local authorities, social movements associations, social economy businesses, workers unions, etc. It includes therefore an (optional) *taxation* function. Each community is supposed to name their currency with a different name. 
-#Decission process
+
+#Currency Governance and monetary decission process
 We decouple the contract running the decission process in the DAO and the currency contract running the monetary mechanics.
 The DAO may use whatever more or less traditional or more innovative democracy to take decissions.   
 Once the DAO has taken the main monetary decissions it passes the wished parameters to the currency contract through the two accounts allowed to change the settings of the currency: the treasury account and the community account.
@@ -11,6 +13,7 @@ At creating the currency contract you may set who they are.
 #Theory  
 [What the hell is p2p credit](http://desperado-theory.blogspot.be/2015/05/what-hell-is-p2p-credit.html)  
 [Moneda con pagos y creditos p2p sin reserva](http://desperado-theory.blogspot.com.es/2015/08/moneda-con-pagos-y-creditos-p2p-sin.html)  
+
 #General  
 The currency is supposed to be managed by a community. Nevertheless, the currency can be used by anybody having an ethereum account to perform payment transactions. The community is managed by a DAO at ethereum or outside ethereum, or just run by human relations. The currency contract does not cover how the DAO is managed, the votings and decision mechanisms. 
 The currency desing presumes that all monetary decissions of the community are implemented through two trusted accounts:
@@ -18,6 +21,7 @@ The currency desing presumes that all monetary decissions of the community are i
 * the **community** account. Admits or kickouts members. It can mint and assign amounts of **Reputation**. 
 **Users** making a transfer can be anybody having an ethereum account. 
 **Members**, additionally, can authorize credits to other members. Anybody, including Members, may have different ethereum accounts. The community is supposed to have external mechanisms to establish the **identity** of a person, and therefore establish which of his accounts this person prefers to use as the unique account as member.  
+
 #p2p Credits  
 Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Credit to another member, with a deadline. Its up to the Money Lender to investigate the borrowers solvency. No tool is provided within the currency contract to analyze the solvency. The system generates the necessary Community Currency Units and adds them to the CCUs balance of the borrower. The Money Lender pays with a reputation cost measures in **Units of trust**. The Units of Trust to endorse the credit is proportional to the amount and the time of the credit.   
 When the deadline is over:

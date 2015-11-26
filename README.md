@@ -1,4 +1,4 @@
-# Community-Currency
+#Community-Currency
 A community currency **template** with zero reserve mutual credit and adjustable parameters  
 #Purpose  
 This is not intended to be a global currency. It is intended to become an ecosystem of community currencies using this template, each of them with different parameters according to the needs of each community.  
@@ -16,8 +16,8 @@ The currency is supposed to be managed by a community. Nevertheless, the currenc
 The currency desing presumes that all monetary decissions of the community are implemented through two trusted accounts:
 * the **treasury** account. Creates the currency, sets the basic parameters and deploys it to the blockchain. It can mint and assign amounts of **CCUs** (Community Currency Units).
 * the **community** account. Admits or kickouts members. It can mint and assign amounts of **Reputation**. 
-
-**Users** making transfer can be anybody having an ethereum account. **Members**, additionally, can authorize credits to other members. Anybody, including Members may have different ethereum accounts. The community is supposed to have external mechanisms to establish the **identity** of a person, and therefore establish which of his accounts this person prefers to use as the unique account as member.  
+**Users** making a transfer can be anybody having an ethereum account. 
+**Members**, additionally, can authorize credits to other members. Anybody, including Members, may have different ethereum accounts. The community is supposed to have external mechanisms to establish the **identity** of a person, and therefore establish which of his accounts this person prefers to use as the unique account as member.  
 #p2p Credits  
 Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Credit to another member, with a deadline. Its up to the Money Lender to investigate the borrowers solvency. No tool is provided within the currency contract to analyze the solvency. The system generates the necessary Community Currency Units and adds them to the CCUs balance of the borrower. The Money Lender pays with a **Reputation Cost**. The cost is proportional to the amount and the time of the credit. When the deadline is over:
 * if the credit has been returned, and the balance of the borrower is again positive, the Money Lender gets back the Reputation Cost and a reward in Reputation. In the future he will be able to authorize larger credits.
@@ -28,6 +28,8 @@ Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Cr
 - **community**; the address of the Community account. Where donations and taxes are paid. Account used to pay community works  
 - **vatRate**; the depreciation at each transaction. The VAT to be paid to the DAO at the community account. % x 100  
 - **rewardRate**; reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100  
+- **iniMemberCCUs**; intitial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member. By default, the total monetary mass is proportional to the number of members
+- **iniMemberReputation**; initial Reputation given to any new member
 
 #Functions
 ##acceptMember
@@ -35,6 +37,8 @@ the community account can accept accounts as members
 a community can opt to name the community account as member or not and therefore give credits or not from that account
 ##kickOutMember
 the community acount can kick out members
+##newParameters  
+the treasury account can change the currency parameters
 ##mintAssignCCUs
 the treasury account can issue as much communityCurrency it likes and send it to any Member  
 warning: it increases the monetary mass 

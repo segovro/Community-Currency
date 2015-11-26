@@ -5,8 +5,8 @@ contract communityCurrency {
 	address _community; //the address of the Community account. Where donations and taxes are paid. Account used to pay community works. 
 	int _vatRate; //the depreciation at each transaction. The VAT to be paid to the DAO at the community account. % x 100
 	uint _rewardRate; //reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100
-	int _iniCommunityCUnits; //Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
-	uint _iniReputation; //Community Currency Units given to any new member
+	int _iniMemberCCUs; //initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
+	uint _iniMemberReputation; //initial Reputation given to any new member
 	
 	//communityCurrency currency parameters and key addresses of a given Community	
 	function communityCurrency () {
@@ -14,8 +14,8 @@ contract communityCurrency {
 		_community = 0x06400992be45bc64a52b5c55d3df84596d6cb4a1; 
 		_vatRate = 3;
 		_rewardRate = 20;
-		_iniCommunityCUnits = 25000;
-		_iniReputation = 100000;
+		_iniMemberCCUs = 25000;
+		_iniMemberReputation = 100000;
 	}
 	
 	//members wallet
@@ -35,13 +35,13 @@ contract communityCurrency {
 	event Transfer(uint _payment, int _myBalanceCCUs, address indexed _to);
 	event Credit(uint _credit, uint _blocks, uint _myunitsOfTrust, uint _myReputationBalance, address indexed _borrower);
 
-	//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
+//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	//a community can opt to name itself member or not and therefore give credits or not
 	function acceptMember (address _newMember) {
         if (msg.sender != _community) return;
         balancesOf[_newMember]._isMember = true;
-        balancesOf[_newMember]._communityCUnits = _iniCommunityCUnits;
-        balancesOf[_newMember]._reputation = _iniReputation;
+        balancesOf[_newMember]._communityCUnits = _iniMemberCCUs;
+        balancesOf[_newMember]._reputation = _iniMemberReputation;
         balancesOf[_newMember]._since = block.number;
        }
 	//the community account can kick out members
@@ -54,15 +54,15 @@ contract communityCurrency {
         balancesOf[_oldMember]._since = block.number;
        }
 
-	//the treasury account can change the currency parameters;
+//the treasury account can change the currency parameters;
 	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR) {
 		_vatRate = _newVatRate;
 		_rewardRate = _newRewardRate;
-		_iniCommunityCUnits = _newIniCCUs;
-		_iniReputation = _newIniR;
+		_iniMemberCCUs = _newIniCCUs;
+		_iniMemberReputation = _newIniR;
 	}
 	
-	//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
+//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
 	//mint communityCurrency
 	//warning: it increases the monetary mass. 
 	function mintAssignCCUs (address _beneficiary, int _createCCUs) {
@@ -71,7 +71,7 @@ contract communityCurrency {
 		balancesOf[_beneficiary]._communityCUnits += _createCCUs;
 	}
 
-	//the community account can issue as much Reputation it likes and send it to any Member; 
+//the community account can issue as much Reputation it likes and send it to any Member; 
 	//mint Reputation
 	function mintAssignReputation (address _beneficiary, uint _createReputation) {
         if (msg.sender != _community) return;
@@ -79,7 +79,7 @@ contract communityCurrency {
         balancesOf[_beneficiary]._reputation += _createReputation;
        }
 	
-	//function make a payment
+//function make a payment
 	//anybody can make a payment if he has sufficient CCUs and or credit
 	function transfer(address _payee, uint _payment) {
 	//update the credit status
@@ -133,11 +133,11 @@ contract communityCurrency {
 		}
 
 	//myWallet
-    	function myWallet() constant returns (int _myCCUs, uint _myReputation, uint _myCredit, uint _myDeadline, bool _amIMember) {
+    function myWallet() constant returns (int _myCCUs, uint _myReputation, uint _myCredit, uint _myDeadline, bool _amIMember) {
         _myCCUs = balancesOf[msg.sender]._communityCUnits;
 		_myReputation = balancesOf[msg.sender]._reputation;
 		_myCredit = balancesOf[msg.sender]._credit;
 		_myDeadline = balancesOf[msg.sender]._deadline;
 		_amIMember = balancesOf[msg.sender]._isMember;
-    	}
+    }
 }

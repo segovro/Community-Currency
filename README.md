@@ -40,6 +40,9 @@ When the deadline is over:
 - **iniMemberCCUs**; intitial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member. By default, the total monetary mass is proportional to the number of members
 - **iniMemberReputation**; initial Reputation given to any new member
 
+#Indicators
+each account has an activity indicator showing the average GDP it is moving. It is using the basic monetarist formula of M x C average over time. In practice gdpActivity = AVERAGE (payment/timeDelta)
+
 #Functions
 ##acceptMember
 the community account can accept accounts as members  
@@ -58,13 +61,18 @@ make a payment: anybody can make a payment if he has sufficient CCUs and / or cr
 every payment will update the credit status
 ##credit
 only members can authorize or get a credit
-##myWallet
-gives you
-- myCCUs
-- myReputation
-- myCredit
-- myDeadline
-- amIMember
+
+##monitorWallet
+if you are authorized it gives you the account data
+- _communityCUnits	
+- _credit
+- _deadline
+- _moneyLender
+- _reputation
+- _unitsOfTrust
+- _isMember
+- _last
+- _gdpActivity
 
 
 

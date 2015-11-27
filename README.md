@@ -27,7 +27,8 @@ Within the community, the members have additional obligations and benefits. They
 
 
 #p2p Credits  
-Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Credit to another member, with a deadline. Its up to the Money Lender to investigate the borrowers solvency. No tool is provided within the currency contract to analyze the solvency. The system generates the necessary Community Currency Units and adds them to the CCUs balance of the borrower. The Money Lender pays with a reputation cost measured in endorsed **Units of Trust**. The Units of Trust needed to endorse the credit is proportional to the amount and the time of the credit.   
+Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Credit to another member, with a deadline. Its up to the Money Lender to investigate the borrowers solvency. No algorithm is provided within the currency contract to analyze the solvency. Just an activity indicator.   
+Once the credit is approved the system generates the necessary Community Currency Units and adds them to the CCUs balance of the borrower. The Money Lender pays with a reputation cost measured in endorsed **Units of Trust**. The Units of Trust needed to endorse the credit is proportional to the amount and the time of the credit.   
 When the deadline is over:
 * if the credit has been returned, and the balance of the borrower is again positive, the Money Lender gets back the Reputation Cost and a reward in Reputation. In the future he will be able to authorize larger credits.
 * if the credit has not been returned, and the balance of the borrower is still negative, the Money Lender loses the Reputation Cost and a fine in Reputation. In the future he will be able to authorize only smaller credits. The borrower gets the account blocked until the debt is covered by future incomes. The Community has the option to kick this member out.  

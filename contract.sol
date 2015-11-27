@@ -1,6 +1,6 @@
 contract communityCurrency {
 	
-	//communityCurrency currency general variables
+	//communityCurrency general variables
 	address _treasury; //the address of the treasury of the DAO. The creator and minter of the currency
 	address _community; //the address of the Community account. Where donations and taxes are paid. Account used to pay community works. 
 	int _vatRate; //the depreciation at each transaction. The VAT to be paid to the DAO at the community account. % x 100
@@ -8,7 +8,7 @@ contract communityCurrency {
 	int _iniMemberCCUs; //initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
 	uint _iniMemberReputation; //initial Reputation given to any new member
 	
-	//communityCurrency currency parameters and key addresses of a given Community	
+	//communityCurrency parameters and key addresses of a given Community	
 	function communityCurrency () {
 		_treasury = msg.sender;  
 		_community = 0x06400992be45bc64a52b5c55d3df84596d6cb4a1; 
@@ -118,7 +118,7 @@ contract communityCurrency {
 			balancesOf[_community]._communityCUnits += _amountCCUs * _vatRate/100;
 			Transfer(_payment, balancesOf[msg.sender]._communityCUnits, _payee);
 	//update the Activity indicator
-			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * _last + _payment)/block.number;
+			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/block.number;
 			balancesOf[msg.sender]._last = block.number;
 		}
 	}
@@ -142,21 +142,21 @@ contract communityCurrency {
 
   	//monitor Wallet
     	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, uint _getLast, uint _getGdpActivity  ) {
-		if ((_monitored = msg.sender) or (msg.sender = _community) or (msg.sender = balancesOf[_monitored]._moneyLender) {
-    	_getCCUs = balancesOf[monitored]._communityCUnits;	
-		_getCredit = balancesOf[monitored]._credit;
-		_getDeadline = balancesOf[monitored]._deadline;
-		_getMoneyLender = balancesOf[monitored]._moneyLender;
-		_getUnitsOfTrust = balancesOf[monitored]._unitsOfTrust;
-		_getIsMember = balancesOf[monitored]._isMember;
-		_getReputation = balancesOf[monitored]._reputation;
-		_getLast = balancesOf[monitored]._last;
-		_getGdpActivity = balancesOf[monitored]._gdpActivity;
+		if ((_monitored == msg.sender) || (msg.sender == _community) || (msg.sender == balancesOf[_monitored]._moneyLender)) {
+    	_getCCUs = balancesOf[_monitored]._communityCUnits;	
+		_getCredit = balancesOf[_monitored]._credit;
+		_getDeadline = balancesOf[_monitored]._deadline;
+		_getMoneyLender = balancesOf[_monitored]._moneyLender;
+		_getUnitsOfTrust = balancesOf[_monitored]._unitsOfTrust;
+		_getIsMember = balancesOf[_monitored]._isMember;
+		_getReputation = balancesOf[_monitored]._reputation;
+		_getLast = balancesOf[_monitored]._last;
+		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
 		}
     	}
     
-   	//authorize monitoring
-   	function accessMyWallet (address _authorized) {
+ 	//authorize monitoring
+	   function accessMyWallet (address _authorized) {
 	   //during a credit, only the money lender and the community have access
 	   //normally, the authorization to monitor own accounts is given to a candidate money lender
 	   if (balancesOf[msg.sender]._credit != 0) return;

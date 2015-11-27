@@ -25,7 +25,7 @@ The currency desing presumes that all monetary decissions of the community are i
 - It builds as well on the analysis made by the EU/FP7 project [D-CENT: Freecoin Toolchain Design and application to Pilots](www.dcentproject.eu) about the funcional requirements of the EUROCAT currency: [Design of Social Digital Currency](http://dcentproject.eu/wp-content/uploads/2015/10/design_of_social_digital_currency_publication.pdf)  
 
 #General  
-The currency is supposed to be used within a community. Nevertheless, the currency can be used by anybody having an ethereum account to perform payment transactions. Whith regards payments it works as any other free market monetary token. Nevertheless, anybody using the currency pays a VAT for every transaction to the community, but no other taxes.   
+The currency is supposed to be used within a community. Nevertheless, the currency can be used by anybody having an ethereum account to perform standard payment transactions. Whith regards payments it works as any other free market monetary token. Nevertheless, anybody using the currency pays a VAT for every transaction to the community, but no other taxes.   
 Within the community, the members have additional obligations and benefits. They can be endorsed with **Trust** by peer members to get credit lines. 
 
 

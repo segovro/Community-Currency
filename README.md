@@ -83,4 +83,4 @@ if you are authorized it gives you the account data. The community account has a
 - _gdpActivity
 
 ##accessMyWallet  
-authorize monitoring to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 
+authorize monitoring my wallet to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 

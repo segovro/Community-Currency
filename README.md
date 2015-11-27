@@ -8,7 +8,7 @@ The type of community we mean is local communities (for example a municipality) 
 #Currency Governance and monetary decission process
 We decouple the contract running the decission process in a supposed DAO and the currency contract running the monetary mechanics.
 The DAO may use whatever more or less traditional or more or less innovative democracy to take decissions.   
-The community is supposed to be managed by a DAO at ethereum or outside ethereum, or just run by a DAO using handwritten notebooks or any eGovernence software. The currency contract does not cover how the DAO is managed, the votings and decision mechanisms.   
+The community is supposed to be managed by a DAO at ethereum or outside ethereum, or just run by a DAO using handwritten notebooks or any eGovernance software. The currency contract does not cover how the DAO is managed, the votings and decision mechanisms.   
 Once the DAO has taken the main monetary decissions it passes the wished parameters to the currency contract through the two accounts allowed to change the settings of the currency: the **treasury** account and the **community** account.
 At creating the currency contract you may set who they are.  
 The currency desing presumes that all monetary decissions of the community are implemented through two trusted accounts:

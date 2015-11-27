@@ -45,6 +45,7 @@ When the deadline is over:
 Each account has an **activity indicator** showing the average GDP it is moving. It is using the basic monetarist formula of M x C average over time. In practice gdpActivity = AVERAGE (payment/timeDelta)  
 The to-be money lender can access this indicator  
 The community can access this indicator  
+However, the indicator is not used mechanically to take any decission through an algotiyhm, for example authorize a credit. We assume always a human intermediation to interpretate the results. 
 
 #Functions
 ##acceptMember

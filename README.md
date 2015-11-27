@@ -41,7 +41,9 @@ When the deadline is over:
 - **iniMemberReputation**; initial Reputation given to any new member
 
 #Indicators
-each account has an activity indicator showing the average GDP it is moving. It is using the basic monetarist formula of M x C average over time. In practice gdpActivity = AVERAGE (payment/timeDelta)
+Each account has an activity indicator showing the average GDP it is moving. It is using the basic monetarist formula of M x C average over time. In practice gdpActivity = AVERAGE (payment/timeDelta)  
+The to-be money lender can access this indicator 
+The community may can access this indicator  
 
 #Functions
 ##acceptMember

@@ -40,6 +40,7 @@ When the deadline is over:
 - **treasury**; the address of the treasury of the DAO. The creator and minter of the currency  
 - **community**; the address of the Community account. Where donations and taxes are paid. Account used to pay community works  
 - **vatRate**; the depreciation at each transaction. The VAT to be paid to the DAO at the community account. % x 100  
+- *demurrage*; a periodic depretiation on the moentary assets. Not used. Judget as unwanted   
 - **rewardRate**; reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100  
 - **iniMemberCCUs**; intitial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member. By default, the total monetary mass is proportional to the number of members
 - **iniMemberReputation**; initial Reputation given to any new member

@@ -66,7 +66,7 @@ every payment will update the credit status
 only members can authorize or get a credit
 
 ##monitorWallet
-if you are authorized it gives you the account data
+if you are authorized it gives you the account data. The community account has access to all accounts
 - _communityCUnits	
 - _credit
 - _deadline
@@ -77,5 +77,5 @@ if you are authorized it gives you the account data
 - _last
 - _gdpActivity
 
-
-
+##accessMyWallet  
+authorize monitoring to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 

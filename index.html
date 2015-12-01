@@ -1,0 +1,131 @@
+<!--very first MOCKUP draft-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Community Currency</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+///First web3.eth.watch code to monitor coinbase
+	web3.eth.watch('chain').changed(function(){
+    var coinbase = web3.eth.coinbase;
+	document.getElementById('coinbase').innerText = coinbase
+	var balance = web3.eth.balanceAt(coinbase);
+  	document.getElementById('balance').innerText = web3.toDecimal(balance);
+});
+///Insert your contract address var here:
+
+</script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+	  background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency" target="blank">ΞCC Community Currency </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+      	<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="index.html"><span class="glyphicon glyphicon-piggy-bank"></span> Wallet</a>
+          <ul class="dropdown-menu">
+          	<li class="active"><a href="index.html"><span class="glyphicon glyphicon-plus"></span> Account balance</a></li>
+          	<li><a href="creditLine.html"><span class="glyphicon glyphicon-minus"></span> Credit line</a></li>
+          	<li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> 
+        	<li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        	
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> Trust</a>
+          <ul class="dropdown-menu">
+          	<li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> 
+        	<li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> 
+        	<li><a href="endorseCredit.html"><span class="glyphicon glyphicon-check"></span> Endorse P2P Credit</a></li> 
+          </ul>
+        </li>
+        <li><a href="addressBook.html"><span class="glyphicon glyphicon-book"></span> Address book</a></li> 
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="management.html"><span class="glyphicon glyphicon-menu-hamburger"></span>  Management</a>
+          <ul class="dropdown-menu">
+        	<li><a href="community.html"><span class="glyphicon glyphicon-flag"></span> Community</a></li> 
+        	<li><a href="treasury.html"><span class="glyphicon glyphicon-lock"></span> Treasury</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container bg-3 text-center">    
+  <div class="row">
+    <div class="col-sm-4">
+      <h3><span class="glyphicon glyphicon-plus"></span> Balance</h3>
+        <div class="form-group">
+		    <label for="account">Account:</label>
+		    <output class="form-control" id="account"></output>
+		 </div>
+  	 	<div class="form-group">
+		    <label for="communityCUnits">Community Currency Balance in ΞCC:</label>
+		    <output class="form-control" id="communityCUnits"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="communityCUnits">Average Activity in ΞCC/blocks:</label>
+		    <output class="form-control" id="communityCUnits"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="isMember">Member of the Community:</label>
+		    <output class="form-control" id="isMember"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="reputation">Reputation in UoT:</label>
+		    <output class="form-control" id="reputation"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="available">Last transaction:</label>
+		    <output class="form-control" id="available"></output>
+		 </div>
+   	</div>    
+   </div>
+</div>
+<br>
+
+
+
+<footer class="container">
+<div class="row">
+	<div class="col-sm-3">
+	<img src="https://15254b2dcaab7f5478ab-24461f391e20b7336331d5789078af53.ssl.cf1.rackcdn.com/ethereum.vanillaforums.com/favicon_85d47ba50743e3c3.ico" height="50" />
+	<img src="https://github.com/ethereum/meteor-dapp-wallet/blob/master/app/public/wallet-icon.png?raw=true" />
+	</div>
+	<div class="col-sm-3">Peers: <strong id="blockNumber"></strong></div>
+	<div class="col-sm-3">Block Number: <strong id="blockNumber"></strong></div>
+  	<div class="col-sm-3">Coinbase Address: <strong id="coinbase"></strong></div>
+  	<div class="col-sm-3">Balance in ether: <strong id="balance"></strong></div>
+  	<div class="col-sm-3">Contract: <strong id="contractString"></strong></div>
+</div>
+</footer>
+
+</body>
+</html>

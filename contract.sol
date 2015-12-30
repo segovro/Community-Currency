@@ -57,15 +57,22 @@ contract communityCurrency {
 
 	//the treasury account can change the currency parameters, including a new Community address;
 	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR, address _newCommunity ) {
+		if (msg.sender != _treasury) return;
 		_vatRate = _newVatRate;
 		_rewardRate = _newRewardRate;
 		_iniMemberCCUs = _newIniCCUs;
 		_iniMemberReputation = _newIniR;
+	}
+	
+	//the treasury account can change to a new community address;
+	function newCommunity (address _newCommunity ) {
+		if (msg.sender != _treasury) return;
 		_community = _newCommunity;
 	}
 	
-	//the community account can change to a new Treasury address;
+	//the community account can change to a new treasury address;
 	function newTreasury (address _newTreasury ) {
+		if (msg.sender != _community) return;
 		_treasury = _newTreasury;
 	}
 	
@@ -169,7 +176,3 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 }
-
-
-
-

@@ -64,6 +64,11 @@ contract communityCurrency {
 		_community = _newCommunity;
 	}
 	
+	//the community account can change to a new Treasury address;
+	function newTreasury (address _newTreasury ) {
+		_treasury = _newTreasury;
+	}
+	
 	//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
 	//mint communityCurrency
 	//warning: it increases the monetary mass. 
@@ -164,5 +169,7 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 }
+
+
 
 

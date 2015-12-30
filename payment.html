@@ -1,22 +1,12 @@
-<!--very first MOCKUP draft-->
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Community Currency</title>
+  <title>Payment</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-///First web3.eth.watch code to monitor coinbase
-	web3.eth.watch('chain').changed(function(){
-    var coinbase = web3.eth.coinbase;
-	document.getElementById('coinbase').innerText = coinbase
-	var balance = web3.eth.balanceAt(coinbase);
-  	document.getElementById('balance').innerText = web3.toDecimal(balance);
-});
-///Insert your contract address var here:
 
 </script>
   <style>
@@ -26,12 +16,7 @@
       border-radius: 0;
     }
     
-    /* Add a gray background color and some padding to the footer */
-    footer {
-	  background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
+ </style>
 </head>
 <body>
 
@@ -43,7 +28,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency" target="blank">ΞCC Community Currency </a>
+    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency" target="blank">EthCC Community Currency </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -91,8 +76,8 @@
 		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
 		  </div>
 		  <div class="form-group">
-		    <label for="amount">Amount in ΞCC:</label>
-		    <input type="text" class="form-control" id="amount" placeholder="Enter amount in ΞCC">
+		    <label for="amount">Amount in EthCC:</label>
+		    <input type="text" class="form-control" id="amount" placeholder="Enter amount in EthCC">
 		  </div>
 		  <div class="checkbox">
 		        <label><input type="checkbox"> Remember me</label>
@@ -102,20 +87,6 @@
     </div>
   </div>
 </div><br>
-
-<footer class="container">
-<div class="row">
-	<div class="col-sm-3">
-	<img src="https://15254b2dcaab7f5478ab-24461f391e20b7336331d5789078af53.ssl.cf1.rackcdn.com/ethereum.vanillaforums.com/favicon_85d47ba50743e3c3.ico" height="50" />
-	<img src="https://github.com/ethereum/meteor-dapp-wallet/blob/master/app/public/wallet-icon.png?raw=true" />
-	</div>
-	<div class="col-sm-3">Peers: <strong id="blockNumber"></strong></div>
-	<div class="col-sm-3">Block Number: <strong id="blockNumber"></strong></div>
-  	<div class="col-sm-3">Coinbase Address: <strong id="coinbase"></strong></div>
-  	<div class="col-sm-3">Balance in ether: <strong id="balance"></strong></div>
-  	<div class="col-sm-3">Contract: <strong id="contractString"></strong></div>
-</div>
-</footer>
 
 </body>
 </html>

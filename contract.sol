@@ -11,7 +11,7 @@ contract communityCurrency {
 	//communityCurrency parameters and key addresses of a given Community	
 	function communityCurrency () {
 		_treasury = msg.sender;  
-		_community = 0x06400992be45bc64a52b5c55d3df84596d6cb4a1; 
+		_community = msg.sender; 
 		_vatRate = 3;
 		_rewardRate = 20;
 		_iniMemberCCUs = 25000;
@@ -55,12 +55,13 @@ contract communityCurrency {
         balancesOf[_oldMember]._last = block.number;
     }
 
-	//the treasury account can change the currency parameters;
-	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR) {
+	//the treasury account can change the currency parameters, including a new Community address;
+	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR, address _newCommunity ) {
 		_vatRate = _newVatRate;
 		_rewardRate = _newRewardRate;
 		_iniMemberCCUs = _newIniCCUs;
 		_iniMemberReputation = _newIniR;
+		_community = _newCommunity;
 	}
 	
 	//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
@@ -154,12 +155,14 @@ contract communityCurrency {
 		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
 		}
     	}
-    
- 	//authorize monitoring
-	   function accessMyWallet (address _authorized) {
+	
+   //authorize monitoring
+   function accessMyWallet (address _authorized) {
 	   //during a credit, only the money lender and the community have access
 	   //normally, the authorization to monitor own accounts is given to a candidate money lender
 	   if (balancesOf[msg.sender]._credit != 0) return;
 	   balancesOf[msg.sender]._moneyLender = _authorized;
-   	}
+   }
 }
+
+

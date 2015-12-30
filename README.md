@@ -57,8 +57,12 @@ the community account can accept accounts as members
 a community can opt to name the community account as member or not and therefore give credits or not from that account
 ##kickOutMember
 the community account can kick out members
+##newCommunity
+the treasury account can change the community delegate address
 ##newParameters  
 the treasury account can change the currency parameters
+##newTreasury
+the community delegate account can change the treasury address
 ##mintAssignCCUs
 the treasury account can issue as much communityCurrency it likes and send it to any Member  
 warning: it increases the monetary mass 

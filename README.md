@@ -73,7 +73,6 @@ make a payment: anybody can make a payment if he has sufficient CCUs and / or cr
 every payment will update the credit status
 ##credit
 only members can authorize or get a credit
-
 ##monitorWallet
 if you are authorized it gives you the account data. The community account has access to all accounts
 - _communityCUnits	
@@ -85,6 +84,9 @@ if you are authorized it gives you the account data. The community account has a
 - _isMember
 - _last
 - _gdpActivity
-
 ##accessMyWallet  
 authorize monitoring my wallet to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 
+
+#Thumbnails
+##Wallet
+![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057887/cc3c2f50-af13-11e5-845a-7d198ae53dae.png)

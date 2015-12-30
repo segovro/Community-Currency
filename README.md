@@ -96,7 +96,7 @@ authorize monitoring my wallet to a particular account. Normally, the authorizat
 ![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057902/14e0dc24-af14-11e5-8acf-4bddf4828ba6.png)
 ##Endorse P2P Credit
 ![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057914/490938d4-af14-11e5-9942-6eee9e5309fd.png)
-##Monitor Window for Money Lender 
+##Monitoring window for Money Lender 
 ![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057929/70f8f9ce-af14-11e5-872c-27c7fd0f5408.png)
 ##Treasury functions 
 ![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057952/90f2eb7c-af14-11e5-8210-44d43edaee7b.png)

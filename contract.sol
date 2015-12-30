@@ -55,8 +55,8 @@ contract communityCurrency {
         balancesOf[_oldMember]._last = block.number;
     }
 
-	//the treasury account can change the currency parameters, including a new Community address;
-	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR, address _newCommunity ) {
+	//the treasury account can change the currency parameters;
+	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR ) {
 		if (msg.sender != _treasury) return;
 		_vatRate = _newVatRate;
 		_rewardRate = _newRewardRate;

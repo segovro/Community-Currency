@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Community Currency</title>
+  <title>Wallet</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -23,14 +23,10 @@
 <div class="container bg-3 text-center">    
   <div class="row">
     <div class="col-sm-4">
-      <h3><span class="glyphicon glyphicon-user"></span> My account</h3>
-	      <div>
-	      <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=36PrZ1KHYMpqSyAQXSG8VwbUiq2EogxLo2&chld=H|0" />
-	      </div>
-	      <br/>
+      <h3><span class="glyphicon glyphicon-piggy-bank"></span> My Balance</h3>
         <div class="form-group">
 		    <label for="account">My Account:</label>
-		    <output class="form-control" id="account">36PrZ1KHYMpqSyAQXSG8VwbUiq2EogxLo2</output>
+		    <output class="form-control" id="account"></output>
 		 </div>
 		<div class="form-group">
 		    <label for="isMember">Commoner:</label>
@@ -39,6 +35,22 @@
 		 <div class="form-group">
 		    <label for="aliasMember">Alias at the Community:</label>
 		    <output class="form-control" id="isMember"></output>
+		 </div>
+  	 	<div class="form-group">
+		    <label for="communityCUnits">My Balance in cHp (community HOUR pay):</label>
+		    <output class="form-control" id="cHps"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="communityCUnits">Average Activity in cHps/block:</label>
+		    <output class="form-control" id="cHps/blocks"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="reputation">Reputation in UoT (Units of Trust):</label>
+		    <output class="form-control" id="reputation"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="available">Last transaction:</label>
+		    <output class="form-control" id="available"></output>
 		 </div>
    	</div>    
    </div>

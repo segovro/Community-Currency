@@ -1,77 +1,69 @@
 <html lang="en">
 <head>
-  <title>Address Book</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+	<meta charset="utf-8" />
+	<title>Contacts</title>
+	
+	<style>
+		a { color: #0068D2; cursor: pointer; }
+		a:link, a:visited { text-decoration: none; color: #0068D2; }
+		a:hover, a:active { text-decoration: underline; color: #0068D2; }
+		body { font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", sans-serif; }
 
-</script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
- </style>
+		#contacts-table { border-collapse: collapse; }
+		#contacts-table, #contacts-table th, #contacts-table td { padding: 8px 16px; text-align: left; border: 0px solid #B9BABE; }
+		#contacts-table th { font-weight: bold; font-size: 14px; color: #29344B; }
+		#contacts-table td { color: #000; }
+		#contacts-table tr:nth-child(2n) { background: #E8EDFF; }
+
+		#contacts-form { padding: 10px; }
+		.text input, .button input { padding: 5px; margin: 0; border: 1px solid #ccc; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; }
+		#contacts-form .item { margin: 3px 0; }
+		#contacts-form label, #contacts-form .field { display: inline-block; color: #0C0B07; }
+		#contacts-form label { width: 110px; font-weight: bold; text-align: right; color: #666; }
+		#contacts-form .text input { width: 176px; padding: 3px; }
+		#contacts-form .button { display: inline-block; }
+		#contacts-form .button-wrapper { padding-left: 113px; }
+		.button input { padding: 4px 8px; color: #343434; background-color: #fdfdfd; background: -moz-linear-gradient(#fdfdfd, #e1e1e1); background: -webkit-gradient(linear, 0 0, 0 100%, from(#fdfdfd), to(#e1e1e1)); }
+		.button-default input { font-weight: bold; color: #fff; background-color: #7ca0c7; background: -moz-linear-gradient(#acc6e1, #7ca0c7); background: -webkit-gradient(linear, 0 0, 0 100%, from(#acc6e1), to(#7ca0c7)); border-color: #5b80b2; }
+	</style>
 </head>
 <body>
+	<h1>Contacts</h1>
+	<table id="contacts-table">
+		<tr id="contacts-head">
+			<th>ID</th>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Email</th>
+			<th>Actions</th>
+		</tr>
+	</table>
 
-<script type="text/javascript" src="js/navbar.js"></script>
-  
-<div class="container bg-3 text-center">    
-	 <div class="row">
-	 	<div class="col-sm-4"> 
-	 	
-	 		<h3><span class="glyphicon glyphicon-user"></span> Edit Contact</h3>
-			<form role="form" id="contacts-form">
-				<div class="item text">
-					<label for="alias">Alias:</label>
-					<div class="field"><input type="text" class="form-control" name="alias" placeholder="Enter alias" /></div>
-				</div>
-				<div class="item text">
-					<label for="account">Account:</label>
-					<div class="field"><input type="text" class="form-control" name="account" placeholder="Enter account" /></div>
-				</div>
-				<div class="item text">
-					<label for="email">Email:</label>
-					<div class="field"><input type="text" class="form-control" name="email" placeholder="Enter email" /></div>
-				</div>
-				<br/>
-				<div class="btn-group">
-					<button type="submit" class="btn btn-default" id="contacts-op-discard" value="Discard" ><span class="glyphicon glyphicon-remove"></span> Discard</button>
-					<button type="submit" class="btn btn-default" id="contacts-op-save" value="Save" ><span class="glyphicon glyphicon-ok"></span> Save</button>
-				</div>
-				<input type="hidden" name="id_entry" value="0" />
-				<br/>
-			</form>
+	<form id="contacts-form">
+		<div class="item text">
+			<label>First name:</label>
+			<div class="field"><input type="text" name="first_name" /></div>
 		</div>
-		<br/>
-		<div class="col-sm-8"> 			   
-		<h3><span class="glyphicon glyphicon-book"></span> Address Book</h3> 
-		<table class="table table-striped" id="contacts-table">
-		<thead>
-			<tr id="contacts-head">
-				<th>ID</th>
-				<th>Alias</th>
-				<th>Account</th>
-				<th>Email</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		</table>
+		<div class="item text">
+			<label>Last name:</label>
+			<div class="field"><input type="text" name="last_name" /></div>
 		</div>
-		
+		<div class="item text">
+			<label>Email:</label>
+			<div class="field"><input type="text" name="email" /></div>
+		</div>
+		<div class="button-wrapper">
+			<div class="item button">
+				<div class="field"><input type="button" id="contacts-op-discard" value="Discard" /></div>
+			</div>
+			<div class="item button button-default">
+				<div class="field"><input type="submit" id="contacts-op-save" value="Save" /></div>
+			</div>
+		</div>
+		<input type="hidden" name="id_entry" value="0" />
+	</form>
 
-			
-	</div>
-</div>
-
-
-<script>
+	<script>
 		var Contacts = {
 			index: window.localStorage.getItem("Contacts:index"),
 			$table: document.getElementById("contacts-table"),
@@ -94,8 +86,8 @@
 				Contacts.$form.addEventListener("submit", function(event) {
 					var entry = {
 						id: parseInt(this.id_entry.value),
-						alias: this.alias.value,
-						account: this.account.value,
+						first_name: this.first_name.value,
+						last_name: this.last_name.value,
 						email: this.email.value
 					};
 					if (entry.id == 0) { // add
@@ -135,13 +127,13 @@
 					if (/edit|remove/.test(op)) {
 						var entry = JSON.parse(window.localStorage.getItem("Contacts:"+ event.target.getAttribute("data-id")));
 						if (op == "edit") {
-							Contacts.$form.alias.value = entry.alias;
-							Contacts.$form.account.value = entry.account;
+							Contacts.$form.first_name.value = entry.first_name;
+							Contacts.$form.last_name.value = entry.last_name;
 							Contacts.$form.email.value = entry.email;
 							Contacts.$form.id_entry.value = entry.id;
 						}
 						else if (op == "remove") {
-							if (confirm('Are you sure you want to remove "'+ entry.alias +' '+ entry.account +'" from your contacts?')) {
+							if (confirm('Are you sure you want to remove "'+ entry.first_name +' '+ entry.last_name +'" from your contacts?')) {
 								Contacts.storeRemove(entry);
 								Contacts.tableRemove(entry);
 							}

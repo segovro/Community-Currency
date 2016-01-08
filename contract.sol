@@ -1,5 +1,10 @@
 contract communityCurrency {
 	
+	//register 
+    string public name;
+    string public symbol;
+    uint8 public decimals;
+	
 	//communityCurrency general variables
 	address _treasury; //the address of the treasury of the DAO. The creator and minter of the currency
 	address _community; //the address of the Community account. Where donations and taxes are paid. Account used to pay community works. 
@@ -16,6 +21,9 @@ contract communityCurrency {
 		_rewardRate = 20;
 		_iniMemberCCUs = 25000;
 		_iniMemberReputation = 100000;
+		name = "community Hour pay";
+		symbol = "cHp";
+		decimals = 2;
 	}
 	
 	//members wallet
@@ -26,6 +34,7 @@ contract communityCurrency {
 		address _moneyLender; //moneyLender is the address of the money lender. The credit line authorizer
 		uint _unitsOfTrust; //unitsOfTrust is the cost in reputation (Units of Trust) of credit line the account has been authorized. The Trust endorsed to this account by the money lender. It is calculated in terms of credit volume = time x amountCCs
 		bool _isMember; //if an address corresponds to an accepted member
+		string _alias; //
 		uint _reputation; //reputation is the volume of the credit in terms of balance of Units of Trust the money lender can authorize; that is, his available balance in Units of Trust he may endorse to others 
 		uint _last; //time stamp of the last transaction
 		uint _gdpActivity; //measures the average economic activity of the account. It measures the monetary mass moved by an account as m x v
@@ -38,9 +47,10 @@ contract communityCurrency {
 
 	//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	//a community can opt to name itself member or not and therefore give credits or not
-	function acceptMember (address _newMember) {
+	function acceptMember (address _newMember, string _newAlias) {
         if (msg.sender != _community) return;
         balancesOf[_newMember]._isMember = true;
+		balancesOf[_newMember]._alias = _newAlias;
         balancesOf[_newMember]._communityCUnits = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
         balancesOf[_newMember]._last = block.number;
@@ -176,3 +186,4 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 }
+

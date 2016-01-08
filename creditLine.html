@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Credit Line</title>
+  <title>My Credit Line</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -20,67 +20,26 @@
 </head>
 <body>
 
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency" target="blank">EthCC Community Currency </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      	<li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="index.html"><span class="glyphicon glyphicon-piggy-bank"></span> Wallet</a>
-          <ul class="dropdown-menu">
-          	<li><a href="index.html"><span class="glyphicon glyphicon-plus"></span> Account balance</a></li>
-          	<li class="active"><a href="creditLine.html"><span class="glyphicon glyphicon-minus"></span> Credit line</a></li>
-          	<li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> 
-        	<li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        	
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> Trust</a>
-          <ul class="dropdown-menu">
-          	<li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> 
-        	<li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> 
-        	<li><a href="endorseCredit.html"><span class="glyphicon glyphicon-check"></span> Endorse P2P Credit</a></li> 
-          </ul>
-        </li>
-        <li><a href="addressBook.html"><span class="glyphicon glyphicon-book"></span> Address book</a></li> 
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="management.html"><span class="glyphicon glyphicon-menu-hamburger"></span>  Management</a>
-          <ul class="dropdown-menu">
-        	<li><a href="community.html"><span class="glyphicon glyphicon-flag"></span> Community</a></li> 
-        	<li><a href="treasury.html"><span class="glyphicon glyphicon-lock"></span> Treasury</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<script type="text/javascript" src="js/navbar.js"></script>
   
 <div class="container bg-3 text-center">    
   <div class="row">
      <div class="col-sm-4">
-      <h3><span class="glyphicon glyphicon-minus"></span> Credit</h3>
+      <h3><span class="glyphicon glyphicon-thumbs-up"></span> My Credit Line</h3>
   	 	<div class="form-group">
-		    <label for="credit">Credit Line in EthCC:</label>
+		    <label for="credit">Credit Line in cHp (community HOUR pay):</label>
 		    <output class="form-control" id="credit"></output>
 		 </div>
 		 <div class="form-group">
-		    <label for="creditUsed">Credit Used in EthCC:</label>
+		    <label for="creditUsed">Credit Used in cHp:</label>
 		    <output class="form-control" id="creditUsed"></output>
 		 </div>
 		 <div class="form-group">
-		    <label for="moneyLender">Money Lender Address:</label>
+		    <label for="moneyLender">Credit Endorser Address:</label>
 		    <output class="form-control" id="moneyLender"></output>
 		 </div>
 		 <div class="form-group">
-		    <label for="unitsOfTrust">Endorsed Trust in UoT:</label>
+		    <label for="unitsOfTrust">Endorsed Trust in UoT (Units of Trust):</label>
 		    <output class="form-control" id="unitsOfTrust"></output>
 		 </div>
 		 <div class="form-group">

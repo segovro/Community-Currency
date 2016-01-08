@@ -86,20 +86,3 @@ if you are authorized it gives you the account data. The community account has a
 - _gdpActivity
 ##accessMyWallet  
 authorize monitoring my wallet to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 
-
-#Thumbnails
-##My Wallet
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057887/cc3c2f50-af13-11e5-845a-7d198ae53dae.png)
-##My Credit
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057891/f97f463c-af13-11e5-9527-87a9f6afcb29.png)
-##Payment
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057902/14e0dc24-af14-11e5-8acf-4bddf4828ba6.png)
-##Endorse P2P Credit
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057914/490938d4-af14-11e5-9942-6eee9e5309fd.png)
-##Monitoring window for Money Lender 
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057929/70f8f9ce-af14-11e5-872c-27c7fd0f5408.png)
-##Treasury functions 
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057952/90f2eb7c-af14-11e5-8210-44d43edaee7b.png)
-##Community functions
-![alt tag](https://cloud.githubusercontent.com/assets/6016780/12057959/aa2bebe8-af14-11e5-9187-207e8f2e761f.png)
-

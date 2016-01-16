@@ -255,8 +255,3 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 }
-
-
-
-
-

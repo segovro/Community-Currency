@@ -1,43 +1,64 @@
+/// @title Community Currency
+/// @author Rogelio SEGOVIA
 contract communityCurrency {
 	
-	//register 
+	/// @notice register 
+	/// @param name the name of the currency
+	/// @param symbol the symbol of the currency
+	/// @param decimals the number of decimals 
     string public name;
     string public symbol;
     uint8 public decimals;
 	
-	//communityCurrency general variables
-	address _treasury; //the address of the treasury of the DAO. The creator and minter of the currency
-	address _community; //the address of the Community account. Where donations and taxes are paid. Account used to pay community works. 
-	int _vatRate; //the depreciation at each transaction. The VAT to be paid to the DAO at the community account. % x 100
-	uint _rewardRate; //reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100
-	int _iniMemberCCUs; //initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
-	uint _iniMemberReputation; //initial Reputation given to any new member
+	/// @notice communityCurrency general variables
+    /// @param _treasury the address of the treasury of the DAO. The creator and minter of the currency
+    /// @param _community the address of the Community account. Where donations and taxes are paid. Account used to pay community works
+    /// @param _demurrage the depreciation at each transaction. The demurrage to be paid to the DAO at the community account. % x 100
+    /// @param _rewardRate reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100
+    /// @param _iniMemberCCUs initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
+    /// @param _iniMemberReputation initial Reputation given to any new member
+    address _treasury; 
+	address _community;  
+	int _demurrage; 
+	uint _rewardRate; 
+	int _iniMemberCCUs; 
+	uint _iniMemberReputation; 
 	
-	//communityCurrency parameters and key addresses of a given Community	
+	/// @notice communityCurrency parameters and key addresses for a given Community	
 	function communityCurrency () {
 		_treasury = msg.sender;  
 		_community = msg.sender; 
-		_vatRate = 3;
+		_demurrage = 3;
 		_rewardRate = 20;
-		_iniMemberCCUs = 25000;
-		_iniMemberReputation = 100000;
+		_iniMemberCCUs = 25;
+		_iniMemberReputation = 125;
 		name = "community Hour pay";
 		symbol = "cHp";
 		decimals = 2;
 	}
 	
-	//members wallet
+	/// @notice structure the members wallet
+	/// @param _communityCUnits is the actual balance of the currency CCs in the Wallet of the account. It can be negative!!!	
+	/// @param _credit is the limit of _communityCUnits the account is authorized to become negative
+	/// @param _deadline is the time limit on which the credit should be already cancelled and becomes zero again
+	/// @param _moneyLender is the address of the money lender. The credit line authorizer
+	/// @param _unitsOfTrust is the cost in reputation (Units of Trust) of credit line the account has been authorized. The Trust endorsed to this account by the money lender. It is calculated in terms of credit volume = time x amountCCs
+	/// @param _isMember boolean if it is an accepted member
+	/// @param _alias is a string with the alias or ID of the member
+	/// @param _reputation is the volume of the credit in terms of balance of Units of Trust the money lender can authorize; that is, his available balance in Units of Trust he may endorse to others 
+	/// @param _last time stamp of the last transaction
+	/// @param _gdpActivity measures the average economic activity of the account in a time period. It measures the monetary mass moved by an account as m x v
 	struct communityCurrencyWallet {
-		int _communityCUnits; //balanceCCs is the actual balance of the currency CCs in the Wallet of the account. It can be negative!!!	
-		uint _credit; //credit is the limit of balanceCCs the account is authorized to become negative	
-		uint _deadline; //deadline is the time limit on which the credit should be already cancelled and becomes zero again. Its measured in number of _blocks
-		address _moneyLender; //moneyLender is the address of the money lender. The credit line authorizer
-		uint _unitsOfTrust; //unitsOfTrust is the cost in reputation (Units of Trust) of credit line the account has been authorized. The Trust endorsed to this account by the money lender. It is calculated in terms of credit volume = time x amountCCs
-		bool _isMember; //if an address corresponds to an accepted member
-		string _alias; //
-		uint _reputation; //reputation is the volume of the credit in terms of balance of Units of Trust the money lender can authorize; that is, his available balance in Units of Trust he may endorse to others 
-		uint _last; //time stamp of the last transaction
-		uint _gdpActivity; //measures the average economic activity of the account. It measures the monetary mass moved by an account as m x v
+		int _communityCUnits; 
+		uint _credit; 
+		uint _deadline; 
+		address _moneyLender; 
+		uint _unitsOfTrust; 
+		bool _isMember; 
+		string _alias; 
+		uint _reputation; 
+		uint _last; 
+		uint _gdpActivity; 
 	}
 	
 	mapping (address => communityCurrencyWallet) balancesOf;	
@@ -45,17 +66,22 @@ contract communityCurrency {
 	event Transfer(uint _payment, int _myBalanceCCUs, address indexed _to);
 	event Credit(uint _credit, uint _blocks, uint _myunitsOfTrust, uint _myReputationBalance, address indexed _borrower);
 
-	//the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
-	//a community can opt to name itself member or not and therefore give credits or not
+	/// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
+	/// @notice a community can opt to name itself member or not and therefore give credits or not
+	/// @param _newMember is the address of the new member
+	/// @param _newAlias is the alias or human readable ID of the new member
+	/// @return changed alias, initial balance in CCUs, initial reputation in UoT
 	function acceptMember (address _newMember, string _newAlias) {
         if (msg.sender != _community) return;
         balancesOf[_newMember]._isMember = true;
 		balancesOf[_newMember]._alias = _newAlias;
         balancesOf[_newMember]._communityCUnits = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
-        balancesOf[_newMember]._last = block.number;
+        balancesOf[_newMember]._last = now;
     }
-	//the community account can kick out members
+	/// @notice the community account can kick out members. The action deletes all balances
+	/// @param _oldMember is the address of the member to be kicked out
+	/// @return isMember turned to false, all other account balances to zero, except _communityCUnits
 	function kickOutMember (address _oldMember) {
         if (msg.sender != _community) return;
         balancesOf[_oldMember]._isMember = false;
@@ -65,106 +91,148 @@ contract communityCurrency {
         balancesOf[_oldMember]._last = block.number;
     }
 
-	//the treasury account can change the currency parameters;
-	function newParameters (int _newVatRate, uint _newRewardRate, int _newIniCCUs, uint _newIniR ) {
+	/// @notice the treasury account can change the currency parameters
+	/// @param _newDemurrage is the new demurrage rate. % x 100
+	/// @param _newrewardRate is the new reward rate for successful credits. % x 100
+	/// @param _newIniCCUs is the new initial Community Currency Units given to any new member
+	/// @param _newIniR is the new initial Reputation given to any new member
+	/// @return new demurrage, reward rate, initial CCUs and initial reputation for new members
+	function newParameters (int _newDemurrage, uint _newrewardRate, int _newIniCCUs, uint _newIniR) {
 		if (msg.sender != _treasury) return;
-		_vatRate = _newVatRate;
-		_rewardRate = _newRewardRate;
+		_demurrage = _newDemurrage;
+		_rewardRate = _newrewardRate;
 		_iniMemberCCUs = _newIniCCUs;
 		_iniMemberReputation = _newIniR;
 	}
 	
-	//the treasury account can change to a new community address;
-	function newCommunity (address _newCommunity ) {
+	/// @notice the treasury account can change to a new community address
+	/// @param _newCommunity is the new address holding the Community permissions
+	/// @return new community address
+	function newCommunity (address _newCommunity) {
 		if (msg.sender != _treasury) return;
 		_community = _newCommunity;
 	}
 	
-	//the community account can change to a new treasury address;
-	function newTreasury (address _newTreasury ) {
+	/// @notice the community account can change to a new treasury address
+	/// @param _newTreasury is the new address holding the Community permissions
+	/// @return new treasury address
+	function newTreasury (address _newTreasury) {
 		if (msg.sender != _community) return;
 		_treasury = _newTreasury;
 	}
 	
-	//the treasury account can issue as much communityCurrency it likes and send it to any Member; 
-	//mint communityCurrency
-	//warning: it increases the monetary mass. 
-	function mintAssignCCUs (address _beneficiary, int _createCCUs) {
+	/// @notice the treasury account can issue as much communityCurrency it likes and send it to the Community account 
+	/// @notice it mints new communityCurrency and thus increases the monetary mass
+	/// @notice it can be negative, taking money from the Community account and destroying it, thus diminishing the total monetary mass
+	/// @param _createCCUs is the amount of CCUs to be created or destroyed
+	/// @return more (or less) money in the community account
+	function mintCCUs (int _createCCUs) {
         if (msg.sender != _treasury) return;
-		if (balancesOf[_beneficiary]._isMember != true) return;
-		balancesOf[_beneficiary]._communityCUnits += _createCCUs;
+		balancesOf[_community]._communityCUnits += _createCCUs;
 	}
 
-	//the community account can issue as much Reputation it likes and send it to any Member; 
-	//mint Reputation
+	/// @notice the community account can issue as much Reputation it likes and send it to any Member; it can mint Reputation
+	/// @param _beneficiary is the address of the beneficiary
+	/// @param _createReputation is the amount of reputation to be allocated; it is always positive
+	/// @return more reputation in somebody account
 	function mintAssignReputation (address _beneficiary, uint _createReputation) {
         if (msg.sender != _community) return;
 		if (balancesOf[_beneficiary]._isMember != true) return;
         balancesOf[_beneficiary]._reputation += _createReputation;
     }
 	
-	//function make a payment
-	//anybody can make a payment if he has sufficient CCUs and or credit
+	/// @notice function make a payment
+	/// @notice anybody with an ethereum account can make a payment if he has sufficient CCUs in the balance
+	/// @notice any member can add to the amount available at the balance, what remains unused in the credit line
+	/// @param _payee is the account to be credited
+	/// @param _payment is the amount in CCUs to be send
+	/// @return credit information updated
+	/// @return balance of payee increased
+	/// @return balance of sender decreased
+	/// @return in case of need, available credit decreased	
 	function transfer(address _payee, uint _payment) {
-	//update the credit status
+	/// @notice update the credit status
 		if (balancesOf[msg.sender]._credit > 0) {
-		//check if deadline is over
-			if (block.number > balancesOf[msg.sender]._deadline) {
-			//if time is over reset credit to zero, deadline to zero
+		/// @notice check if deadline is over
+			if (now >= balancesOf[msg.sender]._deadline) {
+			/// @notice if time is over reset credit to zero, deadline to zero
 				balancesOf[msg.sender]._deadline = 0;
 				balancesOf[msg.sender]._credit = 0;
-				//if balance is negative the credit was not returned, the money lender balanceReputation is not restored and is penalized with a 20%
-				//as regards the borrower will not be able to make any new transfer until future incomes cover the debts
+				/// @notice if balance is negative the credit was not returned, the money lender balanceReputation is not restored and is penalized with a 20%
+				/// @notice as regards the borrower will not be able to make any new transfer until future incomes cover the debts
+				/// @return money lender reputation penalized
 				if (balancesOf[msg.sender]._communityCUnits < 0) {
 					balancesOf[balancesOf[msg.sender]._moneyLender]._reputation -= balancesOf[msg.sender]._unitsOfTrust * _rewardRate/100;
 				}
-					//if balance is not negative the credit was returned, the money lender balanceReputation is restored and is rewardRateed with a 20%
+				/// @notice if balance is not negative the credit was returned, the money lender balanceReputation is restored and is rewardRateed with a 20%
+				/// @return money lender reputation rewarded
 				else {
 					balancesOf[balancesOf[msg.sender]._moneyLender]._reputation += balancesOf[msg.sender]._unitsOfTrust * (100 + _rewardRate)/100;
 				}
-				//reset money lender information
+				/// @notice reset money lender information
+				/// @return money lender information deleted
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-		//if time is not over proceed with the payment
+		/// @notice if time is not over proceed with the payment
 			}
-	//if there was no credit proceed
+	/// @notice if there was no credit proceed
 		}
-	//pay with the reviewed CCUs balance and credit
+	/// @notice pay with the CCUs available at the balance and the credit
 		int _creditLine = int(balancesOf[msg.sender]._credit);
-		int _available = balancesOf[msg.sender]._communityCUnits + _creditLine; //is the spending limit of an account, given the account balance in _communityCUnits and the _credit
+		/// @param _available is the spending limit of an account, given the account balance in _communityCUnits and the _credit
+		int _available = balancesOf[msg.sender]._communityCUnits + _creditLine; 
 		int _amountCCUs = int(_payment); 
 		if (_available > _amountCCUs) {
 			balancesOf[msg.sender]._communityCUnits -= _amountCCUs;
 			balancesOf[_payee]._communityCUnits += _amountCCUs;
-			//apply vatRate and pay tax
-			balancesOf[_payee]._communityCUnits -= _amountCCUs * _vatRate/100;
-			balancesOf[_community]._communityCUnits += _amountCCUs * _vatRate/100;
+			/// @notice apply demurrage and send it to the Community account
+			balancesOf[_payee]._communityCUnits -= _amountCCUs * _demurrage/100;
+			balancesOf[_community]._communityCUnits += _amountCCUs * _demurrage/100;
 			Transfer(_payment, balancesOf[msg.sender]._communityCUnits, _payee);
-	//update the Activity indicator
-			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/block.number;
-			balancesOf[msg.sender]._last = block.number;
+	/// @notice update the Activity indicator
+			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/now;
+			balancesOf[msg.sender]._last = now;
 		}
 	}
 	
 
-	//function authorize a credit
-	//only members can authorize or get a credit
-	function credit(address _borrower, uint _credit, uint _blocks)  {
+	/// @notice function authorize a credit
+	/// @notice only members can authorize or get a credit
+	/// @param _borrower is the address of the credit borrower
+	/// @param _credit is the amount of the credit line in CCUs
+	/// @param _daysAfter is the deadline of the credit line in number of days from today
+	
+	function credit(address _borrower, uint _credit, uint _daysAfter)  {
 		if (balancesOf[msg.sender]._isMember != true) return;
 		if (balancesOf[_borrower]._isMember != true) return;
-			uint _unitsOfTrust = _credit * _blocks;
+			uint _unitsOfTrust = _credit * _daysAfter;
 			if (balancesOf[msg.sender]._reputation > _unitsOfTrust) {
 				balancesOf[msg.sender]._reputation -= _unitsOfTrust;
 				balancesOf[_borrower]._credit += _credit;
 				balancesOf[_borrower]._moneyLender = msg.sender;
-				balancesOf[_borrower]._deadline = block.number + _blocks; //the _deadline is established as a number of _blocks ahead
+				/// @notice the _deadline is established as a number of days ahead
+				balancesOf[_borrower]._deadline = now + _daysAfter * 1 days; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
-				Credit(_credit, _blocks, balancesOf[_borrower]._unitsOfTrust, balancesOf[msg.sender]._reputation, _borrower);
+				Credit(_credit, _daysAfter, balancesOf[_borrower]._unitsOfTrust, balancesOf[msg.sender]._reputation, _borrower);
 				}
 	}
 
-  	//monitor Wallet
-    	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, uint _getLast, uint _getGdpActivity  ) {
+  	/// @notice monitor Wallet
+  	/// @notice the borrower candidate has given access to monitor all relevant parameters of his account to the money lender
+	/// @notice the community can also monitor all accounts
+	/// @dev if you want to disallow the community to monitor all accounts delete the OR | (msg.sender == _community) |
+	/// @param _monitored is the address to be monitored
+	/// @return _getCCUs is the balance in CCUs 
+	/// @return _getCredit is the remaining credit
+	/// @return _getDeadline is the credit deadline
+	/// @return _getMoneyLender is the address of the current money lender or the candidate money lender
+	/// @return _getUnitsOfTrust is the cost in reputation of the credit
+	/// @return _getIsMember is boolean if the account is a member
+	/// @return _getAlias is the alias
+	/// @return _getReputation is the reputation in UoTs
+	/// @return _getLast is the date of the last transaction
+	/// @return _getGdpActivity is the average activity
+	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, string _getAlias, uint _getReputation, uint _getLast, uint _getGdpActivity  ) {
 		if ((_monitored == msg.sender) || (msg.sender == _community) || (msg.sender == balancesOf[_monitored]._moneyLender)) {
     	_getCCUs = balancesOf[_monitored]._communityCUnits;	
 		_getCredit = balancesOf[_monitored]._credit;
@@ -172,18 +240,21 @@ contract communityCurrency {
 		_getMoneyLender = balancesOf[_monitored]._moneyLender;
 		_getUnitsOfTrust = balancesOf[_monitored]._unitsOfTrust;
 		_getIsMember = balancesOf[_monitored]._isMember;
+		_getAlias = balancesOf[_monitored]._alias;
 		_getReputation = balancesOf[_monitored]._reputation;
 		_getLast = balancesOf[_monitored]._last;
 		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
 		}
     	}
 	
-   //authorize monitoring
+   /// @notice authorize monitoring
    function accessMyWallet (address _authorized) {
-	   //during a credit, only the money lender and the community have access
-	   //normally, the authorization to monitor own accounts is given to a candidate money lender
+	   /// @notice during a credit, only the money lender and the community have access
+	   /// @notice normally, the authorization to monitor own accounts is given to a candidate money lender
 	   if (balancesOf[msg.sender]._credit != 0) return;
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 }
+
+
 

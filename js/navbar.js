@@ -7,7 +7,7 @@ document.write(
 		'        <span class="icon-bar"></span>'+
 		'        <span class="icon-bar"></span> '+
 		'      </button>'+
-		'    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency" target="blank">cHp Community Monetary System </a>'+
+		'    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency/wiki" target="blank"><span class="glyphicon glyphicon-hourglass"></span> Community Monetary System </a>'+
 		'    </div>'+
 		'    <div class="collapse navbar-collapse" id="myNavbar">'+
 		'      <ul class="nav navbar-nav">'+
@@ -27,7 +27,6 @@ document.write(
 		'        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-check"></span> Endorse P2P Credit</a></li> '+
 		'        <li class="active"><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> '+
 		'        <li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> '+
-
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
@@ -37,7 +36,6 @@ document.write(
 		'          <li><a href="funding.html"><span class="glyphicon glyphicon-cloud-upload"></span> Commons Cofunding</a></li>        '+
 		'          </ul>'+
 		'        </li>'+
-		'        <li><a href="addressBook.html"><span class="glyphicon glyphicon-book"></span> Address book</a></li> '+
 		'        <li class="dropdown">'+
 		'          <a class="dropdown-toggle" data-toggle="dropdown" href="community.html"><span class="glyphicon glyphicon-menu-hamburger"></span> Commons</a>'+
 		'          <ul class="dropdown-menu">'+
@@ -51,3 +49,4 @@ document.write(
 		'  </div>'+
 		'</nav>'
 );
+

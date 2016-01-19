@@ -21,8 +21,6 @@ The currency design presumes that all monetary decisions of the community are im
 - [What the hell is p2p credit](http://desperado-theory.blogspot.be/2015/05/what-hell-is-p2p-credit.html) at DESPERADOS THEORY blog  
 - [Moneda con pagos y creditos p2p sin reserva](http://desperado-theory.blogspot.com.es/2015/08/moneda-con-pagos-y-creditos-p2p-sin.html) at DESPERADOS THEORY blog  
 - [Apuntes sobre la soberania monetaria](http://www.monedasocial.org/apuntes-soberania-monetaria/) at Instituto de la Moneda Social  
-- The design has been strongly inspired on the paper [Notas para una propuesta de dinero-crédito descentralizado y basado en la reputación](http://socialcurrency.sciencesconf.org/conference/socialcurrency/pages/Capital_confianzafinal.pdf) presented at the [III Conferencia Internacional de Monedas Complementarias, 28 de octubre de 2015 Salvador de Bahía](http://socialcurrency.sciencesconf.org/). The paper reflects the experience of the complementary currency [EUROCAT](http://euro-cat.cat/es/) in Catalunya. 
-- It builds as well on the analysis made by the EU/FP7 project [D-CENT: Freecoin Toolchain Design and application to Pilots](www.dcentproject.eu) about the funcional requirements of the EUROCAT currency: [Design of Social Digital Currency](http://dcentproject.eu/wp-content/uploads/2015/10/design_of_social_digital_currency_publication.pdf)  
 
 #General  
 The currency is supposed to be used within a community. Nevertheless, the currency can be used by anybody having an ethereum account to perform standard payment transactions. Whith regards payments it works as any other free market monetary token. Nevertheless, anybody using the currency pays a VAT for every transaction to the community, but no other taxes.   

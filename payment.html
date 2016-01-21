@@ -6,8 +6,23 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
   <script type="text/javascript" src="cc.js"></script>
+	<script type="text/javascript" >	
+	var available = Number(myCredit) + Number(myCommunityCUnits);
+	window.onload = function () {
+	document.getElementById('account').innerText = from;
+	document.getElementById('communityCUnits').innerText = myCommunityCUnits + " cHp (community Hour pay)";
+	document.getElementById('available').innerText = available + " cHp (community Hour pay)";
+	}
+	function transfer () {
+	var payee_element = document.getElementById('payee');
+	var payment_element = document.getElementById('payment');
+	var payee = payee_element.value;
+	var payment = payment_element.value;
+	communityCurrency.transfer(payee, payment);
+	window.location.reload(true); 
+	}
+	</script>
     <style>
     .navbar {
       margin-bottom: 0;
@@ -25,26 +40,26 @@
     <h3><span class="glyphicon glyphicon-send"></span> Payment</h3>
 		<form role="form">
 		  <div class="form-group">
-		    <label for="sender">Sender account:</label>
-		    <output class="form-control" id="sender"></output>
+		    <label for="account">My account:</label>
+		    <output class="form-control" id="account"></output>
 		  </div>
 		  <div class="form-group">
-		    <label for="communityCUnits">My Balance in cHp (community HOUR pay):</label>
-		    <output class="form-control" id="cHps"></output>
+		    <label for="communityCUnits">My Balance:</label>
+		    <output class="form-control" id="communityCUnits"></output>
 		 </div>
 		 <div class="form-group">
-		    <label for="creditAvailable">Credit Available in cHp:</label>
-		    <output class="form-control" id="creditUsed"></output>
+		    <label for="available">Available for spending:</label>
+		    <output class="form-control" id="available"></output>
 		 </div>
 		  <div class="form-group">
-		    <label for="payee"><span class="glyphicon glyphicon-camera"></span> Payee account:</label>
+		    <label for="payee">Payee account:</label>
 		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
 		  </div>
 		  <div class="form-group">
-		    <label for="amount">Amount in cHp:</label>
-		    <input type="text" class="form-control" id="amount" placeholder="Enter amount in EthCC">
+		    <label for="payment">Amount:</label>
+		    <input type="text" class="form-control" id="payment" placeholder="Enter amount">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-send"></span> Submit</button>
+		    <button type="submit" class="btn btn-default" onClick="transfer()"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
 		</form>
     </div>
   </div>

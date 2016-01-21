@@ -6,26 +6,18 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-</script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="cc.js"></script>
+    <style>
     .navbar {
-      margin-bottom: <output class="form-control" id="actualIncomes"></output>;
-      border-radius: <output class="form-control" id="actualIncomes"></output>;
-    }
-    
-    /* Add a gray background color and some padding to the footer */
-    footer {
-	  background-color: #f2f2f2;
-      padding: 25px;
+      margin-bottom: 0;
+      border-radius: 0;
     }
   </style>
 </head>
 <body>
 
-<script type="text/javascript" src="js/navbar.js"></script>
+<script type="text/javascript" src="navbar.js"></script>
 
 <div class="container bg-3 text-center">    
 <h3><span class="glyphicon glyphicon-piggy-bank"></span> Mint Wallet</h3>
@@ -57,15 +49,15 @@
   <h4><span class="glyphicon glyphicon-wrench"></span> Change Currency Parameters</h4>
       <form role="form">
 		  <div class="form-group">
-		    <label for="vatRate">VAT Rate in %:</label>
-		    <input type="text" class="form-control" id="vatRate" placeholder="Enter new VAT rate">
+		    <label for="vatRate">Demurrage Rate in %:</label>
+		    <input type="text" class="form-control" id="vatRate" placeholder="Enter new demurrage rate">
 		  </div>
 		  <div class="form-group">
 		    <label for="rewardRate">Money Lenders Reward Rate in %:</label>
 		    <input type="text" class="form-control" id="rewardRate" placeholder="Enter new Money Lenders Reward rate">
 		  </div>
 		  <div class="form-group">
-		    <label for="iniMemberCCUs">Members Initial Amount in EthCC:</label>
+		    <label for="iniMemberCCUs">Members Initial Amount in cHp:</label>
 		    <input type="text" class="form-control" id="iniMemberCCUs" placeholder="Enter new Initial Amount in EthCC">
 		  </div>
 		  <div class="form-group">

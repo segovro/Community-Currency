@@ -49,4 +49,3 @@ document.write(
 		'  </div>'+
 		'</nav>'
 );
-

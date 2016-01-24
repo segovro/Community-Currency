@@ -19,10 +19,11 @@ document.write(
 		'          <li><a href="wallet.html"><span class="glyphicon glyphicon-piggy-bank"></span> Account balance</a></li>'+
 		'          <li><a href="creditLine.html"><span class="glyphicon glyphicon-thumbs-up"></span> Credit line</a></li>'+
 		'          <li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        '+
+		'          <li><a href="exchange.html"><span class="glyphicon glyphicon-random"></span> Exchange</a></li>        '+
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Lending</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>'+
 		'          <ul class="dropdown-menu">'+
 		'        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-check"></span> Endorse P2P Credit</a></li> '+
 		'        <li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> '+
@@ -30,18 +31,18 @@ document.write(
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-cloud"></span> Commoner</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-user"></span> Commoner</a>'+
 		'          <ul class="dropdown-menu">'+
 		'          <li><a href="civilService.html"><span class="glyphicon glyphicon-hourglass"></span> Community Service</a></li>        '+
 		'          <li><a href="funding.html"><span class="glyphicon glyphicon-cloud-upload"></span> Community Funding</a></li>        '+
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="community.html"><span class="glyphicon glyphicon-menu-hamburger"></span> Commons</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="community.html"><span class="glyphicon glyphicon-cloud"></span> Community</a>'+
 		'          <ul class="dropdown-menu">'+
 		'        <li><a href="commonersList.html"><span class="glyphicon glyphicon-user"></span> Commoners List</a></li> '+
-		'        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Budget</a></li> '+
-		'        <li><a href="community.html"><span class="glyphicon glyphicon-tree-deciduous"></span> Community</a></li> '+
+		'        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Finances</a></li> '+
+		'        <li><a href="community.html"><span class="glyphicon glyphicon-home"></span> Commune</a></li> '+
 		'        <li><a href="treasury.html"><span class="glyphicon glyphicon-print"></span> Treasury</a></li>'+
 		'          </ul>'+
 		'        </li>'+

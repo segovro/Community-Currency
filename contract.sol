@@ -32,8 +32,8 @@ contract communityCurrency {
 		_rewardRate = 20;
 		_iniMemberCCUs = 25;
 		_iniMemberReputation = 125;
-		name = "community Hour pay";
-		symbol = "cHp";
+		name = "HOUR";
+		symbol = "HR";
 		decimals = 2;
 	}
 	

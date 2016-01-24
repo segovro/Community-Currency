@@ -12,8 +12,8 @@
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + from;
 	document.getElementById('treasury').innerText = treasury;
 	document.getElementById('demurrage').innerText = demurrage;
-	document.getElementById('iniMemberCCUs').innerText = iniMemberCCUs + + "cHps (community Hour pay)";
-	document.getElementById('iniMemberReputation').innerText = myCommunityCUnits + " UoT (Units of Trust)";
+	document.getElementById('iniMemberCCUs').innerText = iniMemberCCUs + + " HR";
+	document.getElementById('iniMemberReputation').innerText = myCommunityCUnits + " UoT";
 	}
 	</script>
     <style>
@@ -57,26 +57,36 @@
   </div>
   
   <div class="col-sm-4"> 
-	<h4><span class="glyphicon glyphicon-print"></span> Mint cHp</h4>
+	<h4><span class="glyphicon glyphicon-print"></span> Mint HR</h4>
 		
     <form role="form">
  		  <div class="form-group">
 		    <label for="total">Mint cHp:</label>
-		    <input type="text" class="form-control" id="reputation" placeholder="Enter amount in cHp">
+		    <input type="text" class="form-control" id="reputation" placeholder="Enter amount in HR">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Send cHp to Community</button>
+		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Send HR to Commune</button>
 		</form>  
+			
+	<h4><span class="glyphicon glyphicon-random"></span> Exchange Rate</h4>
+		
+    <form role="form">
+ 		  <div class="form-group">
+		    <label for="total">Set new Exchange Rate:</label>
+		    <input type="text" class="form-control" id="reputation" placeholder="Enter HR/EUR">
+		  </div>
+		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-random"></span> Set HR/EUR</button>
+		</form> 
  </div>
     
     <div class="col-sm-4"> 
 
-	<h4><span class="glyphicon glyphicon-tree-deciduous"></span> Change Community address</h4>
+	<h4><span class="glyphicon glyphicon-home"></span> Change Commune address</h4>
     <form role="form">
 		<div class="form-group">
 		    <label for="community">New Community address:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Enter the new Community address">
+		    <input type="text" class="form-control" id="community" placeholder="Enter the new Commune address">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-tree-deciduous"></span> Change community address</button>
+		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> Change commune address</button>
 		</form>
     </div>
     

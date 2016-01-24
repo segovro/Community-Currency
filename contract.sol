@@ -63,7 +63,7 @@ contract communityCurrency {
 	
 	mapping (address => communityCurrencyWallet) balancesOf;	
 	
-	event Transfer(uint _payment, int _myBalanceCCUs, address indexed _to);
+	event Transfer(uint _payment, address indexed _from, address indexed _to);
 	event Credit(uint _credit, uint _blocks, uint _myunitsOfTrust, uint _myReputationBalance, address indexed _borrower);
 
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
@@ -188,7 +188,7 @@ contract communityCurrency {
 			// @notice apply demurrage and send it to the Community account
 			balancesOf[_payee]._communityCUnits -= _amountCCUs * _demurrage/100;
 			balancesOf[_community]._communityCUnits += _amountCCUs * _demurrage/100;
-			Transfer(_payment, balancesOf[msg.sender]._communityCUnits, _payee);
+			Transfer(_payment, msg.sender, _payee);
 	// @notice update the Activity indicator
 			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/now;
 			balancesOf[msg.sender]._last = now;
@@ -246,6 +246,20 @@ contract communityCurrency {
 		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
 		}
     	}
+
+   // @notice get the currency parameters
+	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, string getName, string getSymbol, uint getDecimals) {
+		_getTreasury = _treasury;
+		_getCommunity = _community;
+		_getDemurrage = _demurrage;
+		_getRewardRate = _rewardRate;
+		_getIniMemberCCUs = _iniMemberCCUs;
+		_getIniMemberReputation = _iniMemberReputation;
+		getName = name;
+		getSymbol = symbol;
+		getDecimals = decimals;
+		
+	}
 	
    // @notice authorize monitoring
    function accessMyWallet (address _authorized) {

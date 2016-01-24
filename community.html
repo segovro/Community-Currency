@@ -6,8 +6,13 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
   <script type="text/javascript" src="cc.js"></script>
+  <script type="text/javascript">
+	window.onload = function () {
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + from;
+	document.getElementById('community').innerText = community;
+	}
+	</script>
     <style>
     .navbar {
       margin-bottom: 0;
@@ -19,11 +24,15 @@
 
 <script type="text/javascript" src="navbar.js"></script>
   
-<div class="container bg-3 text-center">    
-<h3><span class="glyphicon glyphicon-briefcase"></span> Community functions</h3>
-  <div class="row">
+<div class="container bg-3 text-center"> 
+      <small><p id="me"></p></small>   
+<h3><span class="glyphicon glyphicon-tree-deciduous"></span> Community functions</h3>
+		<div class="alert alert-warning">
+			<small>This page only available to the Community Account</small>
+		</div>
+   <div class="row">
    <div class="col-sm-4"> 
-    <h4><span class="glyphicon glyphicon-ok"></span> Accept new Commoner</h4>
+     <h4><span class="glyphicon glyphicon-ok"></span> Accept new Commoner</h4>
     <form role="form">
 		  <div class="form-group">
 		    <label for="accountNew">Account</label>
@@ -45,7 +54,7 @@
 		</form>
 	</div>
     <div class="col-sm-4"> 
-	<h4><span class="glyphicon glyphicon-heart"></span> Mint Reputation</h4>
+	<h4><span class="glyphicon glyphicon-heart"></span> Attribute Reputation</h4>
     <form role="form">
 		  <div class="form-group">
 		    <label for="accountTrust">Account:</label>
@@ -55,70 +64,20 @@
 		    <label for="reputation">Reputation in UoT:</label>
 		    <input type="text" class="form-control" id="reputation" placeholder="Enter reputation to be endorsed in UoT">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span> Give reputation</button>
+		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span> Attribute reputation</button>
 		</form>		
 	</div>
 	<div class="col-sm-4"> 
-		<h4><span class="glyphicon glyphicon-book"></span> Change Administration address</h4>    
-       <form role="form">
-		  <div class="form-group">
-		    <label for="community">New Administration address:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Enter the new Mint address">
-		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-book"></span> Change administration address</button>
-		</form>
-	<h4><span class="glyphicon glyphicon-print"></span> Change Mint address</h4>    
+	<h4><span class="glyphicon glyphicon-print"></span> Change Treasury address</h4>    
        <form role="form">
 		  <div class="form-group">
 		    <label for="community">New Mint address:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Enter the new Mint address">
+		    <input type="text" class="form-control" id="community" placeholder="Enter the new Treasury address">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Change mint address</button>
+		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Change Treasury address</button>
 		</form>
     </div>
   </div>
-</div>
-
-<div class="container bg-3 text-center">    
-<h3><span class="glyphicon glyphicon-user"></span> Commoners</h3>
-<table class="table-condensed">
-    <thead>
-      <tr>
-        <th>Alias</th>
-        <th>Account</th>
-        <th>Activity</th>
-        <th>Base Reputation</th>
-        <th>Demurrage</th>
-        <th>Funding</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>ce6823d444a7ab70236d83d66855cb06b4400351</td>
-        <td>3500</td>
-        <td>2000</td>      
-        <td>434</td>
-        <td>255</td>
-      </tr>
-      <tr>
-        <td>Myriam</td>
-        <td>2a65aca4d5fc5b5c859090a6c34d164135398226</td>
-        <td>3500</td>
-        <td>2000</td>      
-        <td>434</td>
-        <td>255</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>771dd02681c793eb34eff34528309e3657f843fb</td>
-        <td>3500</td>
-        <td>2000</td>      
-        <td>434</td>
-        <td>255</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
 
 </body>

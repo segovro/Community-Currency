@@ -6,8 +6,14 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
   <script type="text/javascript" src="cc.js"></script>
+    <script type="text/javascript">
+	window.onload = function () {
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + from;
+	document.getElementById('community').innerText = community;
+	}
+	</script>
+    <style>
     <style>
     .navbar {
       margin-bottom: 0;
@@ -19,197 +25,142 @@
 
 <script type="text/javascript" src="navbar.js"></script>
 
-<div class="container bg-3 text-center">    
-<h3><span class="glyphicon glyphicon-piggy-bank"></span> Commons Wallet</h3>
-  <div class="row">
-      <div class="col-sm-4"> 
-          <form role="form">
-		  <div class="form-group">
-		    <label for="sender">Commons account:</label>
-		    <output class="form-control" id="community"></output>
-		  </div>
-		  </form>
-      </div>
-      <div class="col-sm-4"> 
-          <form role="form">
-		  <div class="form-group">
-		    <label for="sender">Balance in cHp:</label>
-		    <output class="form-control" id="sender"></output>
-		  </div>
-		 </form>
-      </div>
-  </div>
-</div>
-
-<div class="container bg-3 text-center">    
-<h3><span class="glyphicon glyphicon-th-list"></span> Commons budget</h3>
-  <div class="col-sm-12"> 
-    <form role="form">
+<div class="container bg-3 text-center">  
+  <div class="col-sm-4"> 
+    <small><p id="me"></p></small>  
+	<h3><span class="glyphicon glyphicon-th-list"></span> Community Monetary System</h3>
+		<div class="alert alert-warning">
+			<small>This page only available to the Commoners</small>
+		</div>
+	<h4><span class="glyphicon glyphicon-th-list"></span> Community Budget</h3>  
     <table class="table table-bordered">
     <thead>
       <tr>
         <th>Concept</th>
         <th>Budget</th>                
         <th>Actual</th>
-        <th>New Budget</th>
       </tr>
     </thead>
     <tbody>
 			<tr>
 				<td><b>Incomes</b></td>
-				<td><output class="form-control" id="budgetIncomes"></output></td>
-				<td><output class="form-control" id="actualIncomes"></output></td>
-				<td><input class="form-control" type="text" id="newIncomes"></input></td>
+				<td>Committed</td>
+				<td>Paid</td>
 			</tr>
 			<tr>
-			<td>Carry Over</td>
-				<td><output class="form-control" id="budgetCarry Over"></output></td>
-				<td><output class="form-control" id="actualCarry Over"></output></td>
-				<td><input class="form-control" type="text" id="newCarry Over"></input></td>
-			</tr>
-			<tr>
-			<td>Demurrage</td>
+				<td>Demurrage</td>
 				<td><output class="form-control" id="budgetDemurrage"></output></td>
 				<td><output class="form-control" id="actualDemurrage"></output></td>
-				<td><input class="form-control" type="text" id="newDemurrage"></input></td>
 			</tr>
 			<tr>
-				<td>Funding</td>
+				<td>Donations</td>
 				<td><output class="form-control" id="budgetDonations"></output></td>
 				<td><output class="form-control" id="actualDonations"></output></td>
-				<td><input class="form-control" type="text" id="newDonations"></input></td>
-			</tr>
-			<tr>
-				<td>Credit</td>
-				<td><output class="form-control" id="budgetCredit"></output></td>
-				<td><output class="form-control" id="actualCredit"></output></td>
-				<td><input class="form-control" type="text" id="newCredit"></input></td>
-			</tr>
-			<tr>
-			<td>Mint</td>
-				<td><output class="form-control" id="budgetMint"></output></td>
-				<td><output class="form-control" id="actualMint"></output></td>
-				<td><input class="form-control" type="text" id="newMint"></input></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
 				<td><output class="form-control" id="budgettotal"></output></td>
 				<td><output class="form-control" id="actualtotal"></output></td>
-				<td><input class="form-control" type="text" id="newtotal"></input></td>
 			</tr>
 			<tr>
 				<td><b>Payments</td>
-				<td><output class="form-control" id="budgetPayments"></output></td>
-				<td><output class="form-control" id="actualPayments"></output></td>
-				<td><input class="form-control" type="text" id="newPayments"></input></td>
+				<td>Committed</td>
+				<td>Paid</td>
+
 			</tr>
 			<tr>
 				<td>Community Services</td>
 				<td><output class="form-control" id="budgetCommunityServiceHours"></output></td>
 				<td><output class="form-control" id="actualCommunityServiceHours"></output></td>
-				<td><input class="form-control" type="text" id="newCommunityServiceHours"></input></td>
 			</tr>
 			<tr>
 				<td>Other Expenses</td>
 				<td><output class="form-control" id="budgetOtherExpenses"></output></td>
 				<td><output class="form-control" id="actualOtherExpenses"></output></td>
-				<td><input class="form-control" type="text" id="newOtherExpenses"></input></td>
-			</tr>
-			<tr>
-				<td>Credit Payback</td>
-				<td><output class="form-control" id="budgetCP"></output></td>
-				<td><output class="form-control" id="actualCP"></output></td>
-				<td><input class="form-control" type="text" id="newCP"></input></td>
-			</tr>
-			<tr>
-				<td>Destruction</td>
-				<td><output class="form-control" id="budgetD"></output></td>
-				<td><output class="form-control" id="actualD"></output></td>
-				<td><input class="form-control" type="text" id="newD"></input></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
 				<td><output class="form-control" id="budgettotal"></output></td>
 				<td><output class="form-control" id="actualtotal"></output></td>
-				<td><input class="form-control" type="text" id="newtotal"></input></td>
 			</tr>
 			<tr>
 				<td><b><i>TOTAL</i></b></td>
 				<td><output class="form-control" id="budgetTOTAL"></output></td>
 				<td><output class="form-control" id="actualTOTAL"></output></td>
-				<td><input class="form-control" type="text"id="newTOTAL"></input></td>
 			</tr>
 			<tr>
+				<td><b>Community Balance</b></td>
 				<td></td>
-				<td></td>
-				<td></td>
-				<td><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> New Budget</button></td>
+				<td><output class="form-control" id="balance"></output></td>
 			</tr>
       </tbody>
      </table>
-	</form>
- 
-</div>
-</div>
-<div class="container bg-3 text-center">    
-<h3><span class="glyphicon glyphicon-book"></span> Administration</h3>
-  <div class="row">
-      <form role="form">
-    <div class="col-sm-8"> 
-    <h4><span class="glyphicon glyphicon-hourglass"></span> Payment Community Services</h4>
-    <table class="table-condensed">
+     
+	<h4><span class="glyphicon glyphicon-hourglass"></span> Monetary Mass</h3>  
+	<table class="table table-bordered">
     <thead>
       <tr>
-        <th>Alias</th>
-        <th>Account</th>
-        <th>Hours</th>
-        <th></th>
+        <th>Monetary Mass</th>
+        <th>cHp</th>
       </tr>
     </thead>
     <tbody>
-    <form role="form">
+      <tr><td>Total Minted</td><td align="right"><output class="form-control" id="totalMinted"></output></td>
+      <tr><td>Total Credit used</td><td align="right"><output class="form-control" id="totalCreditUed"></output></td>
+      <tr><td><b>Total Monetary Mass</b></td><td align="right"><output class="form-control" id="totalMonetaryMass"></output></td>
+     </tbody>
+     </table>
+     
+	<h4><span class="glyphicon glyphicon-heart"></span> Trust Mass</h3>       
+	<table class="table table-bordered">
+    <thead>
       <tr>
-        <td>John</td>
-        <td>ce6823d444a7ab70236d83d66855cb06b4400351</td>
-        <td>40</td>
-        <td><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-hourglass"></span> Approve</button></td>      
+        <th>Trust Mass</th>
+        <th>UoT</th>
       </tr>
-      </form>
-    <form role="form">
+    </thead>
+    <tbody>
+      <tr><td>Total Credit given</td><td align="right"><output class="form-control" id="totalCreditGiven"></output></td>
+      <tr><td>Total Trust used</td><td align="right"><output class="form-control" id="totalTrustUsed"></output></td>
+      <tr><td>Total Trust available</td><td align="right"><output class="form-control" id="totalTrustAvailable"></output></td>
+      <tr><td><b>Total Trust Mass</b></td><td align="right"><output class="form-control" id="totalTrustMass"></output></td>
+     </tbody>
+     </table>
+     
+	<h4><span class="glyphicon glyphicon-transfer"></span> Activity</h3>   
+ 	<table class="table table-bordered">
+    <thead>
       <tr>
-        <td>Myriam</td>
-        <td>2a65aca4d5fc5b5c859090a6c34d164135398226</td>
-        <td>25</td>
-        <td><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-hourglass"></span> Approve</button></td>      
+        <th>Activity</th>
+        <th>cHp/day</th>
       </tr>
-    </form>
-    <form role="form">
-      <tr>
-        <td>July</td>
-        <td>771dd02681c793eb34eff34528309e3657f843fb</td>
-        <td>12</td>
-        <td><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-hourglass"></span> Approve</button></td>      
-      </tr>
-      </form>
-    </tbody>
-  </table>
-
-    </div>
-    <div class="col-sm-4"> 
-    <h4><span class="glyphicon glyphicon-send"></span> Payment other expenses</h4>
-		<form role="form">
+    </thead>
+    <tbody>
+      <tr><td>Total Activity</td>
+      <td align="right"><output class="form-control" id="totalActivity"></output></td>
+     </tbody>
+     </table>
+     
+  <h4><span class="glyphicon glyphicon-wrench"></span> Currency Parameters</h4>
+     <form role="form">
 		  <div class="form-group">
-		    <label for="payee"> Payee account:</label>
-		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
+		    <label for="demurrage">Demurrage Rate in %:</label>
+			<output type="text" class="form-control" id="demurrage"></output>
 		  </div>
 		  <div class="form-group">
-		    <label for="amount">Amount in cHp:</label>
-		    <input type="text" class="form-control" id="amount" placeholder="Enter amount in EthCC">
+		    <label for="rewardRate">Money Lenders Reward Rate in %:</label>
+		    <output type="text" class="form-control" id="rewardRate"></output>
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-send"></span> Pay</button>
+		  <div class="form-group">
+		    <label for="iniMemberCCUs">Members Initial Amount in cHp:</label>
+		    <output type="text" class="form-control" id="iniMemberCCUs"></output>
+		  </div>
+		  <div class="form-group">
+		    <label for="iniMemberReputation">Members Initial Reputation in UoT:</label>
+		    <output type="text" class="form-control" id="iniMemberReputation"></output>
+		  </div>
 		</form>
-    </div>
-  </div>
+</div>
 </div>
 
 </body>

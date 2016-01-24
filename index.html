@@ -9,27 +9,38 @@
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript" >	
 	window.onload = function () {
+	document.getElementById('community').innerText = community;
 	document.getElementById('account').innerText = from;
 	document.getElementById('isMember').innerText = myIsMember;
-	document.getElementById('alias').innerText = myAlias;	
+	document.getElementById('alias').innerText = myAlias;
 	}
+	
 	</script>
     <style>
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
+}
   </style>
 </head>
 <body>
 <script type="text/javascript" src="navbar.js"></script>
   
-<div class="container bg-3 text-center">    
+<div class="container bg-3 text-center"> 
+   <div class="row">
+   <div class="col-sm-4">
+   <h2>Desperado Community</h2>
+   <p id="community"></p>
+   <a href="https://sites.google.com/site/desperadostheory/home">Desperado site</a><br/>
+   <small>my Community</small>
+   </div>
+  </div>
   <div class="row">
     <div class="col-sm-4">
-      <h3><span class="glyphicon glyphicon-user"></span> My account</h3>
-        <div class="form-group">
-		    <label for="account">My Account:</label>
+         <h3><span class="glyphicon glyphicon-user"></span> My Account</h3>
+        <div class="form-group">  
+		    <label for="account"><a href="qr.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-qrcode"></span></a> My Account:</label>
 		    <output class="form-control" id="account"></output>
 		 </div>
 		<div class="form-group">
@@ -40,10 +51,16 @@
 		    <label for="alias">Alias at the Community:</label>
 		    <output class="form-control" id="alias"></output>
 		 </div>
+		 <div class="form-group">
+			 <a class="btn btn-default" role="button" href="mailto:desperado.theory@gmail.com?subject=CommonerRequest&Body=Indicate Alias and Ethereum Address" target="_top"><span class="	glyphicon glyphicon-envelope"></span> Ask to become Commoner</a>
+   		 </div>
    	</div>    
    </div>
 </div>
-<br>
+<div class="panel-footer">
+<p><img src="https://trancsitu.files.wordpress.com/2014/05/ethereum-logo.png" width="20" align="top"/><small> Powered by ethereum</p><p>Your balance</p><p id="ethBalance"></p></small>
+</div>
+
 
 </body>
 </html>

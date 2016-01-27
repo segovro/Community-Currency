@@ -17,12 +17,14 @@ contract communityCurrency {
     // @param _rewardRate reward Rate to the moneyLender of a successful credit, as a multiplier of the Reputation Cost of the credit. % x 100
     // @param _iniMemberCCUs initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member
     // @param _iniMemberReputation initial Reputation given to any new member
+	// @param _exchange is the exchange rate in EUROS per Community Currency units
     address _treasury; 
 	address _community;  
 	int _demurrage; 
 	uint _rewardRate; 
 	int _iniMemberCCUs; 
-	uint _iniMemberReputation; 
+	uint _iniMemberReputation;
+	uint _exchange;
 	
 	// @notice communityCurrency parameters and key addresses for a given Community	
 	function communityCurrency () {
@@ -32,6 +34,7 @@ contract communityCurrency {
 		_rewardRate = 20;
 		_iniMemberCCUs = 25;
 		_iniMemberReputation = 125;
+		_exchange = 10;
 		name = "HOUR";
 		symbol = "HR";
 		decimals = 2;
@@ -248,13 +251,14 @@ contract communityCurrency {
     	}
 
    // @notice get the currency parameters
-	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, string getName, string getSymbol, uint getDecimals) {
+	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, uint getDecimals) {
 		_getTreasury = _treasury;
 		_getCommunity = _community;
 		_getDemurrage = _demurrage;
 		_getRewardRate = _rewardRate;
 		_getIniMemberCCUs = _iniMemberCCUs;
 		_getIniMemberReputation = _iniMemberReputation;
+		_getExchange = _exchange;
 		getName = name;
 		getSymbol = symbol;
 		getDecimals = decimals;

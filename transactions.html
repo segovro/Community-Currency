@@ -1,30 +1,30 @@
 <html lang="en">
 <head>
-  <title>Community Currency</title>
+  <title>Transactions</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="cc.js"></script>
-    <script type="text/javascript" >	
-	window.onload = function () {
-	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + from;
-	document.getElementById('account').innerText = from;
-	}
-	var transfer = communityCurrency.Transfer({}, function(error, result){
-		if (!error)
-		console.log(result);
+    <script type="text/javascript" >
+		
+	var transfers = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+		transfers.watch(function(error, result){
+     	document.getElementById('listSent').innerHTML = "To: " + result.args._to + " <b>" + result.args._payment + " HR</b>";
 		});
-	var results = transfer.get(function(error, result){
-		if (!error)
-		console.log(result);
 	});
-	var row = ""
-	for (var i = 0; i < transfer.length; i++) {
-        out += transfer[i] + '<br>';
-    }
-    document.getElementById("list").innerHTML = row; 
+
+	var transfersAll = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+ 	transfersAll.get(function(error, logs){		
+		document.getElementById('listReceived').innerHTML = "From: " + logs.args._from + " <b>" +  + logs.args._payment + " HR</b><br/>";
+		});
+	});
+		
+	window.onload = function () {
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	};
+	
 	</script>
     <style>
     .navbar {
@@ -41,11 +41,15 @@
   <div class="row">
     <div class="col-sm-4"> 
     <small><p id="me"></p></small>
-	<h3><span class="glyphicon glyphicon-transfer"></span> Transactions</h3>  
+	<h3><span class="glyphicon glyphicon-transfer"></span> Transactions</h3> 
+		<h4><span class="glyphicon glyphicon-arrow-left"></span> Sent</h4>
+		<div class="col-sm-10" id="listSent"></div>
+		<br/>
+		<h4><span class="glyphicon glyphicon-arrow-right"></span> Received</h4>
+		<div class="col-sm-10" id="listReceived"></div>
 	</div>
-	<div class="col-sm-10" id="list">
 	</div>
-</div>
+	</div>
 
 </body>
 </html>

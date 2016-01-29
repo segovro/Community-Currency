@@ -8,6 +8,7 @@ contract communityCurrency {
 	// @param decimals the number of decimals 
     string public name;
     string public symbol;
+	string public communityName;
     uint8 public decimals;
 	
 	// @notice communityCurrency general variables
@@ -37,6 +38,7 @@ contract communityCurrency {
 		_exchange = 10;
 		name = "HOUR";
 		symbol = "HR";
+		communityName = "DESPERADO";
 		decimals = 2;
 	}
 	
@@ -66,8 +68,8 @@ contract communityCurrency {
 	
 	mapping (address => communityCurrencyWallet) balancesOf;	
 	
-	event Transfer(uint _payment, address indexed _from, address indexed _to);
-	event Credit(uint _credit, uint _blocks, uint _myunitsOfTrust, uint _myReputationBalance, address indexed _borrower);
+	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
+	event Credit(uint _creditCCUs, uint _creditDays, uint _endorsedUoT, address indexed _endorsedAddress, uint _myReputationBalance, uint _timeStampC);
 
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
@@ -143,18 +145,9 @@ contract communityCurrency {
 		if (balancesOf[_beneficiary]._isMember != true) return;
         balancesOf[_beneficiary]._reputation += _createReputation;
     }
-	
-	// @notice function make a payment
-	// @notice anybody with an ethereum account can make a payment if he has sufficient CCUs in the balance
-	// @notice any member can add to the amount available at the balance, what remains unused in the credit line
-	// @param _payee is the account to be credited
-	// @param _payment is the amount in CCUs to be send
-	// @return credit information updated
-	// @return balance of payee increased
-	// @return balance of sender decreased
-	// @return in case of need, available credit decreased	
-	function transfer(address _payee, uint _payment) {
-	// @notice update the credit status
+
+	function creditUpdate () {
+		// @notice update the credit status
 		if (balancesOf[msg.sender]._credit > 0) {
 		// @notice check if deadline is over
 			if (now >= balancesOf[msg.sender]._deadline) {
@@ -177,9 +170,22 @@ contract communityCurrency {
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
 		// @notice if time is not over proceed with the payment
-			}
-	// @notice if there was no credit proceed
+			} 
 		}
+	}
+			
+
+	// @notice function make a payment
+	// @notice anybody with an ethereum account can make a payment if he has sufficient CCUs in the balance
+	// @notice any member can add to the amount available at the balance, what remains unused in the credit line
+	// @param _payee is the account to be credited
+	// @param _payment is the amount in CCUs to be send
+	// @return balance of payee increased
+	// @return balance of sender decreased
+	// @return in case of need, available credit decreased	
+	function transfer (address _payee, uint _payment) {
+	// @return credit information updated
+		creditUpdate ();
 	// @notice pay with the CCUs available at the balance and the credit
 		int _creditLine = int(balancesOf[msg.sender]._credit);
 		// @param _available is the spending limit of an account, given the account balance in _communityCUnits and the _credit
@@ -191,10 +197,10 @@ contract communityCurrency {
 			// @notice apply demurrage and send it to the Community account
 			balancesOf[_payee]._communityCUnits -= _amountCCUs * _demurrage/100;
 			balancesOf[_community]._communityCUnits += _amountCCUs * _demurrage/100;
-			Transfer(_payment, msg.sender, _payee);
+			Transfer(_payment, msg.sender, _payee, now);
 	// @notice update the Activity indicator
 			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/now;
-			balancesOf[msg.sender]._last = now;
+			balancesOf[msg.sender]._last = 1000 * now;
 		}
 	}
 	
@@ -204,7 +210,6 @@ contract communityCurrency {
 	// @param _borrower is the address of the credit borrower
 	// @param _credit is the amount of the credit line in CCUs
 	// @param _daysAfter is the deadline of the credit line in number of days from today
-	
 	function credit(address _borrower, uint _credit, uint _daysAfter)  {
 		if (balancesOf[msg.sender]._isMember != true) return;
 		if (balancesOf[_borrower]._isMember != true) return;
@@ -216,10 +221,10 @@ contract communityCurrency {
 				// @notice the _deadline is established as a number of days ahead
 				balancesOf[_borrower]._deadline = now + _daysAfter * 1 days; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
-				Credit(_credit, _daysAfter, balancesOf[_borrower]._unitsOfTrust, balancesOf[msg.sender]._reputation, _borrower);
+				Credit(_credit, _daysAfter, balancesOf[_borrower]._unitsOfTrust, _borrower, balancesOf[msg.sender]._reputation, now);
 				}
 	}
-
+	
   	// @notice monitor Wallet
   	// @notice the borrower candidate has given access to monitor all relevant parameters of his account to the money lender
 	// @notice the community can also monitor all accounts
@@ -251,7 +256,7 @@ contract communityCurrency {
     	}
 
    // @notice get the currency parameters
-	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, uint getDecimals) {
+	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, string getCommunityName, uint getDecimals) {
 		_getTreasury = _treasury;
 		_getCommunity = _community;
 		_getDemurrage = _demurrage;
@@ -261,6 +266,7 @@ contract communityCurrency {
 		_getExchange = _exchange;
 		getName = name;
 		getSymbol = symbol;
+		getCommunityName = communityName;
 		getDecimals = decimals;
 		
 	}

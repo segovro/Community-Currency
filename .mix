@@ -6,10 +6,6 @@
 	"deploymentDir": "",
 	"files": [
 		{
-			"fileName": "contract.sol",
-			"title": "contract.sol"
-		},
-		{
 			"fileName": "index.html",
 			"title": "index.html"
 		},
@@ -38,6 +34,10 @@
 			"title": "endorseCredit.html"
 		},
 		{
+			"fileName": "exchange.html",
+			"title": "exchange.html"
+		},
+		{
 			"fileName": "funding.html",
 			"title": "funding.html"
 		},
@@ -54,6 +54,10 @@
 			"title": "transactions.html"
 		},
 		{
+			"fileName": "treasury.html",
+			"title": "treasury.html"
+		},
+		{
 			"fileName": "wallet.html",
 			"title": "wallet.html"
 		},
@@ -66,16 +70,16 @@
 			"title": "navbar.js"
 		},
 		{
-			"fileName": "exchange.html",
-			"title": "exchange.html"
-		},
-		{
-			"fileName": "treasury.html",
-			"title": "treasury.html"
-		},
-		{
 			"fileName": "web3.js",
 			"title": "web3.js"
+		},
+		{
+			"fileName": "contract.sol",
+			"title": "contract.sol"
+		},
+		{
+			"fileName": "contract.sol",
+			"title": "contract.sol"
 		}
 	],
 	"lastPackageDate": "2015-10-15T17:42:53",
@@ -155,7 +159,7 @@
 							"contractId": "communityCurrency",
 							"functionId": "communityCurrency",
 							"gas": {
-								"value": "3518520"
+								"value": "250000"
 							},
 							"gasAuto": true,
 							"gasPrice": {
@@ -169,8 +173,8 @@
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
 							"value": {
-								"unit": 12,
-								"value": "10"
+								"unit": 18,
+								"value": "0"
 							}
 						}
 					]
@@ -184,19 +188,19 @@
 							"contractId": "<communityCurrency - 0>",
 							"functionId": "acceptMember",
 							"gas": {
-								"value": "127740"
+								"value": "250000"
 							},
-							"gasAuto": false,
+							"gasAuto": true,
 							"gasPrice": {
 								"unit": 18,
 								"value": "100000"
 							},
 							"isContractCreation": false,
 							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.acceptMember()",
+							"label": "communityCurrency.acceptMember()",
 							"parameters": {
-								"_newAlias": "Treasury",
-								"_newMember": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944"
+								"_newMember": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+								"_newAlias": "Treasury"
 							},
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
@@ -209,19 +213,19 @@
 							"contractId": "<communityCurrency - 0>",
 							"functionId": "acceptMember",
 							"gas": {
-								"value": "112161"
+								"value": "250000"
 							},
-							"gasAuto": false,
+							"gasAuto": true,
 							"gasPrice": {
 								"unit": 18,
 								"value": "100000"
 							},
 							"isContractCreation": false,
 							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.acceptMember()",
+							"label": "communityCurrency.acceptMember()",
 							"parameters": {
-								"_newAlias": "",
-								"_newMember": "0x06400992be45bc64a52b5c55d3df84596d6cb4a1"
+								"_newMember": "0x06400992be45bc64a52b5c55d3df84596d6cb4a1",
+								"_newAlias": "Community"
 							},
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
@@ -234,19 +238,19 @@
 							"contractId": "<communityCurrency - 0>",
 							"functionId": "acceptMember",
 							"gas": {
-								"value": "127676"
+								"value": "250000"
 							},
-							"gasAuto": false,
+							"gasAuto": true,
 							"gasPrice": {
 								"unit": 18,
 								"value": "100000"
 							},
 							"isContractCreation": false,
 							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.acceptMember()",
+							"label": "communityCurrency.acceptMember()",
 							"parameters": {
-								"_newAlias": "Segovro",
-								"_newMember": "0xfa4b795b491cc1975e89f3c78972c3e2e827c882"
+								"_newMember": "0xfa4b795b491cc1975e89f3c78972c3e2e827c882",
+								"_newAlias": "Segovro"
 							},
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
@@ -259,69 +263,6 @@
 							"contractId": "<communityCurrency - 0>",
 							"functionId": "acceptMember",
 							"gas": {
-								"value": "127804"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.acceptMember()",
-							"parameters": {
-								"_newAlias": "Desperado",
-								"_newMember": "0xb0dcdc575ef06dc30aaea069d8043c9d463c931c"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 3,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "newCommunity",
-							"gas": {
-								"value": "30496"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.newCommunity()",
-							"parameters": {
-								"_newCommunity": "0x06400992be45bc64a52b5c55d3df84596d6cb4a1"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 4,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
 								"value": "250000"
 							},
 							"gasAuto": true,
@@ -331,249 +272,13 @@
 							},
 							"isContractCreation": false,
 							"isFunctionCall": true,
-							"label": "communityCurrency.transfer()",
+							"label": "communityCurrency.acceptMember()",
 							"parameters": {
-								"_newCommunity": "<communityCurrency - 0>",
-								"_payee": "0x06400992be45bc64a52b5c55d3df84596d6cb4a1",
-								"_payment": "3"
+								"_newMember": "0xb0dcdc575ef06dc30aaea069d8043c9d463c931c",
+								"_newAlias": "Desperado"
 							},
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						},
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "250000"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.transfer()",
-							"parameters": {
-								"_payee": "0xb0dcdc575ef06dc30aaea069d8043c9d463c931c",
-								"_payment": "3"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 5,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "59510"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.transfer()",
-							"parameters": {
-								"_payee": "0xfa4b795b491cc1975e89f3c78972c3e2e827c882",
-								"_payment": "5"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 6,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "74446"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.transfer()",
-							"parameters": {
-								"_payee": "0xe0fc3c88b925844b9b0496575afd9f009f82610e",
-								"_payment": "5"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 7,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "74510"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.transfer()",
-							"parameters": {
-								"_payee": "0x65388b5895a0bf9b3d14fcd3ddd9f77ef6ff4307",
-								"_payment": "1"
-							},
-							"saveStatus": true,
-							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 8,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "59510"
-							},
-							"gasAuto": false,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "<communityCurrency - 0>.transfer()",
-							"parameters": {
-								"_payee": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
-								"_payment": "17"
-							},
-							"saveStatus": true,
-							"sender": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 9,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "250000"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.transfer()",
-							"parameters": {
-								"_payee": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
-								"_payment": "2"
-							},
-							"saveStatus": true,
-							"sender": "db95780d2f30ca8211eec37cc110cc58a2d4f9308dea00ede6717a585efa2eb7",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						},
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "250000"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.transfer()",
-							"parameters": {
-								"_payee": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
-								"_payment": "4"
-							},
-							"saveStatus": true,
-							"sender": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						},
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "transfer",
-							"gas": {
-								"value": "250000"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.transfer()",
-							"parameters": {
-								"_payee": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
-								"_payment": "5"
-							},
-							"saveStatus": true,
-							"sender": "e9bf58b523b4c94255cad51b3f7efdc85a0c970bf42f1d191c126bb6f49bfb9d",
 							"value": {
 								"unit": 18,
 								"value": "0"

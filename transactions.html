@@ -8,16 +8,21 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="cc.js"></script>
     <script type="text/javascript" >
-		
-	var transfers = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
-		transfers.watch(function(error, result){
-     	document.getElementById('listSent').innerHTML = "To: " + result.args._to + " <b>" + result.args._payment + " HR</b>";
+	
+	var transfersRec = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+		var row= "";
+		transfersRec.watch(function(error, result){
+		row += "<tr><td>" + result.args._from + "</td><td><span class=\"badge\">" + result.args._amount + " HR</span></td></tr>";
+		document.getElementById('listRec').innerHTML = "<table class=\"table-bordered\">" + row + '</table>';
 		});
 	});
 
-	var transfersAll = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
- 	transfersAll.get(function(error, logs){		
-		document.getElementById('listReceived').innerHTML = "From: " + logs.args._from + " <b>" +  + logs.args._payment + " HR</b><br/>";
+
+	var transfersSent = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+		var row= "";
+		transfersSent.watch(function(error, result){
+		row += "<tr><td>" + result.args._to + "</td><td><span class=\"badge\">" + result.args._amount + " HR</span></td></tr>";
+		document.getElementById('listRec').innerHTML = "<table class=\"table-bordered\">" + row + '</table>';
 		});
 	});
 		
@@ -37,19 +42,19 @@
 
 <script type="text/javascript" src="navbar.js"></script>
  
-<div class="container bg-3 text-center"> 
-  <div class="row">
+<div class="container bg-3 text-center">  
+<div class="row">
     <div class="col-sm-4"> 
-    <small><p id="me"></p></small>
+		<small><p id="me"></p></small>
 	<h3><span class="glyphicon glyphicon-transfer"></span> Transactions</h3> 
-		<h4><span class="glyphicon glyphicon-arrow-left"></span> Sent</h4>
-		<div class="col-sm-10" id="listSent"></div>
-		<br/>
-		<h4><span class="glyphicon glyphicon-arrow-right"></span> Received</h4>
-		<div class="col-sm-10" id="listReceived"></div>
+	<h4><span class="glyphicon glyphicon-arrow-right"></span> Received from</h4> 
+		<div  id="listRec"></div>	
+	<h4><span class="glyphicon glyphicon-arrow-left"></span> Sent to</h4> 
+		<div id="listSent"></div>	
 	</div>
-	</div>
-	</div>
+</div>
+</div>
+
 
 </body>
 </html>

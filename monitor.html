@@ -13,9 +13,9 @@
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	}
-	
 
-	function monitor(access) {
+
+	   	function monitor(access) {
 		access = document.getElementById('access').value;
 		var mtrWallet = communityCurrency.monitorWallet(access);
 		var mtrCommunityCUnits = mtrWallet[0];
@@ -28,8 +28,7 @@
 		var mtrReputation = mtrWallet[7];
 		var mtrLast = mtrWallet[8];
 		var mtrGdpActivity = mtrWallet[9];	
-		document.getElementById('communityCUnits').innerHTML = mtrCommunityCUnits;
-		
+		document.getElementById('communityCUnits').innerHTML = mtrCommunityCUnits;		
 	}
 	   
 	</script>
@@ -53,10 +52,10 @@
 			 <small>This page only available to Commoners</small>
 			</div>
       <form role="form">
-		 <div class="form-group">
+		  <div class="form-group">
 		    <label for="access">Monitor Account:</label>
 		    <input type="text" class="form-control" id="access" placeholder="Enter account to be monitored">
-		  </div>
+		 </div>
 		  <button type="submit" class="btn btn-default" onClick="monitor();"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
 		</form>
    	</div>   

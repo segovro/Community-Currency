@@ -1,7 +1,7 @@
-// @title Community Currency
-// @author Rogelio SEGOVIA
 contract communityCurrency {
 	
+	// @title Community Currency
+	// @author Rogelio SEGOVIA	
 	// @notice register 
 	// @param name the name of the currency
 	// @param symbol the symbol of the currency
@@ -26,6 +26,19 @@ contract communityCurrency {
 	int _iniMemberCCUs; 
 	uint _iniMemberReputation;
 	uint _exchange;
+	//@notice Budget array
+		uint _goalDemurrage;
+		uint _goalCrowdFundig;
+		uint _goalCommunityHours;
+		uint _goalExpenses;
+		uint _committedDemurrage;
+		uint _committedCrowdFundig;
+		uint _committedCommunityHours;
+		uint _committedExpenses;
+		uint _realDemurrage;
+		uint _realCrowdFundig;
+		uint _realCommunityHours;
+		uint _realExpenses;
 	
 	// @notice communityCurrency parameters and key addresses for a given Community	
 	function communityCurrency () {
@@ -64,6 +77,8 @@ contract communityCurrency {
 		uint _reputation; 
 		uint _last; 
 		uint _gdpActivity; 
+		int _committedH;
+		uint _committedF;
 	}
 	
 	mapping (address => communityCurrencyWallet) balancesOf;	
@@ -278,4 +293,30 @@ contract communityCurrency {
 	   if (balancesOf[msg.sender]._credit != 0) return;
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
+	
+	//@notice committ Hours
+	function commitHours (int _commitH) {
+		balancesOf[msg.sender]._committedH += _commitH;		
+	}
+	
+	//@notice get Hours paid from Community
+	function payHours (int _payH) {
+		if (balancesOf[msg.sender]._committedH > _payH) {
+			balancesOf[msg.sender]._committedH -= _payH;
+			//@notice Community always pays, even going negative
+			balancesOf[_community]._communityCUnits -= _payH;
+			balancesOf[msg.sender]._communityCUnits += _payH;
+		}
+	}
+	
+	//@notice committ Funding
+	function commitFunding (uint _commitF) {
+		balancesOf[msg.sender]._committedF += _commitF;		
+	}
+	
+	//@notice pay Funding
+	function payFunding (uint _payF) {
+		transfer (_community, _payF);
+	}
+	
 }

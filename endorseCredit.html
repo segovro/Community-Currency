@@ -6,14 +6,34 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="cc.js"></script>
+
   	<script type="text/javascript" >	
-	var available = Number(myCredit) + Number(myCommunityCUnits);
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('reputation').innerHTML = myReputation +" UoT";
+	document.getElementById('reputation').innerHTML = myReputation/baseUnits +" UoT";
 	}
-	var credit = communityCurrency.credit(coinbase);
+
+	function showCost (borrower, amount, days, creditCost) {
+		var borrower_element = document.getElementById('borrower');
+		var amount_element = document.getElementById('amount');
+		var days_element = document.getElementById('days');
+		borrower = borrower_element.value;
+		amount = amount_element.value * baseUnits;
+		days = days_element.value;
+		creditCost = days * amount;
+	document.getElementById('reputationCost').innerHTML = creditCost/baseUnits +" UoT";
+	}
+	
+	function endorseCredit (borrower, amount, days) {
+		var borrower_element = document.getElementById('borrower');
+		var amount_element = document.getElementById('amount');
+		var days_element = document.getElementById('days');
+		borrower = borrower_element.value;
+		amount = amount_element.value * baseUnits;
+		days = days_element.value;
+	communityCurrency.credit(borrower, amount, days);
+	window.open('endorseCredit.html');
+	}
 	</script>
     <style>
     .navbar {
@@ -36,26 +56,27 @@
 			</div>
 		<form role="form">
 		  <div class="form-group">
-		    <label for="payee">Borrower account:</label>
-		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
+		    <label for="reputation">Available Trust:</label>
+		    <output class="form-control" id="reputation">UoT</output>
+		  </div>
+		  <div class="form-group">
+		    <label for="borrower">Borrower account:</label>
+		    <input type="text" class="form-control" id="borrower" placeholder="Enter borrower account">
 		  </div>
 		  <div class="form-group">
 		    <label for="amount">Amount:</label>
 		    <input type="text" class="form-control" id="amount" placeholder="Enter amount">
 		  </div>
 		  <div class="form-group">
-		    <label for="deadline">Days:</label>
-		    <input type="text" class="form-control" id="deadline" placeholder="Days">
+		    <label for="days">Days:</label>
+		    <input type="text" class="form-control" id="days" placeholder="Days">
 		  </div>
 		  <div class="form-group">
-		    <label for="reputation">Available Trust:</label>
-		    <output class="form-control" id="reputation">UoT</output>
-		  </div>
-		  <div class="form-group">
-		    <label for="deadline">Cost in UoT of this Credit:</label>
+		    <label for="reputationCost">Cost in UoT of this Credit:</label>
 		    <output class="form-control" id="reputationCost">UoT</output>
 		  </div>
-		      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-check"></span> Endorse Credit</button>
+			<button type="submit" class="btn btn-default" onClick="showCost();"><span class="glyphicon glyphicon-question-sign"></span> Calculate Reputation Cost</button><br/>			
+		    <button type="submit" class="btn btn-default" onClick="endorseCredit();"><span class="glyphicon glyphicon-check"></span> Endorse Credit</button>
 		</form>
     </div>
   </div>

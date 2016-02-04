@@ -5,11 +5,11 @@ contract communityCurrency {
 	// @notice register 
 	// @param name the name of the currency
 	// @param symbol the symbol of the currency
-	// @param decimals the number of decimals 
+	// @param baseUnits is the number of units before the comma 
     string public name;
     string public symbol;
 	string public communityName;
-    uint8 public decimals;
+    uint public baseUnits;
 	
 	// @notice communityCurrency general variables
     // @param _treasury the address of the treasury of the DAO. The creator and minter of the currency
@@ -33,13 +33,13 @@ contract communityCurrency {
 		_community = msg.sender; 
 		_demurrage = 3;
 		_rewardRate = 20;
-		_iniMemberCCUs = 25;
-		_iniMemberReputation = 125;
+		_iniMemberCCUs = 2500;
+		_iniMemberReputation = 12500;
 		_exchange = 10;
 		name = "HOUR";
 		symbol = "HR";
 		communityName = "DESPERADO";
-		decimals = 2;
+		baseUnits = 100;
 	}
 	
 	// @notice structure the members wallet
@@ -213,6 +213,7 @@ contract communityCurrency {
 	function credit(address _borrower, uint _credit, uint _daysAfter)  {
 		if (balancesOf[msg.sender]._isMember != true) return;
 		if (balancesOf[_borrower]._isMember != true) return;
+		if (balancesOf[_borrower]._credit > 0) return;
 			uint _unitsOfTrust = _credit * _daysAfter;
 			if (balancesOf[msg.sender]._reputation > _unitsOfTrust) {
 				balancesOf[msg.sender]._reputation -= _unitsOfTrust;
@@ -256,7 +257,7 @@ contract communityCurrency {
     	}
 
    // @notice get the currency parameters
-	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, string getCommunityName, uint getDecimals) {
+	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, string getCommunityName, uint getBaseUnits) {
 		_getTreasury = _treasury;
 		_getCommunity = _community;
 		_getDemurrage = _demurrage;
@@ -267,8 +268,7 @@ contract communityCurrency {
 		getName = name;
 		getSymbol = symbol;
 		getCommunityName = communityName;
-		getDecimals = decimals;
-		
+		getBaseUnits = baseUnits;		
 	}
 	
    // @notice authorize monitoring

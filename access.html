@@ -6,10 +6,19 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>
    <script type="text/javascript" >	
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('moneyLender').innerHTML = myMoneyLender;
+	}
+	
+	function accessMyWallet (authorized) {
+		var authorized_element = document.getElementById('newMoneyLender');	
+		authorized = authorized_element.value;
+		communityCurrency.accessMyWallet (authorized);
+		window.open('access.html');
 	}
 	</script>
     <style>
@@ -37,11 +46,14 @@
 		    <label for="moneyLender">Current Address with Access:</label>
 		    <output class="form-control" id="moneyLender"></output>
 		 </div>
+		  <div class="alert alert-warning">
+			<small>Access is reserved to the Credit Endorser while having a running credit. </small>
+		</div>
 		 <div class="form-group">
-		    <label for="payee">Give Access to New Account:</label>
-		    <input type="text" class="form-control" id="access" placeholder="Enter access account">
+		    <label for="newMoneyLender">Give Access to New Account:</label>
+		    <input type="text" class="form-control" id="newMoneyLender" placeholder="Enter access account">
 		  </div>
-		  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Give access</button>
+		  <button type="submit" class="btn btn-default" onClick="accessMyWallet();"><span class="glyphicon glyphicon-log-in"></span> Give access</button>
 		</form>
    	</div>    
    </div>

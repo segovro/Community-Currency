@@ -6,12 +6,32 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>
+	
    <script type="text/javascript" >	
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	}
+	
+
+	function monitor(access) {
+		access = document.getElementById('access').value;
+		var mtrWallet = communityCurrency.monitorWallet(access);
+		var mtrCommunityCUnits = mtrWallet[0];
+		var mtrCredit = mtrWallet[1];
+		var mtrDeadline = mtrWallet[2];
+		var mtrMoneyLender = mtrWallet[3];
+		var mtrUnitsOfTrust = mtrWallet[4];
+		var mtrIsMember = mtrWallet[5];
+		var mtrAlias = mtrWallet[6];
+		var mtrReputation = mtrWallet[7];
+		var mtrLast = mtrWallet[8];
+		var mtrGdpActivity = mtrWallet[9];	
+		document.getElementById('communityCUnits').innerHTML = mtrCommunityCUnits;
+		
+	}
+	   
 	</script>
     <style>
     .navbar {
@@ -37,7 +57,7 @@
 		    <label for="access">Monitor Account:</label>
 		    <input type="text" class="form-control" id="access" placeholder="Enter account to be monitored">
 		  </div>
-		  <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
+		  <button type="submit" class="btn btn-default" onClick="monitor();"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
 		</form>
    	</div>   
    	<div class="col-sm-4">

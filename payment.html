@@ -6,21 +6,26 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>
+	
 	<script type="text/javascript" >	
 	var available = Number(myCredit) + Number(myCommunityCUnits);
+	var proceed = false;
+	function endLoop () {
+		proceed = true;
+	}
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('communityCUnits').innerText = myCommunityCUnits + " HR";
-	document.getElementById('available').innerText = available + " HR";
+	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
+	document.getElementById('available').innerText = available/baseUnits + " HR";
 	}
-	function transfer () {
-	var payee_element = document.getElementById('payee');
-	var payment_element = document.getElementById('payment');
-	var payee = payee_element.value;
-	var payment = payment_element.value;
-	communityCurrency.transfer(payee, payment);
-	window.location.reload(true); 
+	
+	function transfer (payee, amount) {
+	payee = document.getElementById('payee').value;
+	amount= document.getElementById('amount').value * baseUnits;
+	communityCurrency.transfer(payee, amount);
+	window.open('payment.html');
 	}
 	</script>
     <style>
@@ -28,6 +33,9 @@
       margin-bottom: 0;
       border-radius: 0;
     }
+	.flip{
+    display: none;
+	}
   </style>
 </head>
 <body>
@@ -39,7 +47,7 @@
     <div class="col-sm-4"> 
     <small><p id="me"></p></small>
     <h3><span class="glyphicon glyphicon-send"></span> Payment</h3>
-		<form role="form">
+		<form role="from" id="payData">
 		  <div class="form-group">
 		    <label for="communityCUnits">My Balance:</label>
 		    <output class="form-control" id="communityCUnits"></output>
@@ -49,15 +57,16 @@
 		    <output class="form-control" id="available"></output>
 		 </div>
 		  <div class="form-group">
-		    <label for="payee"><a href="http://zxing.appspot.com/scan" class="btn btn-default" role="button"><span class="glyphicon glyphicon-camera"></span></a> Payee account:</label>
+		    <label for="payee"><a href="zxing://scan/?ret=http://foo.com/products/{CODE}/description&SCAN_FORMATS=UPC_A,EAN_13" class="btn btn-default" role="button"><span class="glyphicon glyphicon-camera"></span></a> Payee account:</label>
 		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
 		  </div>
 		  <div class="form-group">
-		    <label for="payment">Amount:</label>
-		    <input type="text" class="form-control" id="payment" placeholder="Enter amount">
+		    <label for="amount">Amount:</label>
+		    <input type="text" class="form-control" id="amount" placeholder="Enter amount">
 		  </div>
-		    <button type="submit" class="btn btn-default" onClick="transfer()"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
+		    <button type="submit" class="btn btn-default" onClick="transfer();"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
 		</form>
+
     </div>
   </div>
 </div><br>

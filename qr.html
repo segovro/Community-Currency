@@ -1,16 +1,19 @@
 <html lang="en">
 <head>
-  <title>Community Currency</title>
+  <title>QR</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>
+	
   <script type="text/javascript" >	
-  	var qr = "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + from +"&chld=H|0";
+  	var qr = "http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=" + coinbase +"&chld=H|0";
 	window.onload = function () {
-	document.getElementById('account').innerText = from;
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('account').innerText = coinbase;
 	document.getElementById("qrImage").src = qr;
 	}
 	
@@ -29,6 +32,7 @@
 <div class="container bg-3 text-center"> 
   <div class="row">
     <div class="col-sm-4">
+    <small><p id="me"></p></small>
         <h3><span class="glyphicon glyphicon-user"></span> My Account</h3>
 		 <div id="account"></div>
 		 <img id="qrImage"></img><br/>

@@ -31,7 +31,7 @@ var communitycurrencyContract = web3.eth.contract([
 ,{"name":"getName","type":"string"}
 ,{"name":"getSymbol","type":"string"}
 ,{"name":"getCommunityName","type":"string"}
-,{"name":"getDecimals","type":"uint256"}],"type":"function"}
+,{"name":"getBaseUnits","type":"uint256"}],"type":"function"}
 ,{"constant":false,"inputs":[{"name":"_payee","type":"address"}
 ,{"name":"_payment","type":"uint256"}],"name":"transfer","outputs":[],"type":"function"}
 ,{"constant":false,"inputs":[{"name":"_newDemurrage","type":"int256"}
@@ -60,6 +60,8 @@ var communityCurrency = communitycurrencyContract.at('f025d81196b72fba60a1d4ddda
 
 var coinbase = web3.eth.coinbase;
 
+communityCurrency.creditUpdate();
+
 var myWallet = communityCurrency.monitorWallet(coinbase);
 var myCommunityCUnits = myWallet[0];
 var myCredit = myWallet[1];
@@ -84,7 +86,7 @@ var exchangeRate = contractParameters[6];
 var name = contractParameters[7];
 var symbol = contractParameters[8];
 var communityName = contractParameters[9];
-var decimals = contractParameters[10];
+var baseUnits = contractParameters[10];
 
 if (myIsMember = true) {
 	var commoner ="Commoner of " +  communityName + " Community";

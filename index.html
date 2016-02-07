@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Index</title>
+  <title>Home</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -8,54 +8,116 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <script type="text/javascript" src="cc.js"></script>
-
+	
   <script type="text/javascript" >	
+	var available = Number(myCredit) + Number(myCommunityCUnits);
 	window.onload = function () {
 	document.getElementById('community').innerText = communityName + " Community";
 	document.getElementById('comune').innerText = commune;
-	document.getElementById('account').innerText = coinbase;
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('account').innerHTML = coinbase;
 	document.getElementById('isMember').innerText = commoner;
 	document.getElementById('alias').innerText = myAlias;
+	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
+	document.getElementById('gdpActivity').innerText = myGdpActivity/baseUnits + " HR/day";
+	document.getElementById('reputation').innerText = myReputation/baseUnits + " UoT";
+	document.getElementById('last').innerText = dateMyLast;
+	document.getElementById('credit').innerText = myCredit/baseUnits + " HR";
+	document.getElementById('available').innerText = available/baseUnits + " HR";
+	document.getElementById('moneyLender').innerText = myMoneyLender;
+	document.getElementById('unitsOfTrust').innerText = myUnitsOfTrust/baseUnits + " UoT";
+	document.getElementById('deadline').innerText = dateMyDealine;
+
 	}
-	
 	</script>
     <style>
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
-}
   </style>
 </head>
 <body>
 <script type="text/javascript" src="navbar.js"></script>
   
-<div class="container bg-3 text-center"> 
-   <div class="row">
-   <div class="col-sm-4">
-	   <h2><p id="community"></p></h2>
-   <p id="comune"></p>
-   <small>my Community</small>
-   </div>
-  </div>
+<div class="container bg-3 text-center">  
+
   <div class="row">
-    <div class="col-sm-4">
-         <h3><span class="glyphicon glyphicon-user"></span> My Account</h3>
-        <div class="form-group">  
-		    <label for="account"><a href="qr.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-qrcode"></span></a> My Account:</label>
-		    <output class="form-control" id="account"></output>
+     <div class="col-sm-8">    
+    <small><p id="me"></p></small>
+	<h2><p id="community"></p></h2>
+	   <p id="comune"></p>
+	<h3><a href="qr.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-qrcode"></span></a> <span class="glyphicon glyphicon-user"></span> My Account</h3>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+		    <label class="control-label col-sm-4" for="account">Account:</label>
+		    <div class="col-sm-6"><output class="form-control" id="account"></output></div>
 		 </div>
-		<div class="form-group">
-		    <label for="isMember">Commoner:</label>
-		    <output class="form-control" id="isMember"></output>
+    	<div class="form-group">
+		    <label class="control-label col-sm-4" for="isMember">Commoner:</label>
+		    <div class="col-sm-4"><output class="form-control" id="isMember"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="alias">Alias at the Community:</label>
-		    <output class="form-control" id="alias"></output>
+		    <label class="control-label col-sm-4" for="alias">Alias:</label>
+		    <div class="col-sm-4"><output class="form-control" id="alias"></output></div>
 		 </div>
 		 <div class="form-group">
 			 <a class="btn btn-default" role="button" href="mailto:desperado.theory@gmail.com?subject=CommonerRequest&Body=Indicate Alias and Ethereum Address" target="_top"><span class="	glyphicon glyphicon-envelope"></span> Ask to become Commoner</a>
    		 </div>
+	</form>
+    <h3><span class="glyphicon glyphicon-piggy-bank"></span> My Assets</h3>
+    <form class="form-horizontal" role="form">
+  	 	<div class="form-group">
+		    <label class="control-label col-sm-4" for="communityCUnits">Balance:</label>
+		    <div class="col-sm-4"><output class="form-control" id="communityCUnits"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="gdpActivity">Activity:</label>
+		    <div class="col-sm-4"><output class="form-control" id="gdpActivity"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="last">Last pay:</label>
+		    <div class="col-sm-4"><output class="form-control" id="last"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="reputation">Reputation:</label>
+		    <div class="col-sm-4"><output class="form-control" id="reputation"></output></div>
+		 </div>
+	</form>
+	<h3><span class="glyphicon glyphicon-thumbs-up"></span> My Liabilities</h3>
+	<form class="form-horizontal" role="form">
+  	 	<div class="form-group">
+		    <label class="control-label col-sm-4" for="credit">Credit Line:</label>
+		    <div class="col-sm-4"><output class="form-control" id="credit"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="available">Available:</label>
+		    <div class="col-sm-4"><output class="form-control" id="available"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="moneyLender">Endorser:</label>
+		    <div class="col-sm-6"><output class="form-control" id="moneyLender"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="unitsOfTrust">Endorsed Trust:</label>
+		    <div class="col-sm-4"><output class="form-control" id="unitsOfTrust"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="deadline">Deadline:</label>
+		    <div class="col-sm-4"><output class="form-control" id="deadline"></output></div>
+		 </div>
+	</form>
+	<h3><span class="glyphicon glyphicon-cloud"></span> My Committments</h3>
+	<form class="form-horizontal" role="form">
+  	 	<div class="form-group">
+		    <label class="control-label col-sm-4" for="committedH">Service Hours:</label>
+		    <div class="col-sm-4"><output class="form-control" id="committedH"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="committedF">Crowd-funding:</label>
+		    <div class="col-sm-4"><output class="form-control" id="committedF"></output></div>
+		 </div>
+	</form>
    	</div>    
    </div>
 </div>
@@ -65,7 +127,5 @@
 <p id="ethBalance"></p>
 </small>
 </div>
-
-
 </body>
 </html>

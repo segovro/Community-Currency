@@ -26,20 +26,26 @@ contract communityCurrency {
 	int _iniMemberCCUs; 
 	uint _iniMemberReputation;
 	uint _exchange;
-	//@notice Budget array
-		uint _goalDemurrage;
-		uint _goalCrowdFundig;
-		uint _goalCommunityHours;
-		uint _goalExpenses;
-		uint _committedDemurrage;
-		uint _committedCrowdFundig;
-		uint _committedCommunityHours;
-		uint _committedExpenses;
-		uint _realDemurrage;
-		uint _realCrowdFundig;
-		uint _realCommunityHours;
-		uint _realExpenses;
 	
+	//@notice Budget parameters
+	uint _goalDemurrage;
+	uint _goalCrowdFunding;
+	uint _goalCommunityHours;
+	uint _goalExpenses;
+	uint _commitCrowdFunding;
+	int _commitCommunityHours;
+	uint _commitExpenses;
+	uint _realDemurrage;
+	uint _realCrowdFunding;
+	uint _realCommunityHours;
+	uint _realExpenses;
+	
+	//@notice monetary Totals
+	int _totalMinted;
+	uint _totalCredit;
+	uint _totalTrustCost;
+	uint _totalTrustAvailable;
+
 	// @notice communityCurrency parameters and key addresses for a given Community	
 	function communityCurrency () {
 		_treasury = msg.sender;  
@@ -53,7 +59,23 @@ contract communityCurrency {
 		symbol = "HR";
 		communityName = "DESPERADO";
 		baseUnits = 100;
+		_goalDemurrage = 0;
+		_goalCrowdFunding = 0;
+		_goalCommunityHours = 0;
+		_goalExpenses = 0;
+		_commitCrowdFunding = 0;
+		_commitCommunityHours = 0;
+		_commitExpenses = 0;
+		_realDemurrage = 0;
+		_realCrowdFunding = 0;
+		_realCommunityHours = 0;
+		_realExpenses = 0;
+		_totalMinted = 0;
+		_totalCredit = 0;
+		_totalTrustCost = 0;
+		_totalTrustAvailable = 0;
 	}
+	
 	
 	// @notice structure the members wallet
 	// @param _communityCUnits is the actual balance of the currency CCs in the Wallet of the account. It can be negative!!!	
@@ -77,15 +99,17 @@ contract communityCurrency {
 		uint _reputation; 
 		uint _last; 
 		uint _gdpActivity; 
-		int _committedH;
-		uint _committedF;
+		int _commitH;
+		uint _commitF;
 	}
 	
 	mapping (address => communityCurrencyWallet) balancesOf;	
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
 	event Credit(uint _creditCCUs, uint _creditDays, uint _endorsedUoT, address indexed _endorsedAddress, uint _myReputationBalance, uint _timeStampC);
-
+	event newMember (address _nMember, string _nAlias, uint _timeStampNM);
+	event exMember (address _exMember, string _exAlias, uint _timeStampExM);
+	
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
 	// @param _newMember is the address of the new member
@@ -98,18 +122,59 @@ contract communityCurrency {
         balancesOf[_newMember]._communityCUnits = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
         balancesOf[_newMember]._last = now;
+        balancesOf[_newMember]._gdpActivity = 0;
+        balancesOf[_newMember]._commitH = 0;
+        balancesOf[_newMember]._commitF = 0;
+		_totalMinted += _iniMemberCCUs;
+		_totalTrustAvailable += _iniMemberReputation;
+		newMember(_newMember, _newAlias, now);        
     }
+	
 	// @notice the community account can kick out members. The action deletes all balances
 	// @param _oldMember is the address of the member to be kicked out
 	// @return isMember turned to false, all other account balances to zero, except _communityCUnits
 	function kickOutMember (address _oldMember) {
         if (msg.sender != _community) return;
+        
         balancesOf[_oldMember]._isMember = false;
+		_totalCredit = balancesOf[_oldMember]._credit;
+		balancesOf[balancesOf[_oldMember]._moneyLender]._reputation += balancesOf[_oldMember]._unitsOfTrust;
+		_totalTrustAvailable -= balancesOf[_oldMember]._reputation;
+		_totalTrustAvailable += balancesOf[_oldMember]._unitsOfTrust;
+		_commitCrowdFunding -= balancesOf[_oldMember]._commitF;
+		_commitCommunityHours -= balancesOf[_oldMember]._commitH;
         balancesOf[_oldMember]._reputation = 0;
         balancesOf[_oldMember]._credit = 0;
         balancesOf[_oldMember]._deadline = 0;
-        balancesOf[_oldMember]._last = block.number;
+        balancesOf[_oldMember]._last = now;
+        balancesOf[_oldMember]._gdpActivity = 0;
+        balancesOf[_oldMember]._commitH = 0;
+        balancesOf[_oldMember]._commitF = 0;
+        exMember(_oldMember, balancesOf[_oldMember]._alias, now); 
     }
+	
+	// @notice get the currency parameters
+	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, string getCommunityName, uint getBaseUnits) {
+		_getTreasury = _treasury;
+		_getCommunity = _community;
+		_getDemurrage = _demurrage;
+		_getRewardRate = _rewardRate;
+		_getIniMemberCCUs = _iniMemberCCUs;
+		_getIniMemberReputation = _iniMemberReputation;
+		_getExchange = _exchange;
+		getName = name;
+		getSymbol = symbol;
+		getCommunityName = communityName;
+		getBaseUnits = baseUnits;
+	}
+	
+	// @ notice get the monetary Totals
+	function getMoneyTotals() constant returns (int _getTotalMinted, uint _getTotalCredit, uint _getTotalTrustCost, uint _getTotalTrustAvailable) {
+		_getTotalMinted = _totalMinted;
+		_getTotalCredit = _totalCredit;
+		_getTotalTrustCost = _totalTrustCost;
+		_getTotalTrustAvailable = _totalTrustAvailable;
+	}
 
 	// @notice the treasury account can change the currency parameters
 	// @param _newDemurrage is the new demurrage rate. % x 100
@@ -149,6 +214,7 @@ contract communityCurrency {
 	function mintCCUs (int _createCCUs) {
         if (msg.sender != _treasury) return;
 		balancesOf[_community]._communityCUnits += _createCCUs;
+		_totalMinted += _createCCUs;
 	}
 
 	// @notice the community account can issue as much Reputation it likes and send it to any Member; it can mint Reputation
@@ -161,6 +227,33 @@ contract communityCurrency {
         balancesOf[_beneficiary]._reputation += _createReputation;
     }
 
+		// @notice get Commune budget state
+		function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, uint _getRealDemurrage, uint _getRealCrowdFunding, uint _getRealCommunityHours, uint _getRealExpenses) {
+			_getGoalDemurrage = _goalDemurrage;
+			_getGoalCrowdFunding = _goalCrowdFunding;
+			_getGoalCommunityHours = _goalCommunityHours;
+			_getGoalExpenses = _goalExpenses;
+			_getcommitCrowdFunding = _commitCrowdFunding;
+			_getCommitCommunityHours = _commitCommunityHours;
+			_getCommitExpenses = _commitExpenses;
+			_getRealDemurrage = _realDemurrage;
+			_getRealCrowdFunding = _realCrowdFunding;
+			_getRealCommunityHours = _realCommunityHours;
+			_getRealExpenses = _realExpenses;
+		}
+
+		// @notice set new rolling Commune budget
+		function setNewBudget (uint _NewGoalDemurrage, uint _newGoalCrowdFunding, uint _newGoalCommunityHours, uint _newGoalExpenses) {
+			_goalDemurrage = _NewGoalDemurrage;
+			_goalCrowdFunding = _newGoalCrowdFunding;
+			_goalCommunityHours = _newGoalCommunityHours;
+			_goalExpenses = _newGoalExpenses;
+			_realDemurrage = 0;
+			_realCrowdFunding = 0;
+			_realCommunityHours = 0;
+			_realExpenses = 0;		
+		}
+
 	function creditUpdate () {
 		// @notice update the credit status
 		if (balancesOf[msg.sender]._credit > 0) {
@@ -168,23 +261,28 @@ contract communityCurrency {
 			if (now >= balancesOf[msg.sender]._deadline) {
 			// @notice if time is over reset credit to zero, deadline to zero
 				balancesOf[msg.sender]._deadline = 0;
+				_totalCredit -= balancesOf[msg.sender]._credit;
 				balancesOf[msg.sender]._credit = 0;
 				// @notice if balance is negative the credit was not returned, the money lender balanceReputation is not restored and is penalized with a 20%
 				// @notice as regards the borrower will not be able to make any new transfer until future incomes cover the debts
 				// @return money lender reputation penalized
 				if (balancesOf[msg.sender]._communityCUnits < 0) {
+					_totalTrustCost -= balancesOf[msg.sender]._unitsOfTrust;
+					_totalTrustAvailable -= balancesOf[msg.sender]._unitsOfTrust * _rewardRate/100;
 					balancesOf[balancesOf[msg.sender]._moneyLender]._reputation -= balancesOf[msg.sender]._unitsOfTrust * _rewardRate/100;
 				}
 				// @notice if balance is not negative the credit was returned, the money lender balanceReputation is restored and is rewardRateed with a 20%
 				// @return money lender reputation rewarded
 				else {
+					_totalTrustCost -= balancesOf[msg.sender]._unitsOfTrust;
+					_totalTrustAvailable += balancesOf[msg.sender]._unitsOfTrust * _rewardRate/100;
 					balancesOf[balancesOf[msg.sender]._moneyLender]._reputation += balancesOf[msg.sender]._unitsOfTrust * (100 + _rewardRate)/100;
 				}
 				// @notice reset money lender information
 				// @return money lender information deleted
+				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-		// @notice if time is not over proceed with the payment
 			} 
 		}
 	}
@@ -218,7 +316,6 @@ contract communityCurrency {
 			balancesOf[msg.sender]._last = 1000 * now;
 		}
 	}
-	
 
 	// @notice function authorize a credit
 	// @notice only members can authorize or get a credit
@@ -238,7 +335,10 @@ contract communityCurrency {
 				balancesOf[_borrower]._deadline = now + _daysAfter * 1 days; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
 				Credit(_credit, _daysAfter, balancesOf[_borrower]._unitsOfTrust, _borrower, balancesOf[msg.sender]._reputation, now);
-				}
+				_totalCredit += _credit;
+				_totalTrustCost += _unitsOfTrust;
+				_totalTrustAvailable -= _unitsOfTrust;
+			}
 	}
 	
   	// @notice monitor Wallet
@@ -270,21 +370,6 @@ contract communityCurrency {
 		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
 		}
     	}
-
-   // @notice get the currency parameters
-	function getParameters() constant returns (address _getTreasury, address _getCommunity, int _getDemurrage, uint _getRewardRate, int _getIniMemberCCUs, uint _getIniMemberReputation, uint _getExchange, string getName, string getSymbol, string getCommunityName, uint getBaseUnits) {
-		_getTreasury = _treasury;
-		_getCommunity = _community;
-		_getDemurrage = _demurrage;
-		_getRewardRate = _rewardRate;
-		_getIniMemberCCUs = _iniMemberCCUs;
-		_getIniMemberReputation = _iniMemberReputation;
-		_getExchange = _exchange;
-		getName = name;
-		getSymbol = symbol;
-		getCommunityName = communityName;
-		getBaseUnits = baseUnits;		
-	}
 	
    // @notice authorize monitoring
    function accessMyWallet (address _authorized) {
@@ -294,28 +379,33 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 	
-	//@notice committ Hours
+	// @notice committ Hours
 	function commitHours (int _commitH) {
-		balancesOf[msg.sender]._committedH += _commitH;		
+		balancesOf[msg.sender]._commitH += _commitH;
+		_commitCommunityHours += _commitH;
 	}
 	
-	//@notice get Hours paid from Community
+	// @notice get Hours paid from Community
 	function payHours (int _payH) {
-		if (balancesOf[msg.sender]._committedH > _payH) {
-			balancesOf[msg.sender]._committedH -= _payH;
+		if (balancesOf[msg.sender]._commitH > _payH) {
+			balancesOf[msg.sender]._commitH -= _payH;
+			_commitCommunityHours -= _payH;
 			//@notice Community always pays, even going negative
 			balancesOf[_community]._communityCUnits -= _payH;
 			balancesOf[msg.sender]._communityCUnits += _payH;
-		}
+					}
 	}
 	
-	//@notice committ Funding
+	// @notice committ Funding
 	function commitFunding (uint _commitF) {
-		balancesOf[msg.sender]._committedF += _commitF;		
+		balancesOf[msg.sender]._commitF += _commitF;
+		_commitCrowdFunding += _commitF;
 	}
 	
-	//@notice pay Funding
+	// @notice pay Funding
 	function payFunding (uint _payF) {
+		balancesOf[msg.sender]._commitF -= _payF;
+		_commitCrowdFunding -= _payF;
 		transfer (_community, _payF);
 	}
 	

@@ -10,26 +10,48 @@
   <script type="text/javascript" src="cc.js"></script>
 	
    <script type="text/javascript" >	
+   
 	window.onload = function () {
-	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+		document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	}
 
-
-	   	function monitor(access) {
-		access = document.getElementById('access').value;
-		var mtrWallet = communityCurrency.monitorWallet(access);
-		var mtrCommunityCUnits = mtrWallet[0];
-		var mtrCredit = mtrWallet[1];
-		var mtrDeadline = mtrWallet[2];
-		var mtrMoneyLender = mtrWallet[3];
-		var mtrUnitsOfTrust = mtrWallet[4];
-		var mtrIsMember = mtrWallet[5];
-		var mtrAlias = mtrWallet[6];
-		var mtrReputation = mtrWallet[7];
-		var mtrLast = mtrWallet[8];
-		var mtrGdpActivity = mtrWallet[9];	
-		document.getElementById('communityCUnits').innerHTML = mtrCommunityCUnits;		
-	}
+	var mtrdWallet = communityCurrency.monitorWallet(monitored);
+	var mtrdCommunityCUnits = mtrdWallet[0];
+	var mtrdCredit = mtrdWallet[1];
+	var mtrdDeadline = mtrdWallet[2];
+	var mtrdMoneyLender = mtrdWallet[3];
+	var mtrdUnitsOfTrust = mtrdWallet[4];
+	var mtrdIsMember = mtrdWallet[5];
+	var mtrdAlias = mtrdWallet[6];
+	var mtrdReputation = mtrdWallet[7];
+	var mtrdLast = mtrdWallet[8];
+	var mtrdGdpActivity = mtrdWallet[9];
+	var mtrdCommittedH = mtrdWallet[10];
+	var mtrdCommittedF = mtrdWallet[11];
+	
+	if (mtrdIsMember = true) {
+		var mtrdCommoner ="Commoner of " +  communityName + " Community";
+	} else { 
+	    var mtrdCommoner ="Not Commoner";
+	};
+	var dateMtrdLast = new Date(mtrdLast * 1000);
+	var dateMtrdDealine = new Date(mtrdDeadline * 1000);
+	
+	function monitor() {
+		var monitored = document.getElementById('toMonitor').value;	
+		document.getElementById('account').innerHTML = monitored;
+		document.getElementById('isMember').innerText = mtrdCommoner;
+		document.getElementById('alias').innerText = mtrdAlias;
+		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
+		document.getElementById('gdpActivity').innerText = mtrdGdpActivity/baseUnits + " HR/day";
+		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
+		document.getElementById('last').innerText = dateMtrdLast;
+		document.getElementById('credit').innerText = mtrdCredit/baseUnits + " HR";
+		document.getElementById('available').innerText = available/baseUnits + " HR";
+		document.getElementById('moneyLender').innerText = mtrdMoneyLender;
+		document.getElementById('unitsOfTrust').innerText = mtrdUnitsOfTrust/baseUnits + " UoT";
+		document.getElementById('deadline').innerText = dateMtrdDealine;
+		}
 	   
 	</script>
     <style>
@@ -45,7 +67,7 @@
   
 <div class="container bg-3 text-center">    
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
     <small><p id="me"></p></small>
       <h3><span class="glyphicon glyphicon-eye-open"></span> Monitor Account</h3>
       		<div class="alert alert-warning">
@@ -53,50 +75,80 @@
 			</div>
       <form role="form">
 		  <div class="form-group">
-		    <label for="access">Monitor Account:</label>
-		    <input type="text" class="form-control" id="access" placeholder="Enter account to be monitored">
+		    <label for="toMonitor">Monitor Account:</label>
+		    <input type="text" class="form-control" id="toMonitor" placeholder="Enter account to be monitored">
 		 </div>
-		  <button type="submit" class="btn btn-default" onClick="monitor();"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
 		</form>
-   	</div>   
-   	<div class="col-sm-4">
-      <h3><span class="glyphicon glyphicon-plus"></span> Assets</h3>
+		  <button type="submit" class="btn btn-default" onClick="monitor();"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
+	<h3><span class="glyphicon glyphicon-user"></span> Account</h3>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+		    <label class="control-label col-sm-4" for="account">Account:</label>
+		    <div class="col-sm-6"><output class="form-control" id="account"></output></div>
+		 </div>
+    	<div class="form-group">
+		    <label class="control-label col-sm-4" for="isMember">Commoner:</label>
+		    <div class="col-sm-4"><output class="form-control" id="isMember"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="alias">Alias:</label>
+		    <div class="col-sm-4"><output class="form-control" id="alias"></output></div>
+		 </div>
+	</form>
+    <h3><span class="glyphicon glyphicon-piggy-bank"></span> Assets</h3>
+    <form class="form-horizontal" role="form">
   	 	<div class="form-group">
-		    <label for="communityCUnits">Balance:</label>
-		    <output class="form-control" id="communityCUnits"></output>
+		    <label class="control-label col-sm-4" for="communityCUnits">Balance:</label>
+		    <div class="col-sm-4"><output class="form-control" id="communityCUnits"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="communityCUnits">Activity:</label>
-		    <output class="form-control" id="communityCUnits"></output>
+		    <label class="control-label col-sm-4" for="gdpActivity">Activity:</label>
+		    <div class="col-sm-4"><output class="form-control" id="gdpActivity"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="reputation">Reputation:</label>
-		    <output class="form-control" id="reputation"></output>
+		    <label class="control-label col-sm-4" for="last">Last pay:</label>
+		    <div class="col-sm-4"><output class="form-control" id="last"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="available">Last transaction:</label>
-		    <output class="form-control" id="available"></output>
+		    <label class="control-label col-sm-4" for="reputation">Reputation:</label>
+		    <div class="col-sm-4"><output class="form-control" id="reputation"></output></div>
 		 </div>
-   	</div>   
-   	<div class="col-sm-4">
-      <h3><span class="glyphicon glyphicon-minus"></span> Liabilities</h3>
+	</form>
+	<h3><span class="glyphicon glyphicon-thumbs-up"></span> Liabilities</h3>
+	<form class="form-horizontal" role="form">
   	 	<div class="form-group">
-		    <label for="credit">Credit Line:</label>
-		    <output class="form-control" id="credit"></output>
+		    <label class="control-label col-sm-4" for="credit">Credit Line:</label>
+		    <div class="col-sm-4"><output class="form-control" id="credit"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="moneyLender">Credit Endorser Address:</label>
-		    <output class="form-control" id="moneyLender"></output>
+		    <label class="control-label col-sm-4" for="available">Available:</label>
+		    <div class="col-sm-4"><output class="form-control" id="available"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="unitsOfTrust">Endorsed Trust:</label>
-		    <output class="form-control" id="unitsOfTrust"></output>
+		    <label class="control-label col-sm-4" for="moneyLender">Endorser:</label>
+		    <div class="col-sm-6"><output class="form-control" id="moneyLender"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label for="deadline">Deadline:</label>
-		    <output class="form-control" id="deadline"></output>
+		    <label class="control-label col-sm-4" for="unitsOfTrust">Endorsed Trust:</label>
+		    <div class="col-sm-4"><output class="form-control" id="unitsOfTrust"></output></div>
 		 </div>
-   	</div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="deadline">Deadline:</label>
+		    <div class="col-sm-4"><output class="form-control" id="deadline"></output></div>
+		 </div>
+	</form>
+	<h3><span class="glyphicon glyphicon-cloud"></span> Committments</h3>
+	<form class="form-horizontal" role="form">
+  	 	<div class="form-group">
+		    <label class="control-label col-sm-4" for="committedH">Service Hours:</label>
+		    <div class="col-sm-4"><output class="form-control" id="committedH"></output></div>
+		 </div>
+		 <div class="form-group">
+		    <label class="control-label col-sm-4" for="committedF">Crowd-funding:</label>
+		    <div class="col-sm-4"><output class="form-control" id="committedF"></output></div>
+		 </div>
+	</form>
+   	</div>   
    </div>
 </div>
 <br>

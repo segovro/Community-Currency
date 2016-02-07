@@ -13,11 +13,9 @@ document.write(
 		'      <ul class="nav navbar-nav">'+
 		'      <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>'+
 		'      <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html.html"><span class="glyphicon glyphicon-piggy-bank"></span> My Wallet</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a>'+
 		'          <ul class="dropdown-menu">'+
 		'          <li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> '+
-		'          <li><a href="wallet.html"><span class="glyphicon glyphicon-piggy-bank"></span> Account balance</a></li>'+
-		'          <li><a href="creditLine.html"><span class="glyphicon glyphicon-thumbs-up"></span> Credit line</a></li>'+
 		'          <li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        '+
 		'          <li><a href="exchange.html"><span class="glyphicon glyphicon-random"></span> Exchange</a></li>        '+
 		'          </ul>'+

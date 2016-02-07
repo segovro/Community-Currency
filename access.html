@@ -18,8 +18,8 @@
 		var authorized_element = document.getElementById('newMoneyLender');	
 		authorized = authorized_element.value;
 		communityCurrency.accessMyWallet (authorized);
-		window.open('access.html');
 	}
+	
 	</script>
     <style>
     .navbar {
@@ -53,8 +53,9 @@
 		    <label for="newMoneyLender">Give Access to New Account:</label>
 		    <input type="text" class="form-control" id="newMoneyLender" placeholder="Enter access account">
 		  </div>
+	</form>
 		  <button type="submit" class="btn btn-default" onClick="accessMyWallet();"><span class="glyphicon glyphicon-log-in"></span> Give access</button>
-		</form>
+
    	</div>    
    </div>
 </div>

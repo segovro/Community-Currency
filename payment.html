@@ -25,7 +25,6 @@
 	payee = document.getElementById('payee').value;
 	amount= document.getElementById('amount').value * baseUnits;
 	communityCurrency.transfer(payee, amount);
-	window.open('payment.html');
 	}
 	</script>
     <style>
@@ -64,8 +63,9 @@
 		    <label for="amount">Amount:</label>
 		    <input type="text" class="form-control" id="amount" placeholder="Enter amount">
 		  </div>
+		 </form>
 		    <button type="submit" class="btn btn-default" onClick="transfer();"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
-		</form>
+
 
     </div>
   </div>

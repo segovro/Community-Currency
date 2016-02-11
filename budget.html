@@ -11,7 +11,25 @@
     <script type="text/javascript">
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('community').innerText = community;
+	document.getElementById('goalDemurrage').innerText = goalDemurrage/baseUnits;
+	document.getElementById('goalCrowdFundig').innerText = goalCrowdFundig/baseUnits;
+	document.getElementById('goalCommunityHours').innerText = goalCommunityHours/baseUnits;
+	document.getElementById('goalExpenses').innerText = goalExpenses/baseUnits;
+	document.getElementById('committedCrowdFundig').innerText = committedCrowdFundig/baseUnits;
+	document.getElementById('committedCommunityHours').innerText = committedCommunityHours/baseUnits;
+	document.getElementById('committedExpenses').innerText = committedExpenses/baseUnits;
+	document.getElementById('realDemurrage').innerText = realDemurrage/baseUnits;
+	document.getElementById('realCrowdFundig').innerText = realCrowdFundig/baseUnits;
+	document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits;
+	document.getElementById('realExpenses').innerText = realExpenses/baseUnits;
+	document.getElementById('goalITotal').innerText = (Number(goalDemurrage) + Number(goalCrowdFundig))/baseUnits;
+	document.getElementById('committedITotal').innerText = committedCrowdFundig/baseUnits;
+	document.getElementById('realITotal').innerText = (Number(realDemurrage) + Number(realCrowdFundig))/baseUnits;
+	document.getElementById('goalETotal').innerText = (Number(goalCommunityHours) + Number(goalExpenses))/baseUnits;
+	document.getElementById('committedETotal').innerText = (Number(committedCommunityHours) + Number(committedExpenses))/baseUnits;
+	document.getElementById('realETotal').innerText = (Number(realCommunityHours) + Number(realExpenses))/baseUnits;
+	document.getElementById('communeBalance').innerText = communityCurrency.monitorWallet(commune)[0]/baseUnits;
+	document.getElementById('treasuryBalance').innerText = communityCurrency.monitorWallet(treasury)[0]/baseUnits;
 	}
 	</script>
     <style>
@@ -52,21 +70,21 @@
 			</tr>
 			<tr>
 				<td>Demurrage</td>
-				<td><output class="form-control" id="budgetDemurrage"></output></td>
+				<td><output class="form-control" id="goalDemurrage"></output></td>
 				<td></td>
-				<td><output class="form-control" id="actualDemurrage"></output></td>
+				<td><output class="form-control" id="realDemurrage"></output></td>
 			</tr>
 			<tr>
 				<td>Crowd-funding</td>
-				<td><output class="form-control" id="budgetDonations"></output></td>
-				<td><output class="form-control" id="budgetDonations"></output></td>
-				<td><output class="form-control" id="actualDonations"></output></td>
+				<td><output class="form-control" id="goalCrowdFundig"></output></td>
+				<td><output class="form-control" id="committedCrowdFundig"></output></td>
+				<td><output class="form-control" id="realCrowdFundig"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
-				<td><output class="form-control" id="budgettotal"></output></td>
-				<td><output class="form-control" id="budgettotal"></output></td>
-				<td><output class="form-control" id="actualtotal"></output></td>
+				<td><output class="form-control" id="goalITotal"></output></td>
+				<td><output class="form-control" id="committedITotal"></output></td>
+				<td><output class="form-control" id="realITotal"></output></td>
 			</tr>
 			<tr>
 				<td><b>Payments</td>
@@ -77,28 +95,22 @@
 			</tr>
 			<tr>
 				<td>Community Services</td>
-				<td><output class="form-control" id="budgetCommunityServiceHours"></output></td>
-				<td><output class="form-control" id="budgetCommunityServiceHours"></output></td>
-				<td><output class="form-control" id="actualCommunityServiceHours"></output></td>
+				<td><output class="form-control" id="goalCommunityHours"></output></td>
+				<td><output class="form-control" id="committedCommunityHours"></output></td>
+				<td><output class="form-control" id="realCommunityHours"></output></td>
 			</tr>
 			<tr>
 				<td>Other Expenses</td>
-				<td><output class="form-control" id="budgetOtherExpenses"></output></td>
-				<td><output class="form-control" id="budgetOtherExpenses"></output></td>
-				<td><output class="form-control" id="actualOtherExpenses"></output></td>
+				<td><output class="form-control" id="goalExpenses"></output></td>
+				<td><output class="form-control" id="committedExpenses"></output></td>
+				<td><output class="form-control" id="realExpenses"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
-				<td><output class="form-control" id="budgettotal"></output></td>
-				<td><output class="form-control" id="budgettotal"></output></td>
-				<td><output class="form-control" id="actualtotal"></output></td>
-			</tr>
-			<tr>
-				<td><b><i>TOTAL</i></b></td>
-				<td><output class="form-control" id="budgetTOTAL"></output></td>
-				<td><output class="form-control" id="budgetTOTAL"></output></td>
-				<td><output class="form-control" id="actualTOTAL"></output></td>
-			</tr>
+				<td><output class="form-control" id="goalETotal"></output></td>
+				<td><output class="form-control" id="committedETotal"></output></td>
+				<td><output class="form-control" id="realETotal"></output></td>
+		</tr>
       </tbody>
      </table>
  

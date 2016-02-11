@@ -6,11 +6,11 @@ contract communityCurrency {
 	// @param name the name of the currency
 	// @param symbol the symbol of the currency
 	// @param baseUnits is the number of units before the comma 
-    string public name;
-    string public symbol;
-	string public communityName;
-    uint public baseUnits;
-	
+    uint baseUnits;
+    string name;
+    string symbol; 
+	string communityName;
+
 	// @notice communityCurrency general variables
     // @param _treasury the address of the treasury of the DAO. The creator and minter of the currency
     // @param _community the address of the Community account. Where donations and taxes are paid. Account used to pay community works
@@ -55,10 +55,10 @@ contract communityCurrency {
 		_iniMemberCCUs = 2500;
 		_iniMemberReputation = 12500;
 		_exchange = 10;
+		baseUnits = 100;
 		name = "HOUR";
 		symbol = "HR";
-		communityName = "DESPERADO";
-		baseUnits = 100;
+		communityName = "DESPERADO"; 		
 		_goalDemurrage = 0;
 		_goalCrowdFunding = 0;
 		_goalCommunityHours = 0;
@@ -107,8 +107,6 @@ contract communityCurrency {
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
 	event Credit(uint _creditCCUs, uint _creditDays, uint _endorsedUoT, address indexed _endorsedAddress, uint _myReputationBalance, uint _timeStampC);
-	event newMember (address _nMember, string _nAlias, uint _timeStampNM);
-	event exMember (address _exMember, string _exAlias, uint _timeStampExM);
 	
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
@@ -126,8 +124,7 @@ contract communityCurrency {
         balancesOf[_newMember]._commitH = 0;
         balancesOf[_newMember]._commitF = 0;
 		_totalMinted += _iniMemberCCUs;
-		_totalTrustAvailable += _iniMemberReputation;
-		newMember(_newMember, _newAlias, now);        
+		_totalTrustAvailable += _iniMemberReputation;    
     }
 	
 	// @notice the community account can kick out members. The action deletes all balances
@@ -150,7 +147,6 @@ contract communityCurrency {
         balancesOf[_oldMember]._gdpActivity = 0;
         balancesOf[_oldMember]._commitH = 0;
         balancesOf[_oldMember]._commitF = 0;
-        exMember(_oldMember, balancesOf[_oldMember]._alias, now); 
     }
 	
 	// @notice get the currency parameters
@@ -356,7 +352,7 @@ contract communityCurrency {
 	// @return _getReputation is the reputation in UoTs
 	// @return _getLast is the date of the last transaction
 	// @return _getGdpActivity is the average activity
-	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, string _getAlias, uint _getReputation, uint _getLast, uint _getGdpActivity  ) {
+	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, string _getAlias, uint _getReputation, uint _getLast, uint _getGdpActivity, int _getCommitH, uint _getCommitF ) {
 		if ((_monitored == msg.sender) || (msg.sender == _community) || (msg.sender == balancesOf[_monitored]._moneyLender)) {
     	_getCCUs = balancesOf[_monitored]._communityCUnits;	
 		_getCredit = balancesOf[_monitored]._credit;
@@ -368,6 +364,8 @@ contract communityCurrency {
 		_getReputation = balancesOf[_monitored]._reputation;
 		_getLast = balancesOf[_monitored]._last;
 		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
+		_getCommitH = balancesOf[_monitored]._commitH;
+		_getCommitF = balancesOf[_monitored]._commitF;
 		}
     	}
 	

@@ -14,20 +14,24 @@
 	window.onload = function () {
 		document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	}
-
-	var mtrdWallet = communityCurrency.monitorWallet(monitored);
-	var mtrdCommunityCUnits = mtrdWallet[0];
-	var mtrdCredit = mtrdWallet[1];
-	var mtrdDeadline = mtrdWallet[2];
-	var mtrdMoneyLender = mtrdWallet[3];
-	var mtrdUnitsOfTrust = mtrdWallet[4];
-	var mtrdIsMember = mtrdWallet[5];
-	var mtrdAlias = mtrdWallet[6];
-	var mtrdReputation = mtrdWallet[7];
-	var mtrdLast = mtrdWallet[8];
-	var mtrdGdpActivity = mtrdWallet[9];
-	var mtrdCommittedH = mtrdWallet[10];
-	var mtrdCommittedF = mtrdWallet[11];
+	
+	function monitor() {
+		var monitored = document.getElementById('toMonitor').value;	
+		document.getElementById('account').innerHTML = monitored;
+		
+		var mtrdWallet = communityCurrency.monitorWallet(monitored);
+		var mtrdCommunityCUnits = mtrdWallet[0];
+		var mtrdCredit = mtrdWallet[1];
+		var mtrdDeadline = mtrdWallet[2];
+		var mtrdMoneyLender = mtrdWallet[3];
+		var mtrdUnitsOfTrust = mtrdWallet[4];
+		var mtrdIsMember = mtrdWallet[5];
+		var mtrdAlias = mtrdWallet[6];
+		var mtrdReputation = mtrdWallet[7];
+		var mtrdLast = mtrdWallet[8];
+		var mtrdGdpActivity = mtrdWallet[9];
+		var mtrdCommittedH = mtrdWallet[10];
+		var mtrdCommittedF = mtrdWallet[11];
 	
 	if (mtrdIsMember = true) {
 		var mtrdCommoner ="Commoner of " +  communityName + " Community";
@@ -36,10 +40,7 @@
 	};
 	var dateMtrdLast = new Date(mtrdLast * 1000);
 	var dateMtrdDealine = new Date(mtrdDeadline * 1000);
-	
-	function monitor() {
-		var monitored = document.getElementById('toMonitor').value;	
-		document.getElementById('account').innerHTML = monitored;
+		
 		document.getElementById('isMember').innerText = mtrdCommoner;
 		document.getElementById('alias').innerText = mtrdAlias;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";

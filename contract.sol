@@ -27,7 +27,7 @@ contract communityCurrency {
 	uint _iniMemberReputation;
 	uint _exchange;
 	
-	//@notice Budget parameters
+	// @notice Budget parameters
 	uint _goalDemurrage;
 	uint _goalCrowdFunding;
 	uint _goalCommunityHours;
@@ -35,7 +35,7 @@ contract communityCurrency {
 	uint _commitCrowdFunding;
 	int _commitCommunityHours;
 	uint _commitExpenses;
-	uint _realDemurrage;
+	int _realDemurrage;
 	uint _realCrowdFunding;
 	uint _realCommunityHours;
 	uint _realExpenses;
@@ -178,10 +178,10 @@ contract communityCurrency {
 	// @param _newIniCCUs is the new initial Community Currency Units given to any new member
 	// @param _newIniR is the new initial Reputation given to any new member
 	// @return new demurrage, reward rate, initial CCUs and initial reputation for new members
-	function newParameters (int _newDemurrage, uint _newrewardRate, int _newIniCCUs, uint _newIniR) {
+	function newParameters (int _newDemurrage, uint _newRewardRate, int _newIniCCUs, uint _newIniR) {
 		if (msg.sender != _treasury) return;
 		_demurrage = _newDemurrage;
-		_rewardRate = _newrewardRate;
+		_rewardRate = _newRewardRate;
 		_iniMemberCCUs = _newIniCCUs;
 		_iniMemberReputation = _newIniR;
 	}
@@ -224,7 +224,7 @@ contract communityCurrency {
     }
 
 		// @notice get Commune budget state
-		function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, uint _getRealDemurrage, uint _getRealCrowdFunding, uint _getRealCommunityHours, uint _getRealExpenses) {
+		function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, int _getRealDemurrage, uint _getRealCrowdFunding, uint _getRealCommunityHours, uint _getRealExpenses, int _getCommuneBalance, int _getTreasuryBalance) {
 			_getGoalDemurrage = _goalDemurrage;
 			_getGoalCrowdFunding = _goalCrowdFunding;
 			_getGoalCommunityHours = _goalCommunityHours;
@@ -236,6 +236,8 @@ contract communityCurrency {
 			_getRealCrowdFunding = _realCrowdFunding;
 			_getRealCommunityHours = _realCommunityHours;
 			_getRealExpenses = _realExpenses;
+			_getCommuneBalance = balancesOf[_community]._communityCUnits;
+			_getTreasuryBalance = balancesOf[_treasury]._communityCUnits;
 		}
 
 		// @notice set new rolling Commune budget
@@ -252,6 +254,7 @@ contract communityCurrency {
 
 	function creditUpdate () {
 		// @notice update the credit status
+		if (balancesOf[msg.sender]._isMember == true) {
 		if (balancesOf[msg.sender]._credit > 0) {
 		// @notice check if deadline is over
 			if (now >= balancesOf[msg.sender]._deadline) {
@@ -279,7 +282,8 @@ contract communityCurrency {
 				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-			} 
+				} 
+			}
 		}
 	}
 			
@@ -306,6 +310,7 @@ contract communityCurrency {
 			// @notice apply demurrage and send it to the Community account
 			balancesOf[_payee]._communityCUnits -= _amountCCUs * _demurrage/100;
 			balancesOf[_community]._communityCUnits += _amountCCUs * _demurrage/100;
+			_realDemurrage += _amountCCUs * _demurrage/100;
 			Transfer(_payment, msg.sender, _payee, now);
 	// @notice update the Activity indicator
 			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/now;

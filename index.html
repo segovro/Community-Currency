@@ -6,9 +6,9 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
-	
   <script type="text/javascript" >	
 	var available = Number(myCredit) + Number(myCommunityCUnits);
 	window.onload = function () {
@@ -44,7 +44,7 @@
 <div class="container bg-3 text-center">  
 
   <div class="row">
-     <div class="col-sm-8">    
+     <div class="col-sm-10">    
     <small><p id="me"></p></small>
 	<h2><p id="community"></p></h2>
 	   <p id="comune"></p>
@@ -56,11 +56,11 @@
 		 </div>
     	<div class="form-group">
 		    <label class="control-label col-sm-4" for="isMember">Commoner:</label>
-		    <div class="col-sm-4"><output class="form-control" id="isMember"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="isMember"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
-		    <div class="col-sm-4"><output class="form-control" id="alias"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
 		 </div>
 		 <div class="form-group">
 			 <a class="btn btn-default" role="button" href="mailto:desperado.theory@gmail.com?subject=CommonerRequest&Body=Indicate Alias and Ethereum Address" target="_top"><span class="	glyphicon glyphicon-envelope"></span> Ask to become Commoner</a>
@@ -70,30 +70,30 @@
     <form class="form-horizontal" role="form">
   	 	<div class="form-group">
 		    <label class="control-label col-sm-4" for="communityCUnits">Balance:</label>
-		    <div class="col-sm-4"><output class="form-control" id="communityCUnits"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="communityCUnits"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="gdpActivity">Activity:</label>
-		    <div class="col-sm-4"><output class="form-control" id="gdpActivity"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="gdpActivity"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="last">Last pay:</label>
-		    <div class="col-sm-4"><output class="form-control" id="last"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="last"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="reputation">Reputation:</label>
-		    <div class="col-sm-4"><output class="form-control" id="reputation"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="reputation"></output></div>
 		 </div>
 	</form>
 	<h3><span class="glyphicon glyphicon-thumbs-up"></span> My Liabilities</h3>
 	<form class="form-horizontal" role="form">
   	 	<div class="form-group">
 		    <label class="control-label col-sm-4" for="credit">Credit Line:</label>
-		    <div class="col-sm-4"><output class="form-control" id="credit"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="credit"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="available">Available:</label>
-		    <div class="col-sm-4"><output class="form-control" id="available"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="available"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="moneyLender">Endorser:</label>
@@ -101,22 +101,22 @@
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="unitsOfTrust">Endorsed Trust:</label>
-		    <div class="col-sm-4"><output class="form-control" id="unitsOfTrust"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="unitsOfTrust"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="deadline">Deadline:</label>
-		    <div class="col-sm-4"><output class="form-control" id="deadline"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="deadline"></output></div>
 		 </div>
 	</form>
 	<h3><span class="glyphicon glyphicon-cloud"></span> My Committments</h3>
 	<form class="form-horizontal" role="form">
   	 	<div class="form-group">
 		    <label class="control-label col-sm-4" for="committedH">Service Hours:</label>
-		    <div class="col-sm-4"><output class="form-control" id="committedH"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="committedH"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="committedF">Crowd-funding:</label>
-		    <div class="col-sm-4"><output class="form-control" id="committedF"></output></div>
+		    <div class="col-sm-6"><output class="form-control" id="committedF"></output></div>
 		 </div>
 	</form>
    	</div>    

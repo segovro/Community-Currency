@@ -6,9 +6,10 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
-    <script type="text/javascript">
+  <script type="text/javascript">
 	window.onload = function () {
 	var budget = communityCurrency.getBudget();
 		var goalDemurrage = budget[0];
@@ -24,11 +25,13 @@
 		var realExpenses = budget[10];
 		var communeBalance = budget[11];
 		var treasuryBalance = budget[12];
+		
 	var MoneyTotals = communityCurrency.getMoneyTotals();
 		var totalMinted = MoneyTotals[0];
 		var totalCredit = MoneyTotals[1];
 		var totalTrustCost = MoneyTotals[2];
 		var totalTrustAvailable = MoneyTotals[3];
+		
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	document.getElementById('goalDemurrage').innerText = goalDemurrage/baseUnits + " HR";
 	document.getElementById('goalCrowdFundig').innerText = goalCrowdFundig/baseUnits + " HR";

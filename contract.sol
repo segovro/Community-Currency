@@ -131,8 +131,7 @@ contract communityCurrency {
 	// @param _oldMember is the address of the member to be kicked out
 	// @return isMember turned to false, all other account balances to zero, except _communityCUnits
 	function kickOutMember (address _oldMember) {
-        if (msg.sender != _community) return;
-        
+        if (msg.sender != _community) return;        
         balancesOf[_oldMember]._isMember = false;
 		_totalCredit = balancesOf[_oldMember]._credit;
 		balancesOf[balancesOf[_oldMember]._moneyLender]._reputation += balancesOf[_oldMember]._unitsOfTrust;
@@ -189,7 +188,7 @@ contract communityCurrency {
 	// @notice the treasury account can change to a new community address
 	// @param _newCommunity is the new address holding the Community permissions
 	// @return new community address
-	function newCommunity (address _newCommunity) {
+	function newCommune (address _newCommunity) {
 		if (msg.sender != _treasury) return;
 		_community = _newCommunity;
 	}
@@ -251,6 +250,11 @@ contract communityCurrency {
 			_realCommunityHours = 0;
 			_realExpenses = 0;		
 		}
+	
+	function setExchange (uint _newExchange) {
+		if (msg.sender != _treasury) return;
+		_exchange = _newExchange;
+	}
 
 	function creditUpdate () {
 		// @notice update the credit status
@@ -313,8 +317,8 @@ contract communityCurrency {
 			_realDemurrage += _amountCCUs * _demurrage/100;
 			Transfer(_payment, msg.sender, _payee, now);
 	// @notice update the Activity indicator
-			balancesOf[msg.sender]._gdpActivity = (balancesOf[msg.sender]._gdpActivity * balancesOf[msg.sender]._last + _payment)/now;
-			balancesOf[msg.sender]._last = 1000 * now;
+			balancesOf[msg.sender]._gdpActivity = (1 days * _payment)/(now - balancesOf[msg.sender]._last);
+			balancesOf[msg.sender]._last = now;
 		}
 	}
 

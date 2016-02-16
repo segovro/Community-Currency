@@ -6,12 +6,32 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
+	var budget = communityCurrency.getBudget();
+		var goalDemurrage = budget[0];
+		var goalCrowdFundig = budget[1];
+		var goalCommunityHours = budget[2];
+		var goalExpenses = budget[3];
+		
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('oldGD').innerText = "Goal Demurrage income: " + goalDemurrage/baseUnits +" HR";
+	document.getElementById('oldGCF').innerText = "Goal Crowd-funding income: " + goalCrowdFundig/baseUnits +" HR";
+	document.getElementById('oldGS').innerText = "Goal Service Hours spending: " + goalCommunityHours/baseUnits +" HR";
+	document.getElementById('oldGE').innerText = "Goal Expenses spending: " + goalExpenses/baseUnits +" HR";
 	}
+	
+	function setNewBudget () {
+		var newGoalDemurrage = document.getElementById('goalDemurrage').value * baseUnits;;
+		var newGoalCrowdfunding = document.getElementById('goalCrowdfunding').value * baseUnits;;
+		var newGoalService = document.getElementById('goalService').value * baseUnits;
+		var newGoalExpenses = document.getElementById('goalExpenses').value * baseUnits;
+		communityCurrency.newParameters(newGoalDemurrage, newGoalCrowdfunding, newGoalService, newGoalExpenses);	
+	}
+	  
 	</script>
     <style>
     .navbar {
@@ -67,29 +87,32 @@
 	</div>
     <div class="col-sm-4"> 
 	<h4><span class="glyphicon glyphicon-th-list"></span> New Budget Goals</h4> 
-	<form role="form">
-	<h4><span class="glyphicon glyphicon-scissors"></span> Demurrage</h4>    
+		<div class="well">	
+	  		<p id="oldGD"></p>
+	  		<p id="oldGCF"></p>
+	  		<p id="oldGS"></p>
+	  	  	<p id="oldGE"></p>
+	  </div>
+	<form role="form">   
 		  <div class="form-group">
-		    <label for="community">Goal Demurrage income:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Add new goal">
-		  </div>
-	<h4><span class="glyphicon glyphicon-cloud-upload"></span> Crowd-funding</h4>    
+		    <label for="goalDemurrage">Goal Demurrage income:</label>
+		    <input type="text" class="form-control" id="goalDemurrage" placeholder="Add new goal">
+		  </div> 
  		  <div class="form-group">
-		    <label for="community">Goal Crowd-funding income:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Add new goal">
+		    <label for="goalCrowdFunding">Goal Crowd-funding income:</label>
+		    <input type="text" class="form-control" id="goalCrowdFunding" placeholder="Add new goal">
 		  </div>
-	<h4><span class="glyphicon glyphicon-hourglass"></span> Service Hours</h4>    
 		  <div class="form-group">
-		    <label for="community">Goal Service Hours spending:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Add new goal">
+		    <label for="goalServices">Goal Service Hours spending:</label>
+		    <input type="text" class="form-control" id="goalServices" placeholder="Add new goal">
 		  </div>
-	<h4><span class="glyphicon glyphicon-send"></span> Other Expenses</h4>    
 		  <div class="form-group">
-		    <label for="community">Goal Expenses spending:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Add new goal">
+		    <label for="goalExpenses">Goal Expenses spending:</label>
+		    <input type="text" class="form-control" id="goalExpenses" placeholder="Add new goal">
 		  </div>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span> Change Budget Goals</button>
 		</form>	
+		    <button type="submit" class="btn btn-default" onClick="setNewBudget();"><span class="glyphicon glyphicon-th-list"></span> Change Budget Goals</button>
+
 	</div>
 	<div class="col-sm-4"> 
 	<h4><span class="glyphicon glyphicon-print"></span> Change Treasury address</h4>    

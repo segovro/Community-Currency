@@ -6,25 +6,21 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
-  <script type="text/javascript" src="bignumber.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>	
   <script type="text/javascript" >	
 	var available = Number(myCredit) + Number(myCommunityCUnits);
-	var proceed = false;
-	function endLoop () {
-		proceed = true;
-	}
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
 	document.getElementById('available').innerText = available/baseUnits + " HR";
 	}
 	
-	function transfer (payee, amount) {
-	payee = document.getElementById('payee').value;
-	amount= document.getElementById('amount').value * baseUnits;
+	function transfer() {
+	var payee = document.getElementById('payee').value;
+	var amount= document.getElementById('amount').value * baseUnits;
 	communityCurrency.transfer(payee, amount);
+	location.reload();
 	}
 	</script>
     <style>
@@ -63,11 +59,10 @@
 		    <label for="amount">Amount:</label>
 		    <input type="text" class="form-control" id="amount" placeholder="Enter amount">
 		  </div>
-		 </form>
-		    <button type="submit" class="btn btn-default" onClick="transfer();"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
+    	</form>
+			<button type="submit" class="btn btn-default" onClick="transfer();"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
 
-
-    </div>
+	</div>
   </div>
 </div><br>
 </body>

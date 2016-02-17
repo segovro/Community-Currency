@@ -23,7 +23,7 @@ document.write(
 		'        <li class="dropdown">'+
 		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>'+
 		'          <ul class="dropdown-menu">'+
-		'        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-check"></span> Endorse P2P Credit</a></li> '+
+		'        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-ok"></span> Endorse P2P Credit</a></li> '+
 		'        <li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> '+
 		'        <li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> '+
 		'          </ul>'+

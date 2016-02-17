@@ -37,7 +37,7 @@ contract communityCurrency {
 	uint _commitExpenses;
 	int _realDemurrage;
 	uint _realCrowdFunding;
-	uint _realCommunityHours;
+	int _realCommunityHours;
 	uint _realExpenses;
 	
 	//@notice monetary Totals
@@ -107,6 +107,8 @@ contract communityCurrency {
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
 	event Credit(uint _creditCCUs, uint _creditDays, uint _endorsedUoT, address indexed _endorsedAddress, uint _myReputationBalance, uint _timeStampC);
+	event ClaimH (address indexed _hFrom, int _claimedH, uint _timeStampCH);
+	event PaidH (address indexed _hTo, uint _paidH, uint _timeStampPH);
 	
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
@@ -223,7 +225,7 @@ contract communityCurrency {
     }
 
 		// @notice get Commune budget state
-		function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, int _getRealDemurrage, uint _getRealCrowdFunding, uint _getRealCommunityHours, uint _getRealExpenses, int _getCommuneBalance, int _getTreasuryBalance) {
+		function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, int _getRealDemurrage, uint _getRealCrowdFunding, int _getRealCommunityHours, uint _getRealExpenses, int _getCommuneBalance, int _getTreasuryBalance) {
 			_getGoalDemurrage = _goalDemurrage;
 			_getGoalCrowdFunding = _goalCrowdFunding;
 			_getGoalCommunityHours = _goalCommunityHours;
@@ -392,15 +394,21 @@ contract communityCurrency {
 		_commitCommunityHours += _commitH;
 	}
 	
-	// @notice get Hours paid from Community
-	function payHours (int _payH) {
-		if (balancesOf[msg.sender]._commitH > _payH) {
-			balancesOf[msg.sender]._commitH -= _payH;
-			_commitCommunityHours -= _payH;
-			//@notice Community always pays, even going negative
-			balancesOf[_community]._communityCUnits -= _payH;
-			balancesOf[msg.sender]._communityCUnits += _payH;
-					}
+	// @notice claim Hours to paid from Community
+	function claimHours (int _claimH) {
+		if (balancesOf[msg.sender]._commitH > _claimH) {
+		ClaimH (msg.sender, _claimH, now);
+		}
+	}
+	
+	// @notice pay Hours
+	function payHours (address _servant, uint _payH) {
+	if (msg.sender != _community) return;
+	transfer (_servant, _payH);
+		balancesOf[_servant]._commitH -= int(_payH);
+		_commitCommunityHours -= int(_payH);
+		_realCommunityHours += int(_payH);
+		PaidH (_servant, _payH, now);
 	}
 	
 	// @notice committ Funding
@@ -411,9 +419,24 @@ contract communityCurrency {
 	
 	// @notice pay Funding
 	function payFunding (uint _payF) {
+	transfer (_community, _payF);
 		balancesOf[msg.sender]._commitF -= _payF;
 		_commitCrowdFunding -= _payF;
-		transfer (_community, _payF);
+		_realCrowdFunding += _payF;
+	}
+	
+		// @notice committ Expenses
+	function commitExpenses (uint _commitE) {
+	if (msg.sender != _community) return;
+		_commitExpenses += _commitE;
+	}
+	
+	// @notice pay Expenses
+	function payExpenses (address _contractor, uint _payE) {
+	if (msg.sender != _community) return;
+	transfer (_contractor, _payE);
+		_commitExpenses -= _payE;
+		_realExpenses += _payE;
 	}
 	
 }

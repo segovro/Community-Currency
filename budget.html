@@ -6,8 +6,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="web3.js"></script>
-  <script type="text/javascript" src="bignumber.js"></script>
+
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
@@ -43,7 +42,7 @@
 	document.getElementById('realDemurrage').innerText = realDemurrage/baseUnits + " HR";
 	document.getElementById('realCrowdFundig').innerText = realCrowdFundig/baseUnits + " HR";
 	document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits + " HR";
-	document.getElementById('realExpenses').innerText = realExpenses/baseUnits;
+	document.getElementById('realExpenses').innerText = realExpenses/baseUnits + " HR";
 	document.getElementById('goalITotal').innerText = (Number(goalDemurrage) + Number(goalCrowdFundig))/baseUnits + " HR";
 	document.getElementById('committedITotal').innerText = committedCrowdFundig/baseUnits + " HR";
 	document.getElementById('realITotal').innerText = (Number(realDemurrage) + Number(realCrowdFundig))/baseUnits + " HR";
@@ -222,7 +221,13 @@
 		    <output type="text" class="form-control" id="exchange"></output>
 		  </div>
 		</form>
-</div>
+	<h4><span class="glyphicon glyphicon-thumbs-up"></span> Credits</h4>
+	<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
+		<div  id="listRec"></div>	
+	<h4><span class="glyphicon glyphicon-remove"></span> Expired credits</h4> 
+		<div id="listSent"></div>	
+	</div>
+	</div>
 </div>
 
 </body>

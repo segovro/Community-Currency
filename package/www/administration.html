@@ -1,0 +1,147 @@
+<html lang="en">
+<head><script src="deployment.js"></script>
+  <title>Administration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="cc.js"></script>
+  <script type="text/javascript">
+	window.onload = function () {
+		
+			var claimedH = communityCurrency.ClaimH({}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			claimedH.watch(function(error, result){
+			row += Date(result.args._timeStamCH) + "&emsp;<b>" + result.args._servantC + "</b>&emsp;" + result.args._hFrom + "&emsp;<span class=\"badge\">" + result.args._claimedH/baseUnits + " HR</span><br/>";
+			document.getElementById('listClaimedHours').innerHTML = row;
+			});
+		});
+
+
+		var paidH = communityCurrency.PaidH({}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			paidH.watch(function(error, result){
+			row += Date(result.args._timeStampPH) + "&emsp;<b>" + result.args._servantC + "</b>&emsp;<span class=\"badge\">" + result.args.__paidH/baseUnits + " HR</span><br/>";
+			document.getElementById('listPaidHours').innerHTML = row;
+			});
+		});
+		
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('committedE').innerHTML = committedExpenses/baseUnits + " HR";
+	document.getElementById('communeWallet').innerHTML = communeBalance/baseUnits + " HR";
+	}
+	
+	var budget = communityCurrency.getBudget();
+		var committedExpenses = budget[6];
+		var communeBalance = budget[11];
+		
+	function payHours() {
+		var servant = document.getElementById('servant').value;
+		var hours = document.getElementById('hours').value * baseUnits;
+		communityCurrency.payHours(servant, hours)
+		location.reload();
+	}
+	
+	function payExpenses() {
+		var contractor = document.getElementById('contractor').value;
+		var expenses = document.getElementById('expenses').value * baseUnits;
+		communityCurrency.payExpenses(contractor, expenses)
+		location.reload();
+	}
+	
+	function commitExpenses() {
+		var ctE = document.getElementById('ctE').value * baseUnits;
+		communityCurrency.commitExpenses(ctE);
+		location.reload();
+	}
+	  
+	</script>
+    <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+
+<script type="text/javascript" src="navbar.js"></script>
+  
+<div class="container bg-3 text-center"> 
+      <small><p id="me"></p></small>   
+<h3><span class="glyphicon glyphicon-inbox"></span> Administrative functions</h3>
+		<div class="alert alert-warning">
+			<small>This page only available to the Commune Account</small>
+		</div>
+   <div class="row">   
+
+    <div class="col-sm-4">   
+        <h3><span class="glyphicon glyphicon-hourglass"></span> Payment of Service Hours</h3>
+		<form role="from" id="payData">
+		  <div class="form-group">
+		    <label for="servant">Servant account:</label>
+		    <input type="text" class="form-control" id="servant" placeholder="Enter servant account">
+		  </div>
+		  <div class="form-group">
+		    <label for="hours">Amount:</label>
+		    <input type="text" class="form-control" id="hours" placeholder="Enter amount of hours">
+		  </div>
+    	</form>
+			<button type="submit" class="btn btn-default" onClick="payHours();"><span class="glyphicon glyphicon-hourglass"></span> Pay Hours</button>
+    
+    <h3><span class="glyphicon glyphicon-hourglass"></span> Service hours</h4>
+	<h4> Claimed</h4> 
+		<div  id="listClaimedHours"></div>	
+	<h4> Paid</h4> 
+		<div id="listPaidHours"></div>	
+	</div>
+
+   <div class="col-sm-4">     
+
+    <h3><span class="glyphicon glyphicon-cloud-download"></span> Community Expenses</h3>
+
+		  <div class="form-group">
+		    <label for="committedE">Pending Committed Expenses:</label>
+		    <output class="form-control" id="committedE"></output>
+		  </div>
+		  
+		<form role="form">		  
+		  <div class="form-group">
+		    <label for="contractor">Contractor account:</label>
+		    <input type="text" class="form-control" id="contractor" placeholder="Enter contractor account">
+		  </div>
+		  <div class="form-group">
+		    <label for="expenses">Expenses:</label>
+		    <input type="text" class="form-control" id="expenses" placeholder="Enter amount in HR">
+		  </div>
+		 </form>
+		    <button type="submit" class="btn btn-default" onClick="payExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Pay Expenses</button>
+
+		<form role="form">
+		  <div class="form-group">
+		    <label for="ctE">Commit Expenses:</label>
+		    <input class="form-control" id="ctE" placeholder="Enter amount in HR">
+		  </div>
+		 </form>
+		    <button type="submit" class="btn btn-default" onClick="commitExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Commit New Expenses</button>
+
+    </div>
+    
+    <div class="col-sm-4">   
+        <h3><span class="glyphicon glyphicon-piggy-bank"></span> Commune Wallet</h3>
+		<form role="from" id="payData">
+		  <div class="form-group">
+		    <label for="communeWallet">Commune Balance:</label>
+		    <output class="form-control" id="communeWallet"></output>
+		 </div>
+    	</form>
+  
+    </div>
+    	
+  </div>
+</div>
+
+</body>
+</html>

@@ -106,9 +106,10 @@ contract communityCurrency {
 	mapping (address => communityCurrencyWallet) balancesOf;	
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
-	event Credit(uint _creditCCUs, uint _creditDays, uint _endorsedUoT, address indexed _endorsedAddress, uint _myReputationBalance, uint _timeStampC);
-	event ClaimH (address indexed _hFrom, int _claimedH, uint _timeStampCH);
-	event PaidH (address indexed _hTo, uint _paidH, uint _timeStampPH);
+	event Credit(uint _cDealine, uint _endorsedUoT, string _moneyLender);
+    event CreditExp(uint _oldUoT , string _oldMoneyLender, bool _success, uint _timeStampCX);
+	event ClaimH (string _servantC, address indexed _hFrom, int _claimedH, uint _timeStampCH);
+	event PaidH (string _servantP, uint _paidH, uint _timeStampPH);
 	
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
@@ -242,8 +243,8 @@ contract communityCurrency {
 		}
 
 		// @notice set new rolling Commune budget
-		function setNewBudget (uint _NewGoalDemurrage, uint _newGoalCrowdFunding, uint _newGoalCommunityHours, uint _newGoalExpenses) {
-			_goalDemurrage = _NewGoalDemurrage;
+		function setNewBudget (uint _newGoalDemurrage, uint _newGoalCrowdFunding, uint _newGoalCommunityHours, uint _newGoalExpenses) {
+			_goalDemurrage = _newGoalDemurrage;
 			_goalCrowdFunding = _newGoalCrowdFunding;
 			_goalCommunityHours = _newGoalCommunityHours;
 			_goalExpenses = _newGoalExpenses;
@@ -264,6 +265,10 @@ contract communityCurrency {
 		if (balancesOf[msg.sender]._credit > 0) {
 		// @notice check if deadline is over
 			if (now >= balancesOf[msg.sender]._deadline) {
+				bool _success = false;
+				uint _oldCredit = balancesOf[msg.sender]._credit;
+				uint _oldUoT = balancesOf[msg.sender]._unitsOfTrust;
+				string _oldMoneyLender = balancesOf[balancesOf[msg.sender]._moneyLender]._alias;
 			// @notice if time is over reset credit to zero, deadline to zero
 				balancesOf[msg.sender]._deadline = 0;
 				_totalCredit -= balancesOf[msg.sender]._credit;
@@ -279,6 +284,7 @@ contract communityCurrency {
 				// @notice if balance is not negative the credit was returned, the money lender balanceReputation is restored and is rewardRateed with a 20%
 				// @return money lender reputation rewarded
 				else {
+					_success = true;
 					_totalTrustCost -= balancesOf[msg.sender]._unitsOfTrust;
 					_totalTrustAvailable += balancesOf[msg.sender]._unitsOfTrust * _rewardRate/100;
 					balancesOf[balancesOf[msg.sender]._moneyLender]._reputation += balancesOf[msg.sender]._unitsOfTrust * (100 + _rewardRate)/100;
@@ -288,6 +294,7 @@ contract communityCurrency {
 				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
+				// CreditExp(_oldUoT , _oldMoneyLender, _success, now);
 				} 
 			}
 		}
@@ -330,8 +337,8 @@ contract communityCurrency {
 	// @param _credit is the amount of the credit line in CCUs
 	// @param _daysAfter is the deadline of the credit line in number of days from today
 	function credit(address _borrower, uint _credit, uint _daysAfter)  {
-		if (balancesOf[msg.sender]._isMember != true) return;
-		if (balancesOf[_borrower]._isMember != true) return;
+		if (balancesOf[msg.sender]._isMember == true) {
+		if (balancesOf[_borrower]._isMember == true) {
 		if (balancesOf[_borrower]._credit > 0) return;
 			uint _unitsOfTrust = _credit * _daysAfter;
 			if (balancesOf[msg.sender]._reputation > _unitsOfTrust) {
@@ -339,13 +346,16 @@ contract communityCurrency {
 				balancesOf[_borrower]._credit += _credit;
 				balancesOf[_borrower]._moneyLender = msg.sender;
 				// @notice the _deadline is established as a number of days ahead
-				balancesOf[_borrower]._deadline = now + _daysAfter * 1 days; 
+				uint _creditDeadline = now + _daysAfter * 1 days; 
+				string _moneyLenderAlias = balancesOf[msg.sender]._alias;
+				balancesOf[_borrower]._deadline = _creditDeadline; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
-				Credit(_credit, _daysAfter, balancesOf[_borrower]._unitsOfTrust, _borrower, balancesOf[msg.sender]._reputation, now);
 				_totalCredit += _credit;
 				_totalTrustCost += _unitsOfTrust;
 				_totalTrustAvailable -= _unitsOfTrust;
+				// Credit(_creditDeadline, _unitsOfTrust, _moneyLenderAlias);		
 			}
+		}}
 	}
 	
   	// @notice monitor Wallet
@@ -397,7 +407,8 @@ contract communityCurrency {
 	// @notice claim Hours to paid from Community
 	function claimHours (int _claimH) {
 		if (balancesOf[msg.sender]._commitH > _claimH) {
-		ClaimH (msg.sender, _claimH, now);
+		string myAlias = balancesOf[msg.sender]._alias;
+		ClaimH (myAlias, msg.sender, _claimH, now);
 		}
 	}
 	
@@ -408,7 +419,8 @@ contract communityCurrency {
 		balancesOf[_servant]._commitH -= int(_payH);
 		_commitCommunityHours -= int(_payH);
 		_realCommunityHours += int(_payH);
-		PaidH (_servant, _payH, now);
+		string _servantAlias = balancesOf[_servant]._alias;
+		PaidH (_servantAlias, _payH, now);
 	}
 	
 	// @notice committ Funding
@@ -434,6 +446,7 @@ contract communityCurrency {
 	// @notice pay Expenses
 	function payExpenses (address _contractor, uint _payE) {
 	if (msg.sender != _community) return;
+	if (_payE > _commitExpenses) return;
 	transfer (_contractor, _payE);
 		_commitExpenses -= _payE;
 		_realExpenses += _payE;

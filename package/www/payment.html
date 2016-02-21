@@ -1,0 +1,69 @@
+<html lang="en">
+<head><script src="deployment.js"></script>
+  <title>Payment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="cc.js"></script>	
+  <script type="text/javascript" >	
+	var available = Number(myCredit) + Number(myCommunityCUnits);
+	window.onload = function () {
+	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
+	document.getElementById('available').innerText = available/baseUnits + " HR";
+	}
+	
+	function transfer() {
+	var payee = document.getElementById('payee').value;
+	var amount= document.getElementById('amount').value * baseUnits;
+	communityCurrency.transfer(payee, amount);
+	location.reload();
+	}
+	</script>
+    <style>
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+	.flip{
+    display: none;
+	}
+  </style>
+</head>
+<body>
+
+<script type="text/javascript" src="navbar.js"></script>
+  
+<div class="container bg-3 text-center">    
+  <div class="row">
+    <div class="col-sm-4"> 
+    <small><p id="me"></p></small>
+    <h3><span class="glyphicon glyphicon-send"></span> Payment</h3>
+		<form role="from" id="payData">
+		  <div class="form-group">
+		    <label for="communityCUnits">My Balance:</label>
+		    <output class="form-control" id="communityCUnits"></output>
+		 </div>
+		 <div class="form-group">
+		    <label for="available">Available for spending:</label>
+		    <output class="form-control" id="available"></output>
+		 </div>
+		  <div class="form-group">
+		    <label for="payee">Payee account:</label>
+		    <input type="text" class="form-control" id="payee" placeholder="Enter payee account">
+		  </div>
+		  <div class="form-group">
+		    <label for="amount">Amount:</label>
+		    <input type="text" class="form-control" id="amount" placeholder="Enter amount">
+		  </div>
+    	</form>
+			<button type="submit" class="btn btn-default" onClick="transfer();"><span class="glyphicon glyphicon-send"></span> Make Payment</button>
+
+	</div>
+  </div>
+</div><br>
+</body>
+</html>

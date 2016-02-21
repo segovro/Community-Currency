@@ -5,13 +5,13 @@
 	"deploymentAddresses": {},
 	"deploymentDir": "",
 	"files": [],
-	"lastPackageDate": "2016-02-15T17:20:19",
+	"lastPackageDate": "2016-02-21T18:54:42",
 	"localPackageUrl": "file:///home/segovro/git/Community-Currency/package//www/",
 	"registerContentHashBlockNumber": -1,
 	"registerContentHashTrHash": "",
 	"registerUrlBlockNumber": -1,
 	"registerUrlTrHash": "",
-	"startUrl": "/index.html",
+	"startUrl": "/administration.html",
 	"title": "ComunityCurrency",
 	"states": [
 		{
@@ -220,77 +220,6 @@
 					"transactions": [
 						{
 							"contractId": "<communityCurrency - 0>",
-							"functionId": "setNewBudget",
-							"gas": {
-								"value": "124949"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.setNewBudget()",
-							"parameters": {
-								"_NewGoalDemurrage": "25000",
-								"_newGoalCommunityHours": "25000",
-								"_newGoalCrowdFunding": "25000",
-								"_newGoalExpenses": "25000",
-								"_borrower": "<communityCurrency - 0>",
-								"_credit": "",
-								"_daysAfter": ""
-							},
-							"saveStatus": true,
-							"sender": "db95780d2f30ca8211eec37cc110cc58a2d4f9308dea00ede6717a585efa2eb7",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 4,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
-							"functionId": "credit",
-							"gas": {
-								"value": "159985"
-							},
-							"gasAuto": true,
-							"gasPrice": {
-								"unit": 18,
-								"value": "100000"
-							},
-							"isContractCreation": false,
-							"isFunctionCall": true,
-							"label": "communityCurrency.credit()",
-							"parameters": {
-								"_borrower": "0xb0dcdc575ef06dc30aaea069d8043c9d463c931c",
-								"_credit": "1000",
-								"_daysAfter": "5",
-								"_newCommunity": "<communityCurrency - 0>"
-							},
-							"saveStatus": true,
-							"sender": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382",
-							"value": {
-								"unit": 18,
-								"value": "0"
-							}
-						}
-					]
-				},
-				{
-					"hash": "",
-					"number": 5,
-					"status": "mined",
-					"transactions": [
-						{
-							"contractId": "<communityCurrency - 0>",
 							"functionId": "commitHours",
 							"gas": {
 								"value": "250000"
@@ -318,7 +247,7 @@
 				},
 				{
 					"hash": "",
-					"number": 6,
+					"number": 4,
 					"status": "mined",
 					"transactions": [
 						{
@@ -350,7 +279,7 @@
 				},
 				{
 					"hash": "",
-					"number": 7,
+					"number": 5,
 					"status": "mined",
 					"transactions": [
 						{
@@ -382,7 +311,7 @@
 				},
 				{
 					"hash": "",
-					"number": 8,
+					"number": 6,
 					"status": "mined",
 					"transactions": [
 						{
@@ -414,7 +343,7 @@
 				},
 				{
 					"hash": "",
-					"number": 9,
+					"number": 7,
 					"status": "mined",
 					"transactions": [
 						{
@@ -446,7 +375,7 @@
 				},
 				{
 					"hash": "",
-					"number": 10,
+					"number": 8,
 					"status": "mined",
 					"transactions": [
 						{
@@ -465,6 +394,263 @@
 							"label": "<communityCurrency - 0>.accessMyWallet()",
 							"parameters": {
 								"_authorized": "0x06400992be45bc64a52b5c55d3df84596d6cb4a1"
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 9,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "credit",
+							"gas": {
+								"value": "142338"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "communityCurrency.credit()",
+							"parameters": {
+								"_borrower": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+								"_credit": "500",
+								"_daysAfter": "5",
+								"_servant": "<communityCurrency - 0>",
+								"_payH": ""
+							},
+							"saveStatus": true,
+							"sender": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 10,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "commitExpenses",
+							"gas": {
+								"value": "34604"
+							},
+							"gasAuto": true,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "communityCurrency.commitExpenses()",
+							"parameters": {
+								"_commitH": "1000",
+								"_payH": "",
+								"_servant": "<communityCurrency - 0>",
+								"_commitE": "1000"
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 11,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "claimHours",
+							"gas": {
+								"value": "26095"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "communityCurrency.claimHours()",
+							"parameters": {
+								"_claimH": "500",
+								"_commitH": ""
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						},
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "payHours",
+							"gas": {
+								"value": "97560"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "communityCurrency.payHours()",
+							"parameters": {
+								"_payH": "300",
+								"_servant": "0x38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+								"_claimH": ""
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 12,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "setNewBudget",
+							"gas": {
+								"value": "124949"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "<communityCurrency - 0>.setNewBudget()",
+							"parameters": {
+								"_NewGoalDemurrage": "25000",
+								"_newGoalCommunityHours": "25000",
+								"_newGoalCrowdFunding": "25000",
+								"_newGoalExpenses": "25000"
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 13,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "claimHours",
+							"gas": {
+								"value": "24420"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "<communityCurrency - 0>.claimHours()",
+							"parameters": {
+								"_claimH": "1000"
+							},
+							"saveStatus": true,
+							"sender": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 14,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "payHours",
+							"gas": {
+								"value": "127656"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "<communityCurrency - 0>.payHours()",
+							"parameters": {
+								"_payH": "500",
+								"_servant": "0xfa4b795b491cc1975e89f3c78972c3e2e827c882"
+							},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": 15,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "<communityCurrency - 0>",
+							"functionId": "credit",
+							"gas": {
+								"value": "127338"
+							},
+							"gasAuto": false,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": false,
+							"isFunctionCall": true,
+							"label": "communityCurrency.credit()",
+							"parameters": {
+								"_borrower": "0xb0dcdc575ef06dc30aaea069d8043c9d463c931c",
+								"_credit": "500",
+								"_daysAfter": "5"
 							},
 							"saveStatus": true,
 							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
@@ -537,7 +723,7 @@
 				{
 					"hash": "",
 					"number": 1,
-					"status": "pending",
+					"status": "mined",
 					"transactions": [
 						{
 							"contractId": "communityCurrency",
@@ -562,6 +748,12 @@
 							}
 						}
 					]
+				},
+				{
+					"hash": "",
+					"number": -1,
+					"status": "pending",
+					"transactions": []
 				}
 			],
 			"contracts": [],

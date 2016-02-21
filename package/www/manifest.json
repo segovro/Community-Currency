@@ -1,0 +1,167 @@
+
+{
+	"entries" : 
+	[
+		
+		{
+			"contentType" : "text/html",
+			"file" : "index.html",
+			"hash" : "6320be23a8a53356f6d770567e29394cf3fc0a544f6acef00a18fd624c23088f",
+			"path" : "/"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "civilService.html",
+			"hash" : "9d37ba9ae4d660c4ea3eb9b00aa35e5b2f99724ad1b763ed803fd1276a622422",
+			"path" : "/civilService.html"
+		},
+		
+		{
+			"contentType" : "application/javascript",
+			"file" : "bignumber.js",
+			"hash" : "c1d2380e15ad91510f3ae8aa44558279d6741652ee10e00619d680f86fb5a836",
+			"path" : "/bignumber.js"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "endorseCredit.html",
+			"hash" : "df87e45190da31bdb00eee6479796a97bb0459502eca00172b9cd89b158f78ad",
+			"path" : "/endorseCredit.html"
+		},
+		
+		{
+			"contentType" : "application/javascript",
+			"file" : "cc.js",
+			"hash" : "7c89bae5db545b03b7426c120971713a1e971862371477de4291e296c0b88fc6",
+			"path" : "/cc.js"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "qr.html",
+			"hash" : "18027610a1739ef6d258343d9da9a42ceef240dae716744ef057114e599d9838",
+			"path" : "/qr.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "administration.html",
+			"hash" : "2c1b1452d3ec663c0a9a100e497b1625fa88b2de5df4c3ef8a2f97e0f2207674",
+			"path" : "/administration.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "funding.html",
+			"hash" : "cba3265661b3b4e1dcc14f4da2048a90db794d30687b5dcc8c8c7e4ed959d00d",
+			"path" : "/funding.html"
+		},
+		
+		{
+			"contentType" : "application/javascript",
+			"file" : "deployment.js",
+			"hash" : "838a9090aa2d025a3968fd3f6cd37efed3ac951dcb5d9692339cc1c9091f9a34",
+			"path" : "/deployment.js"
+		},
+		
+		{
+			"contentType" : "text/plain",
+			"file" : "web3.js.map",
+			"hash" : "07a274d032e04284d3e40ec360b0b3c91d5a4410143b1f13a2e2de4f3b5f7be6",
+			"path" : "/web3.js.map"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "payment.html",
+			"hash" : "c149173dec99a972b243cfa7e7d25c89aa74d1be7d59ec041b4e6436a2e70e1a",
+			"path" : "/payment.html"
+		},
+		
+		{
+			"contentType" : "text/x-markdown",
+			"file" : "README.md",
+			"hash" : "0cadd67812031c1ed6826e02417ac8e5e4752d5152bb8a74fbf6ff2eba46407b",
+			"path" : "/README.md"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "budget.html",
+			"hash" : "6734e01bd19cf552aeca1677a8076a36ea18e7f64c53698d20de18f4c566f0b7",
+			"path" : "/budget.html"
+		},
+		
+		{
+			"contentType" : "text/plain",
+			"file" : "LICENSE",
+			"hash" : "40f3e8d9a144f0553c86eebf6b05258be31493070b30b7bd0016ddf911d87fd9",
+			"path" : "/LICENSE"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "exchange.html",
+			"hash" : "469ae7796f30ffe8113da76a52913e5ad4f806cd96a22337c3cda16a42c4bd36",
+			"path" : "/exchange.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "commune.html",
+			"hash" : "448ad8dcaf37cf49a0659e76e97567042ebd9b4ba4c9b5a4d2babc9d868a5e9b",
+			"path" : "/commune.html"
+		},
+		
+		{
+			"contentType" : "application/javascript",
+			"file" : "navbar.js",
+			"hash" : "8161d382c2cf39d1b1c3e4b948cd8f3ea81dc7bf9b21c04a5d023370865b1922",
+			"path" : "/navbar.js"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "access.html",
+			"hash" : "abbe2fc86fd5b03cf2a13499083c3e68b53407f3dd12394785d43a0a3e05e96e",
+			"path" : "/access.html"
+		},
+		
+		{
+			"contentType" : "application/javascript",
+			"file" : "web3.js",
+			"hash" : "387fc08434dff75883557edfd8c10fe2ca18270d50a3eaca0e0d10877d302930",
+			"path" : "/web3.js"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "treasury.html",
+			"hash" : "130230ba1f13bcd65ebff9d526f59aaa05761bc79ad6c5e4c90d9a5dd70dbbbd",
+			"path" : "/treasury.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "monitor.html",
+			"hash" : "82086bcabd02ea9a32fdc8af1d3471beefd58e2b9c86814f89c031fe70348b3d",
+			"path" : "/monitor.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "commonersList.html",
+			"hash" : "c770bf7d0a5bef5c504d19b94e03ced8328ec880ebd9c218bce476110c385d4c",
+			"path" : "/commonersList.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "transactions.html",
+			"hash" : "0e19d79663190ad31badf816b0e9a9bf2d4568eef8a9f0cebb02be7854dd48e0",
+			"path" : "/transactions.html"
+		}
+	]
+}

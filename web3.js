@@ -10331,7 +10331,7 @@ module.exports = transfer;
 }(this, function (CryptoJS) {
 
 	/** @preserve
-	(c) 2012 by CÃÂÃÂÃÂÃÂ©dric Mesnil. All rights reserved.
+	(c) 2012 by CÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©dric Mesnil. All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -12952,7 +12952,7 @@ module.exports = transfer;
 			return continuationByte & 0x3F;
 		}
 
-		// If we end up here, itÃÂÃÂ¢ÃÂÃÂÃÂÃÂs not a continuation byte
+		// If we end up here, itÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂs not a continuation byte
 		throw Error('Invalid continuation byte');
 	}
 
@@ -13877,7 +13877,7 @@ module.exports = transfer;
                       // Return NaN if either NaN, or both Infinity or 0.
                       !x.s || !y.s || ( xc ? yc && xc[0] == yc[0] : !yc ) ? NaN :
 
-                        // Return ÃÂÃÂÃÂÃÂ±0 if x is ÃÂÃÂÃÂÃÂ±0 or y is ÃÂÃÂÃÂÃÂ±Infinity, or return ÃÂÃÂÃÂÃÂ±Infinity as y is ÃÂÃÂÃÂÃÂ±0.
+                        // Return ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0 if x is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0 or y is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity, or return ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity as y is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0.
                         xc && xc[0] == 0 || !yc ? s * 0 : s / 0
                     );
                 }
@@ -14209,7 +14209,7 @@ module.exports = transfer;
                 var base,
                     s = num ? str : str.replace( whitespaceOrPlus, '' );
 
-                // No exception on ÃÂÃÂÃÂÃÂ±Infinity or NaN.
+                // No exception on ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity or NaN.
                 if ( isInfinityOrNaN.test(s) ) {
                     x.s = isNaN(s) ? null : s < 0 ? -1 : 1;
                 } else {
@@ -14480,7 +14480,7 @@ module.exports = transfer;
 
         /*
          * Return the number of decimal places of the value of this BigNumber, or null if the value
-         * of this BigNumber is ÃÂÃÂÃÂÃÂ±Infinity or NaN.
+         * of this BigNumber is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity or NaN.
          */
         P.decimalPlaces = P.dp = function () {
             var n, v,
@@ -14877,7 +14877,7 @@ module.exports = transfer;
 
             if ( !xe || !ye ) {
 
-                // Return ÃÂÃÂÃÂÃÂ±Infinity if either ÃÂÃÂÃÂÃÂ±Infinity.
+                // Return ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity if either ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity.
                 if ( !xc || !yc ) return new BigNumber( a / 0 );
 
                 // Either zero?
@@ -14993,7 +14993,7 @@ module.exports = transfer;
          *
          * k {number} Integer, -MAX_SAFE_INTEGER to MAX_SAFE_INTEGER inclusive.
          *
-         * If k is out of range and ERRORS is false, the result will be ÃÂÃÂÃÂÃÂ±0 if k < 0, or ÃÂÃÂÃÂÃÂ±Infinity
+         * If k is out of range and ERRORS is false, the result will be ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0 if k < 0, or ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity
          * otherwise.
          *
          * 'shift() argument not an integer: {k}'
@@ -15149,7 +15149,7 @@ module.exports = transfer;
                 xc = x.c,
                 yc = ( id = 17, y = new BigNumber( y, b ) ).c;
 
-            // Either NaN, ÃÂÃÂÃÂÃÂ±Infinity or ÃÂÃÂÃÂÃÂ±0?
+            // Either NaN, ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity or ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0?
             if ( !xc || !yc || !xc[0] || !yc[0] ) {
 
                 // Return NaN if either is NaN, or one is 0 and the other is Infinity.
@@ -15158,11 +15158,11 @@ module.exports = transfer;
                 } else {
                     y.s *= x.s;
 
-                    // Return ÃÂÃÂÃÂÃÂ±Infinity if either is ÃÂÃÂÃÂÃÂ±Infinity.
+                    // Return ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity if either is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity.
                     if ( !xc || !yc ) {
                         y.c = y.e = null;
 
-                    // Return ÃÂÃÂÃÂÃÂ±0 if either is ÃÂÃÂÃÂÃÂ±0.
+                    // Return ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0 if either is ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±0.
                     } else {
                         y.c = [0];
                         y.e = 0;
@@ -15447,7 +15447,7 @@ module.exports = transfer;
                 i = mathfloor( n < 0 ? -n : +n ),
                 x = this;
 
-            // Pass ÃÂÃÂÃÂÃÂ±Infinity to Math.pow if exponent is out of range.
+            // Pass ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±Infinity to Math.pow if exponent is out of range.
             if ( !isValidInt( n, -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER, 23, 'exponent' ) &&
               ( !isFinite(n) || i > MAX_SAFE_INTEGER && ( n /= 0 ) ||
                 parseFloat(n) != n && !( n = NaN ) ) ) {

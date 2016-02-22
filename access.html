@@ -14,9 +14,8 @@
 	document.getElementById('moneyLender').innerHTML = myMoneyLender;
 	}
 	
-	function accessMyWallet (authorized) {
-		var authorized_element = document.getElementById('newMoneyLender');	
-		authorized = authorized_element.value;
+	function accessMyWallet () {
+		var authorized = document.getElementById('newMoneyLender').value;	
 		communityCurrency.accessMyWallet (authorized);
 	}
 	

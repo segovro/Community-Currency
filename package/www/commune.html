@@ -16,23 +16,48 @@
 	document.getElementById('oldGCF').innerText = "Goal Crowd-funding income: " + goalCrowdFundig/baseUnits +" HR";
 	document.getElementById('oldGS').innerText = "Goal Service Hours spending: " + goalCommunityHours/baseUnits +" HR";
 	document.getElementById('oldGE').innerText = "Goal Expenses spending: " + goalExpenses/baseUnits +" HR";
+	document.getElementById('oldTreasury').innerText = treasury;
 	}
 
 	var budget = communityCurrency.getBudget();
 	var goalDemurrage = budget[0];
 	var goalCrowdFundig = budget[1];
 	var goalCommunityHours = budget[2];
-	var goalExpenses = budget[3];
-		
+	var goalExpenses = budget[3];	  
+
 	function setNewBudget () {
 		var newGoalDemurrage = document.getElementById('newGoalDemurrage').value * baseUnits;
 		var newGoalCrowdfunding = document.getElementById('newGoalDemurrage').value * baseUnits;
 		var newGoalService = document.getElementById('newGoalDemurrage').value * baseUnits;
 		var newGoalExpenses = document.getElementById('newGoalDemurrage').value * baseUnits;
 		communityCurrency.setNewBudget(newGoalDemurrage, newGoalCrowdfunding, newGoalService, newGoalExpenses);
+		location.reload();
 	}
 	
-	
+	function acceptMember () {
+		var newAddress = document.getElementById('newAddress').value;
+		var newAlias = document.getElementById('newAlias').value;
+		var newEmail = document.getElementById('newEmail').value;
+		communityCurrency.acceptMember (newAddress, newAlias, newEmail)
+		location.reload();
+	}
+	  
+	function kickOutMember () {
+	var oldAddress = document.getElementById('oldAddress').value;
+		location.reload();
+	}
+	  
+	function mintAssignReputation () {
+		var accountTrust = document.getElementById('accountTrust').value;
+		var reputation = document.getElementById('reputation').value;
+		location.reload();
+	}
+	  
+	function newTreasury () {
+		var newTreasury = document.getElementById('newTreasury').value;
+		communityCurrency.newCommune(newExchange);
+		location.reload();
+	}
 	  
 	</script>
     <style>
@@ -94,19 +119,23 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="aliasNew">Alias</label>
-		    <input type="text" class="form-control" id="accountNew" placeholder="Enter alias new commoner">
+		    <input type="text" class="form-control" id="aliasNew" placeholder="Enter alias new commoner">
+		  </div>
+			<div class="form-group">
+		    <label for="emailNew">Alias</label>
+		    <input type="text" type="email" class="form-control" id="emailNew" placeholder="Enter email new commoner">
 		  </div>
 	</form>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Accept</button>
+		    <button type="submit" class="btn btn-default" onClick="acceptMember();"><span class="glyphicon glyphicon-ok"></span> Accept</button>
 
 	<h4><span class="glyphicon glyphicon-remove"></span> Remove Commoner</h4>
     <form role="form">
 		  <div class="form-group">
-		    <label for="accountOld">Account:</label>
-		    <input type="text" class="form-control" id="accountOld" placeholder="Enter account member to be removed">
+		    <label for="oldAddress">Account:</label>
+		    <input type="text" class="form-control" id="oldAddress" placeholder="Enter account member to be removed">
 		  </div>
 	</form>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+		    <button type="submit" class="btn btn-default" onClick="kickOutMember();"><span class="glyphicon glyphicon-remove"></span> Remove</button>
 
 	<h4><span class="glyphicon glyphicon-heart"></span> Attribute Reputation</h4>
     <form role="form">
@@ -128,11 +157,11 @@
 		<h4><span class="glyphicon glyphicon-print"></span> Change Treasury address</h4>    
        	<form role="form">
 		  <div class="form-group">
-		    <label for="community">New Mint address:</label>
-		    <input type="text" class="form-control" id="community" placeholder="Enter the new Treasury address">
+		    <p id="oldTreasury"></p>
+		    <input type="text" class="form-control" id="newTreasury" placeholder="Enter the new Treasury address">
 		  </div>
 		</form>
-		    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Change Treasury address</button>
+		    <button type="submit" class="btn btn-default" onClick="newTreasury();"><span class="glyphicon glyphicon-print"></span> Change Treasury address</button>
 
       	</div>
     	

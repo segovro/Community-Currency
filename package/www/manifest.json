@@ -6,7 +6,7 @@
 		{
 			"contentType" : "text/html",
 			"file" : "index.html",
-			"hash" : "6320be23a8a53356f6d770567e29394cf3fc0a544f6acef00a18fd624c23088f",
+			"hash" : "08471df9c8bc0f36cfec7dfa9c669b1208731216e1557829eff36e5e40ad7aea",
 			"path" : "/"
 		},
 		
@@ -27,14 +27,14 @@
 		{
 			"contentType" : "text/html",
 			"file" : "endorseCredit.html",
-			"hash" : "df87e45190da31bdb00eee6479796a97bb0459502eca00172b9cd89b158f78ad",
+			"hash" : "2927f28cadd09230b5e3bf04e801ef231145eead7348571a2a4827dae7851330",
 			"path" : "/endorseCredit.html"
 		},
 		
 		{
 			"contentType" : "application/javascript",
 			"file" : "cc.js",
-			"hash" : "7c89bae5db545b03b7426c120971713a1e971862371477de4291e296c0b88fc6",
+			"hash" : "d6419350a81c5b8ba56f7fd49dc750a78d9ff867243d7d3ed899521414102b8a",
 			"path" : "/cc.js"
 		},
 		
@@ -48,7 +48,7 @@
 		{
 			"contentType" : "text/html",
 			"file" : "administration.html",
-			"hash" : "2c1b1452d3ec663c0a9a100e497b1625fa88b2de5df4c3ef8a2f97e0f2207674",
+			"hash" : "cc07c941d061f28092611b559a447a64fe3588dab96aa6d81a59c433b198bc35",
 			"path" : "/administration.html"
 		},
 		
@@ -90,7 +90,7 @@
 		{
 			"contentType" : "text/html",
 			"file" : "budget.html",
-			"hash" : "6734e01bd19cf552aeca1677a8076a36ea18e7f64c53698d20de18f4c566f0b7",
+			"hash" : "38629de5ed9bf303ec71773f1c2a74ed52e58040e113f7a43d207d4f1d7a5d6b",
 			"path" : "/budget.html"
 		},
 		
@@ -111,7 +111,7 @@
 		{
 			"contentType" : "text/html",
 			"file" : "commune.html",
-			"hash" : "448ad8dcaf37cf49a0659e76e97567042ebd9b4ba4c9b5a4d2babc9d868a5e9b",
+			"hash" : "08df8f8d591fa9ea0a7ed863a2deeebd90c4f831ac54018a1a3ca8306ad50351",
 			"path" : "/commune.html"
 		},
 		
@@ -125,14 +125,14 @@
 		{
 			"contentType" : "text/html",
 			"file" : "access.html",
-			"hash" : "abbe2fc86fd5b03cf2a13499083c3e68b53407f3dd12394785d43a0a3e05e96e",
+			"hash" : "6a4042624f4afc50b98e96e85d8a8eefa124b10f8c856484e42dfdcc105f03db",
 			"path" : "/access.html"
 		},
 		
 		{
 			"contentType" : "application/javascript",
 			"file" : "web3.js",
-			"hash" : "387fc08434dff75883557edfd8c10fe2ca18270d50a3eaca0e0d10877d302930",
+			"hash" : "6cd19c4e871251095091cc8d6b064961702256fcd16deca6c293d6a1369f816f",
 			"path" : "/web3.js"
 		},
 		
@@ -146,14 +146,14 @@
 		{
 			"contentType" : "text/html",
 			"file" : "monitor.html",
-			"hash" : "82086bcabd02ea9a32fdc8af1d3471beefd58e2b9c86814f89c031fe70348b3d",
+			"hash" : "1cab1851e0ffd67e0b633b78d50aaffe3ee5a6a9cdd372e8182ae6523c00f760",
 			"path" : "/monitor.html"
 		},
 		
 		{
 			"contentType" : "text/html",
 			"file" : "commonersList.html",
-			"hash" : "c770bf7d0a5bef5c504d19b94e03ced8328ec880ebd9c218bce476110c385d4c",
+			"hash" : "fe91115560c65559abe8bf377871087e688bc7484a52096d99e1095690e166cc",
 			"path" : "/commonersList.html"
 		},
 		

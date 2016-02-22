@@ -24,13 +24,14 @@
 		var mtrdDeadline = mtrdWallet[2];
 		var mtrdMoneyLender = mtrdWallet[3];
 		var mtrdUnitsOfTrust = mtrdWallet[4];
-		var mtrdIsMember = mtrdWallet[5];
-		var mtrdAlias = mtrdWallet[6];
-		var mtrdReputation = mtrdWallet[7];
-		var mtrdLast = mtrdWallet[8];
-		var mtrdGdpActivity = mtrdWallet[9];
-		var mtrdCommittedH = mtrdWallet[10];
-		var mtrdCommittedF = mtrdWallet[11];
+		var mtrdIsMember = mtrdWallet[5];		
+		var mtrdReputation = mtrdWallet[6];
+		var mtrdLast = mtrdWallet[7];
+		var mtrdGdpActivity = mtrdWallet[8];
+		var mtrdCommittedH = mtrdWallet[9];
+		var mtrdCommittedF = mtrdWallet[10];
+		var mtrdAlias = mtrdWallet[11];
+		var mtrdEmail = mtrdWallet[12];
 		var mtrdAvailable = Number(mtrdCredit) + Number(mtrdCommunityCUnits);
 		
 	if (mtrdIsMember = true) {
@@ -43,6 +44,7 @@
 		
 		document.getElementById('isMember').innerText = mtrdCommoner;
 		document.getElementById('alias').innerText = mtrdAlias;
+		document.getElementById('email').innerText = mtrdEmail;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
 		document.getElementById('gdpActivity').innerText = mtrdGdpActivity/baseUnits + " HR/day";
 		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
@@ -96,6 +98,10 @@
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
+		 </div>
+		<div class="form-group">
+		    <label class="control-label col-sm-4" for="email">Alias:</label>
+		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
 		 </div>
 	</form>
     <h3><span class="glyphicon glyphicon-piggy-bank"></span> Assets</h3>

@@ -17,6 +17,7 @@
 	document.getElementById('account').innerHTML = coinbase;
 	document.getElementById('isMember').innerText = commoner;
 	document.getElementById('alias').innerText = myAlias;
+	document.getElementById('email').innerText = myEmail;
 	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
 	document.getElementById('gdpActivity').innerText = myGdpActivity/baseUnits + " HR/day";
 	document.getElementById('reputation').innerText = myReputation/baseUnits + " UoT";
@@ -60,6 +61,10 @@
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
+		 </div>
+		<div class="form-group">
+		    <label class="control-label col-sm-4" for="email">Email:</label>
+		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
 		 </div>
 		 <div class="form-group">
 			 <a class="btn btn-default" role="button" href="mailto:desperado.theory@gmail.com?subject=CommonerRequest&Body=Indicate Alias and Ethereum Address" target="_top"><span class="	glyphicon glyphicon-envelope"></span> Ask to become Commoner</a>

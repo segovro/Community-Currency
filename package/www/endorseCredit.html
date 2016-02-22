@@ -14,24 +14,18 @@
 	document.getElementById('reputation').innerHTML = myReputation/baseUnits +" UoT";
 	}
 
-	function showCost (borrower, amount, days, creditCost) {
-		var borrower_element = document.getElementById('borrower');
-		var amount_element = document.getElementById('amount');
-		var days_element = document.getElementById('days');
-		borrower = borrower_element.value;
-		amount = amount_element.value * baseUnits;
-		days = days_element.value;
-		creditCost = days * amount;
+	function showCost () {
+		var borrower = document.getElementById('borrower').value;
+		var amount = document.getElementById('amount').value * baseUnits;
+		var days = document.getElementById('days').value;
+		var creditCost = days * amount;
 		document.getElementById('reputationCost').innerHTML = creditCost/baseUnits +" UoT";
 	}
 	
-	function endorseCredit (borrower, amount, days) {
-		var borrower_element = document.getElementById('borrower');
-		var amount_element = document.getElementById('amount');
-		var days_element = document.getElementById('days');
-		borrower = borrower_element.value;
-		amount = amount_element.value * baseUnits;
-		days = days_element.value;
+	function endorseCredit () {
+		var borrower = document.getElementById('borrower').value;
+		var amount = document.getElementById('amount').value * baseUnits;
+		var days = document.getElementById('days').value;
 		communityCurrency.credit(borrower, amount, days);
 		location.reload();
 	}

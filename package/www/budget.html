@@ -31,14 +31,14 @@
 		var totalTrustCost = MoneyTotals[2];
 		var totalTrustAvailable = MoneyTotals[3];
 
-		var credits = communityCurrency.Credit({fromBlock: 0, toBlock: 'latest'});
+		var credits = communityCurrency.Credit({'_from' : null},{fromBlock: 0, toBlock: 'latest'});
 			var row = "";
 			credits.watch(function(error, result){
 			row += Date(result.args.__cDealine) + "&emsp;" + result.args._moneyLender + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
 			document.getElementById('listCredit').innerHTML = row;
 			});
 		
-		var creditsExp = communityCurrency.CreditExp({fromBlock: 0, toBlock: 'latest'});
+		var creditsExp = communityCurrency.CreditExp({'_from' : null},{fromBlock: 0, toBlock: 'latest'});
 			var row = "";
 			creditsExp.watch(function(error, result){
 			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._oldMoneyLender + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";

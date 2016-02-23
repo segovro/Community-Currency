@@ -9,9 +9,9 @@ contract communityCurrency {
     uint baseUnits;
     string name;
     string symbol; 
-	string communityName;
+    string communityName;
 
-	// @notice communityCurrency general variables
+    // @notice communityCurrency general variables
     // @param _treasury the address of the treasury of the DAO. The creator and minter of the currency
     // @param _commune the address of the Community account. Where donations and taxes are paid. Account used to pay community works
     // @param _demurrage the depreciation at each transaction. The demurrage to be paid to the DAO at the community account. % x 100

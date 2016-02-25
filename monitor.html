@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>	
   <script type="text/javascript" >	
    
@@ -26,12 +27,8 @@
 		var mtrdUnitsOfTrust = mtrdWallet[4];
 		var mtrdIsMember = mtrdWallet[5];		
 		var mtrdReputation = mtrdWallet[6];
-		var mtrdLast = mtrdWallet[7];
-		var mtrdGdpActivity = mtrdWallet[8];
-		var mtrdCommittedH = mtrdWallet[9];
-		var mtrdCommittedF = mtrdWallet[10];
-		var mtrdAlias = mtrdWallet[11];
-		var mtrdEmail = mtrdWallet[12];
+		var mtrdAlias = mtrdWallet[7];
+		var mtrdEmail = mtrdWallet[8];
 		var mtrdAvailable = Number(mtrdCredit) + Number(mtrdCommunityCUnits);
 		
 	if (mtrdIsMember = true) {
@@ -46,16 +43,12 @@
 		document.getElementById('alias').innerText = mtrdAlias;
 		document.getElementById('email').innerText = mtrdEmail;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
-		document.getElementById('gdpActivity').innerText = mtrdGdpActivity/baseUnits + " HR/day";
 		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
-		document.getElementById('last').innerText = dateMtrdLast;
 		document.getElementById('credit').innerText = mtrdCredit/baseUnits + " HR";
 		document.getElementById('available').innerText = mtrdAvailable/baseUnits + " HR";
 		document.getElementById('moneyLender').innerText = mtrdMoneyLender;
 		document.getElementById('unitsOfTrust').innerText = mtrdUnitsOfTrust/baseUnits + " UoT";
 		document.getElementById('deadline').innerText = dateMtrdDealine;
-		document.getElementById('committedH').innerText = mtrdCommittedH/baseUnits + " HR";
-		document.getElementById('committedF').innerText = mtrdCommittedF/baseUnits + " HR";
 		}
 	   
 	</script>
@@ -100,7 +93,7 @@
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
 		 </div>
 		<div class="form-group">
-		    <label class="control-label col-sm-4" for="email">Alias:</label>
+		    <label class="control-label col-sm-4" for="email">Email:</label>
 		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
 		 </div>
 	</form>
@@ -109,14 +102,6 @@
   	 	<div class="form-group">
 		    <label class="control-label col-sm-4" for="communityCUnits">Balance:</label>
 		    <div class="col-sm-6"><output class="form-control" id="communityCUnits"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="gdpActivity">Activity:</label>
-		    <div class="col-sm-6"><output class="form-control" id="gdpActivity"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="last">Last pay:</label>
-		    <div class="col-sm-6"><output class="form-control" id="last"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="reputation">Reputation:</label>

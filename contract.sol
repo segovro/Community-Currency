@@ -8,10 +8,10 @@ contract communityCurrency {
 	// @param baseUnits is the number of units before the comma 
     uint baseUnits;
     string name;
-    string symbol; 
-    string communityName;
+    string symbol;
+	string communityName;
 
-    // @notice communityCurrency general variables
+	// @notice communityCurrency general variables
     // @param _treasury the address of the treasury of the DAO. The creator and minter of the currency
     // @param _commune the address of the Community account. Where donations and taxes are paid. Account used to pay community works
     // @param _demurrage the depreciation at each transaction. The demurrage to be paid to the DAO at the community account. % x 100
@@ -32,9 +32,6 @@ contract communityCurrency {
 	uint _goalCrowdFunding;
 	uint _goalCommunityHours;
 	uint _goalExpenses;
-	uint _commitCrowdFunding;
-	int _commitCommunityHours;
-	uint _commitExpenses;
 	int _realDemurrage;
 	uint _realCrowdFunding;
 	int _realCommunityHours;
@@ -49,31 +46,11 @@ contract communityCurrency {
 	// @notice communityCurrency parameters and key addresses for a given Community	
 	function communityCurrency () {
 		_treasury = msg.sender;  
-		_commune = msg.sender; 
-		_demurrage = 3;
-		_rewardRate = 20;
-		_iniMemberCCUs = 2500;
-		_iniMemberReputation = 12500;
-		_exchange = 10;
+		_commune = msg.sender;  
 		baseUnits = 100;
-		name = "HOUR";
-		symbol = "HR";
-		communityName = "DESPERADO"; 		
-		_goalDemurrage = 0;
-		_goalCrowdFunding = 0;
-		_goalCommunityHours = 0;
-		_goalExpenses = 0;
-		_commitCrowdFunding = 0;
-		_commitCommunityHours = 0;
-		_commitExpenses = 0;
-		_realDemurrage = 0;
-		_realCrowdFunding = 0;
-		_realCommunityHours = 0;
-		_realExpenses = 0;
-		_totalMinted = 0;
-		_totalCredit = 0;
-		_totalTrustCost = 0;
-		_totalTrustAvailable = 0;
+    	name = "HOURS";
+    	symbol = "HR";
+		communityName = "DESPERADO";
 	}
 	
 	
@@ -96,58 +73,36 @@ contract communityCurrency {
 		uint _unitsOfTrust; 
 		bool _isMember; 
 		uint _reputation; 
-		uint _last; 
-		uint _gdpActivity; 
-		int _commitH;
-		uint _commitF;
-		bytes32 _alias; 
-		bytes32 _email;
+		string _alias; 
+		string _email;
 	}
-	address[] commoners;
 	
 	mapping (address => Wallet) balancesOf;	
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
-	event Credit(uint _cDealine, uint _endorsedUoT, bytes32 _moneyLender);
-    event CreditExp(uint _oldUoT , bytes32 _oldMoneyLender, bool _success, uint _timeStampCX);
-	event ClaimH (bytes32 _servantC, address indexed _hFrom, int _claimedH, uint _timeStampCH);
-	event PaidH (bytes32 _servantP, uint _paidH, uint _timeStampPH);
+	event NewMember(address indexed _member, string _alias, string _email);
+	event OldMember(address indexed _exMember, string _exAlias, string _exEmail);
+	event Credit(address indexed _endorserAddress, uint _cDealine, uint _endorsedUoT, string _moneyLender);
+    event CreditExp(address indexed _exEndorserAddress, uint _oldUoT , string indexed _oldMoneyLender, bool _success, uint _timeStampCX);
+	event ClaimH(address indexed _hFrom, string _servantC, int _claimedH, uint _timeStampCH);
+	event PaidH(address indexed _hTo, string _servantP, uint _paidH, uint _timeStampPH);
 	
 	// @notice the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
 	// @notice a community can opt to name itself member or not and therefore give credits or not
 	// @param _newMember is the address of the new member
 	// @param _newAlias is the alias or human readable ID of the new member
 	// @return changed alias, initial balance in CCUs, initial reputation in UoT
-	function acceptMember (address _newMember, bytes32 _newAlias, bytes32 _newEmail) {
+	function acceptMember (address _newMember, string _newAlias, string _newEmail) {
         if (msg.sender != _commune) return;
-        if ((_newEmail =="")||(_newAlias =="")) throw;
         balancesOf[_newMember]._isMember = true;
 		balancesOf[_newMember]._CCUs = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
-        balancesOf[_newMember]._last = now;
-        balancesOf[_newMember]._gdpActivity = 0;
-        balancesOf[_newMember]._commitH = 0;
-        balancesOf[_newMember]._commitF = 0;
-		balancesOf[_newMember]._alias = _newAlias;
+ 		balancesOf[_newMember]._alias = _newAlias;
 		balancesOf[_newMember]._email = _newEmail;
-		commoners.push(_newMember);
 		_totalMinted += _iniMemberCCUs;
-		_totalTrustAvailable += _iniMemberReputation;    
+		_totalTrustAvailable += _iniMemberReputation; 
+		NewMember(_newMember, _newAlias, _newEmail);
     }
-	
-	// @notice auxiliary internal function to retrieve an index in the addresses array form its address
-	function findCommonersIndex(address _addr) returns (uint _index){
-	    for (uint i = 0; i < commoners.length; i++){
-	        if (commoners[i] == _addr) {
-	        	_index = i;
-	        } 
-	    }
-	}
-	
-	// @notice returns the count of current active users
-	function getNumberCommoners() returns (uint _numberCommoners){
-		_numberCommoners = commoners.length;
-	}
 	
 	// @notice the community account can kick out members. The action deletes all balances
 	// @param _oldMember is the address of the member to be kicked out
@@ -155,24 +110,13 @@ contract communityCurrency {
 	function kickOutMember (address _oldMember) {
         if (msg.sender != _commune) return;        
         balancesOf[_oldMember]._isMember = false;
-		_totalCredit = balancesOf[_oldMember]._credit;
-		balancesOf[balancesOf[_oldMember]._moneyLender]._reputation += balancesOf[_oldMember]._unitsOfTrust;
+        string _oldAlias = balancesOf[_oldMember]._alias;
+        string _oldEmail = balancesOf[_oldMember]._email;
+		_totalCredit -= balancesOf[_oldMember]._credit;
 		_totalTrustAvailable -= balancesOf[_oldMember]._reputation;
-		_totalTrustAvailable += balancesOf[_oldMember]._unitsOfTrust;
-		_commitCrowdFunding -= balancesOf[_oldMember]._commitF;
-		_commitCommunityHours -= balancesOf[_oldMember]._commitH;
-        balancesOf[_oldMember]._reputation = 0;
+		_totalTrustCost += balancesOf[_oldMember]._unitsOfTrust;
         balancesOf[_oldMember]._credit = 0;
-        balancesOf[_oldMember]._deadline = 0;
-        balancesOf[_oldMember]._last = now;
-        balancesOf[_oldMember]._gdpActivity = 0;
-        balancesOf[_oldMember]._commitH = 0;
-        balancesOf[_oldMember]._commitF = 0;
-        uint _index = findCommonersIndex(_oldMember);
-		if (_index > 0){
-	        delete commoners[_index];
-	        commoners.length--;
-		}
+        OldMember(_oldMember, _oldAlias, _oldEmail);
     }
 	
 	// @notice get the currency parameters
@@ -228,36 +172,12 @@ contract communityCurrency {
 		_treasury = _newTreasury;
 	}
 	
-	// @notice the treasury account can issue as much communityCurrency it likes and send it to the Community account 
-	// @notice it mints new communityCurrency and thus increases the monetary mass
-	// @notice it can be negative, taking money from the Community account and destroying it, thus diminishing the total monetary mass
-	// @param _createCCUs is the amount of CCUs to be created or destroyed
-	// @return more (or less) money in the community account
-	function mintCCUs (int _createCCUs) {
-        if (msg.sender != _treasury) return;
-		balancesOf[_commune]._CCUs += _createCCUs;
-		_totalMinted += _createCCUs;
-	}
-
-	// @notice the community account can issue as much Reputation it likes and send it to any Member; it can mint Reputation
-	// @param _beneficiary is the address of the beneficiary
-	// @param _createReputation is the amount of reputation to be allocated; it is always positive
-	// @return more reputation in somebody account
-	function mintAssignReputation (address _beneficiary, uint _createReputation) {
-        if (msg.sender != _commune) return;
-		if (balancesOf[_beneficiary]._isMember != true) return;
-        balancesOf[_beneficiary]._reputation += _createReputation;
-    }
-
 	// @notice get Commune budget state
-	function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, uint _getcommitCrowdFunding, int _getCommitCommunityHours, uint _getCommitExpenses, int _getRealDemurrage, uint _getRealCrowdFunding, int _getRealCommunityHours, uint _getRealExpenses, int _getCommuneBalance, int _getTreasuryBalance) {
+	function getBudget() constant returns (uint _getGoalDemurrage, uint _getGoalCrowdFunding, uint _getGoalCommunityHours, uint _getGoalExpenses, int _getRealDemurrage, uint _getRealCrowdFunding, int _getRealCommunityHours, uint _getRealExpenses, int _getCommuneBalance, int _getTreasuryBalance) {
 			_getGoalDemurrage = _goalDemurrage;
 			_getGoalCrowdFunding = _goalCrowdFunding;
 			_getGoalCommunityHours = _goalCommunityHours;
 			_getGoalExpenses = _goalExpenses;
-			_getcommitCrowdFunding = _commitCrowdFunding;
-			_getCommitCommunityHours = _commitCommunityHours;
-			_getCommitExpenses = _commitExpenses;
 			_getRealDemurrage = _realDemurrage;
 			_getRealCrowdFunding = _realCrowdFunding;
 			_getRealCommunityHours = _realCommunityHours;
@@ -285,14 +205,13 @@ contract communityCurrency {
 
 	function creditUpdate () {
 		// @notice update the credit status
-		if (balancesOf[msg.sender]._isMember == true) {
 		if (balancesOf[msg.sender]._credit > 0) {
 		// @notice check if deadline is over
 			if (now >= balancesOf[msg.sender]._deadline) {
 				bool _success = false;
-				uint _oldCredit = balancesOf[msg.sender]._credit;
 				uint _oldUoT = balancesOf[msg.sender]._unitsOfTrust;
-				bytes32 _oldMoneyLender = balancesOf[balancesOf[msg.sender]._moneyLender]._alias;
+				address _oldMoneyLenderAddress = balancesOf[msg.sender]._moneyLender;
+				string _oldMoneyLender = balancesOf[balancesOf[msg.sender]._moneyLender]._alias;
 			// @notice if time is over reset credit to zero, deadline to zero
 				balancesOf[msg.sender]._deadline = 0;
 				_totalCredit -= balancesOf[msg.sender]._credit;
@@ -318,10 +237,10 @@ contract communityCurrency {
 				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-				CreditExp(_oldUoT , _oldMoneyLender, _success, now);
+				CreditExp(_oldMoneyLenderAddress, _oldUoT , _oldMoneyLender, _success, now);
 				} 
 			}
-		}
+	    
 	}
 			
 
@@ -349,9 +268,6 @@ contract communityCurrency {
 			balancesOf[_commune]._CCUs += _amountCCUs * _demurrage/100;
 			_realDemurrage += _amountCCUs * _demurrage/100;
 			Transfer(_payment, msg.sender, _payee, now);
-	// @notice update the Activity indicator
-			balancesOf[msg.sender]._gdpActivity = (1 days * _payment)/(now - balancesOf[msg.sender]._last);
-			balancesOf[msg.sender]._last = now;
 		}
 	}
 
@@ -371,13 +287,13 @@ contract communityCurrency {
 				balancesOf[_borrower]._moneyLender = msg.sender;
 				// @notice the _deadline is established as a number of days ahead
 				uint _creditDeadline = now + _daysAfter * 1 days; 
-				bytes32 _moneyLenderAlias = balancesOf[msg.sender]._alias;
+				string _moneyLenderAlias = balancesOf[msg.sender]._alias;
 				balancesOf[_borrower]._deadline = _creditDeadline; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
 				_totalCredit += _credit;
 				_totalTrustCost += _unitsOfTrust;
 				_totalTrustAvailable -= _unitsOfTrust;
-				Credit(_creditDeadline, _unitsOfTrust, _moneyLenderAlias);		
+				Credit(msg.sender, _creditDeadline, _unitsOfTrust, _moneyLenderAlias);		
 			}
 		}}
 	}
@@ -397,7 +313,7 @@ contract communityCurrency {
 	// @return _getReputation is the reputation in UoTs
 	// @return _getLast is the date of the last transaction
 	// @return _getGdpActivity is the average activity
-	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, uint _getLast, uint _getGdpActivity, int _getCommitH, uint _getCommitF, bytes32 _getAlias, bytes32 _getEmail) {
+	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, string _getAlias, string _getEmail) {
 		if ((_monitored == msg.sender) || (msg.sender == _commune) || (msg.sender == balancesOf[_monitored]._moneyLender)) {
     	_getCCUs = balancesOf[_monitored]._CCUs;	
 		_getCredit = balancesOf[_monitored]._credit;
@@ -406,23 +322,11 @@ contract communityCurrency {
 		_getUnitsOfTrust = balancesOf[_monitored]._unitsOfTrust;
 		_getIsMember = balancesOf[_monitored]._isMember;		
 		_getReputation = balancesOf[_monitored]._reputation;
-		_getLast = balancesOf[_monitored]._last;
-		_getGdpActivity = balancesOf[_monitored]._gdpActivity;
-		_getCommitH = balancesOf[_monitored]._commitH;
-		_getCommitF = balancesOf[_monitored]._commitF;
 		_getAlias = balancesOf[_monitored]._alias;
 		_getEmail = balancesOf[_monitored]._email;
 		}
     	}
   	
-  	// @notice list a Commoner
-	function listCommoner(uint _index) constant returns (address _getAddress, bytes32 _getAlias, bytes32 _getEmail) {
-  		address _cAddress = commoners[_index];
-    	_getAddress = _cAddress;	
-		_getAlias = balancesOf[_cAddress]._alias;
-		_getEmail = balancesOf[_cAddress]._email;
-    	}  	  	
-	
    // @notice authorize monitoring
    function accessMyWallet (address _authorized) {
 	   // @notice during a credit, only the money lender and the community have access
@@ -431,57 +335,32 @@ contract communityCurrency {
 	   balancesOf[msg.sender]._moneyLender = _authorized;
    }
 	
-	// @notice committ Hours
-	function commitHours (int _commitH) {
-		balancesOf[msg.sender]._commitH += _commitH;
-		_commitCommunityHours += _commitH;
-	}
-	
 	// @notice claim Hours to paid from Community
 	function claimHours (int _claimH) {
-		if (balancesOf[msg.sender]._commitH > _claimH) {
-		bytes32 myAlias = balancesOf[msg.sender]._alias;
-		ClaimH (myAlias, msg.sender, _claimH, now);
+		string myAlias = balancesOf[msg.sender]._alias;
+		ClaimH(msg.sender, myAlias, _claimH, now);
 		}
-	}
-	
+
 	// @notice pay Hours
 	function payHours (address _servant, uint _payH) {
 	if (msg.sender != _commune) return;
-	transfer (_servant, _payH);
-		balancesOf[_servant]._commitH -= int(_payH);
-		_commitCommunityHours -= int(_payH);
+	if (balancesOf[_servant]._isMember != true) return;
+    	transfer (_servant, _payH);
 		_realCommunityHours += int(_payH);
-		bytes32 _servantAlias = balancesOf[_servant]._alias;
-		PaidH (_servantAlias, _payH, now);
-	}
-	
-	// @notice committ Funding
-	function commitFunding (uint _commitF) {
-		balancesOf[msg.sender]._commitF += _commitF;
-		_commitCrowdFunding += _commitF;
+		string _servantAlias = balancesOf[_servant]._alias;
+		PaidH(_servant, _servantAlias, _payH, now);
 	}
 	
 	// @notice pay Funding
 	function payFunding (uint _payF) {
-	transfer (_commune, _payF);
-		balancesOf[msg.sender]._commitF -= _payF;
-		_commitCrowdFunding -= _payF;
+    	transfer (_commune, _payF);
 		_realCrowdFunding += _payF;
-	}
-	
-	// @notice committ Expenses
-	function commitExpenses (uint _commitE) {
-	if (msg.sender != _commune) return;
-		_commitExpenses += _commitE;
 	}
 	
 	// @notice pay Expenses
 	function payExpenses (address _contractor, uint _payE) {
 	if (msg.sender != _commune) return;
-	if (_payE > _commitExpenses) return;
-	transfer (_contractor, _payE);
-		_commitExpenses -= _payE;
+    	transfer (_contractor, _payE);
 		_realExpenses += _payE;
 	}
 	

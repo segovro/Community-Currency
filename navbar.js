@@ -41,7 +41,7 @@ document.write(
 		'        <li><a href="commonersList.html"><span class="glyphicon glyphicon-user"></span> Commoners List</a></li> '+
 		'        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Finances</a></li> '+
 		'        <li><a href="commune.html"><span class="glyphicon glyphicon-home"></span> Commune</a></li> '+
-		'        <li><a href="treasury.html"><span class="glyphicon glyphicon-print"></span> Treasury</a></li>'+
+		'        <li><a href="treasury.html"><span class="glyphicon glyphicon-lock"></span> Treasury</a></li>'+
 		'        <li><a href="administration.html"><span class="glyphicon glyphicon-inbox"></span> Administration</a></li>'+
 		'          </ul>'+
 		'        </li>'+

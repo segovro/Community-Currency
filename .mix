@@ -5,7 +5,7 @@
 	"deploymentAddresses": {},
 	"deploymentDir": "",
 	"files": [],
-	"lastPackageDate": "2016-02-22T17:44:38",
+	"lastPackageDate": "2016-02-25T10:24:23",
 	"localPackageUrl": "file:///home/segovro/git/Community-Currency/package//www/",
 	"registerContentHashBlockNumber": -1,
 	"registerContentHashTrHash": "",
@@ -77,7 +77,7 @@
 							"saveStatus": true,
 							"sender": "e9bf58b523b4c94255cad51b3f7efdc85a0c970bf42f1d191c126bb6f49bfb9d",
 							"value": {
-								"unit": 11,
+								"unit": 18,
 								"value": "0"
 							}
 						}

@@ -1,11 +1,15 @@
 {
 	"applicationUrlEth": "",
 	"applicationUrlHttp": "",
-	"deployBlockNumber": "",
-	"deploymentAddresses": {},
+	"deployBlockNumber": "1100596",
+	"deploymentAddresses": {
+		"communityCurrency": "0xd870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2",
+		"<communityCurrency - 0>": "0xd870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2"
+	},
 	"deploymentDir": "",
+	"deploymentTrHashes": "{\"communityCurrency.communityCurrency()\":\"0xd4573120de60014a985495ead1659de8a0252b53085568f6072fe223fd878e3e\"}",
 	"files": [],
-	"lastPackageDate": "2016-03-04T19:19:21",
+	"lastPackageDate": "2016-03-04T20:20:04",
 	"localPackageUrl": "file:///home/segovro/git/Community-Currency/package//www/",
 	"registerContentHashBlockNumber": -1,
 	"registerContentHashTrHash": "",
@@ -310,8 +314,8 @@
 				},
 				{
 					"hash": "",
-					"number": 5,
-					"status": "mined",
+					"number": -1,
+					"status": "pending",
 					"transactions": [
 						{
 							"contractId": "<communityCurrency - 0>",
@@ -366,12 +370,6 @@
 							}
 						}
 					]
-				},
-				{
-					"hash": "",
-					"number": -1,
-					"status": "pending",
-					"transactions": []
 				}
 			],
 			"contracts": [],
@@ -386,6 +384,121 @@
 				"secret": "e9bf58b523b4c94255cad51b3f7efdc85a0c970bf42f1d191c126bb6f49bfb9d"
 			},
 			"title": "TestContract",
+			"transactions": [
+				{
+					"contractId": "communityCurrency",
+					"functionId": "communityCurrency",
+					"gas": {
+						"value": "250000"
+					},
+					"gasAuto": true,
+					"gasPrice": {
+						"unit": 18,
+						"value": "100000"
+					},
+					"isContractCreation": true,
+					"isFunctionCall": true,
+					"label": "communityCurrency.communityCurrency()",
+					"parameters": {},
+					"saveStatus": true,
+					"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+					"value": {
+						"unit": 18,
+						"value": "0"
+					}
+				}
+			]
+		},
+		{
+			"accounts": [
+				{
+					"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "user1",
+					"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+				},
+				{
+					"address": "06400992be45bc64a52b5c55d3df84596d6cb4a1",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "user2",
+					"secret": "db95780d2f30ca8211eec37cc110cc58a2d4f9308dea00ede6717a585efa2eb7"
+				},
+				{
+					"address": "fa4b795b491cc1975e89f3c78972c3e2e827c882",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "user3",
+					"secret": "090f51d202f847d2468fc87fb06f92c469b8a1927b4aecea796b6831f1331382"
+				},
+				{
+					"address": "b0dcdc575ef06dc30aaea069d8043c9d463c931c",
+					"balance": {
+						"unit": 12,
+						"value": "1000000"
+					},
+					"name": "user4",
+					"secret": "e9bf58b523b4c94255cad51b3f7efdc85a0c970bf42f1d191c126bb6f49bfb9d"
+				}
+			],
+			"blocks": [
+				{
+					"hash": "",
+					"number": 1,
+					"status": "mined",
+					"transactions": [
+						{
+							"contractId": "communityCurrency",
+							"functionId": "communityCurrency",
+							"gas": {
+								"value": "250000"
+							},
+							"gasAuto": true,
+							"gasPrice": {
+								"unit": 18,
+								"value": "100000"
+							},
+							"isContractCreation": true,
+							"isFunctionCall": true,
+							"label": "communityCurrency.communityCurrency()",
+							"parameters": {},
+							"saveStatus": true,
+							"sender": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074",
+							"value": {
+								"unit": 18,
+								"value": "0"
+							}
+						}
+					]
+				},
+				{
+					"hash": "",
+					"number": -1,
+					"status": "pending",
+					"transactions": []
+				}
+			],
+			"contracts": [],
+			"miner": {
+				"address": "38f388fadf4a6a35c61c3f88194ec5ae162c8944",
+				"balance": {
+					"objectName": "",
+					"value": "1000000",
+					"unit": 12,
+					"value": "1000000",
+					"unit": 12
+				},
+				"name": "user1",
+				"secret": "cb73d9408c4720e230387d956eb0f829d8a4dd2c1055f96257167e14e7169074"
+			},
+			"title": "Deploy",
 			"transactions": [
 				{
 					"contractId": "communityCurrency",

@@ -28,7 +28,6 @@
 		var mtrdIsMember = mtrdWallet[5];		
 		var mtrdReputation = mtrdWallet[6];
 		var mtrdAlias = mtrdWallet[7];
-		var mtrdEmail = mtrdWallet[8];
 		var mtrdAvailable = Number(mtrdCredit) + Number(mtrdCommunityCUnits);
 		
 	if (mtrdIsMember = true) {
@@ -36,12 +35,11 @@
 	} else { 
 	    var mtrdCommoner ="Not Commoner";
 	};
-	var dateMtrdLast = new Date(mtrdLast * 1000);
-	var dateMtrdDealine = new Date(mtrdDeadline * 1000);
+
+		var dateMtrdDealine = new Date(mtrdDeadline * 1000);
 		
 		document.getElementById('isMember').innerText = mtrdCommoner;
 		document.getElementById('alias').innerText = mtrdAlias;
-		document.getElementById('email').innerText = mtrdEmail;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
 		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
 		document.getElementById('credit').innerText = mtrdCredit/baseUnits + " HR";
@@ -49,6 +47,22 @@
 		document.getElementById('moneyLender').innerText = mtrdMoneyLender;
 		document.getElementById('unitsOfTrust').innerText = mtrdUnitsOfTrust/baseUnits + " UoT";
 		document.getElementById('deadline').innerText = dateMtrdDealine;
+		
+		var credits = communityCurrency.Credit({'_MoneyLender' : monitored}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			credits.watch(function(error, result){
+			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
+			document.getElementById('listCredit').innerHTML = row;
+			});
+		});
+		
+		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : monitored}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
+			var row = "";
+			creditsExp.watch(function(error, result){
+			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
+			document.getElementById('listCreditEx').innerHTML = row;
+			});
+	  });
 		}
 	   
 	</script>
@@ -61,56 +75,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency/wiki" target="blank"><span class="glyphicon glyphicon-hourglass"></span> Community Monetary System </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-      <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a>
-          <ul class="dropdown-menu">
-          <li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> 
-          <li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        
-          <li><a href="exchange.html"><span class="glyphicon glyphicon-random"></span> Exchange</a></li>        
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>
-          <ul class="dropdown-menu">
-        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-ok"></span> Endorse P2P Credit</a></li> 
-        <li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> 
-        <li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> 
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-user"></span> Commoner</a>
-          <ul class="dropdown-menu">
-          <li><a href="civilService.html"><span class="glyphicon glyphicon-hourglass"></span> Community Service</a></li>        
-          <li><a href="funding.html"><span class="glyphicon glyphicon-cloud-upload"></span> Community Funding</a></li>        
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="commune.html"><span class="glyphicon glyphicon-cloud"></span> Community</a>
-          <ul class="dropdown-menu">
-        <li><a href="commonersList.html"><span class="glyphicon glyphicon-user"></span> Commoners List</a></li> 
-        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Finances</a></li> 
-        <li><a href="commune.html"><span class="glyphicon glyphicon-home"></span> Commune</a></li> 
-        <li><a href="treasury.html"><span class="glyphicon glyphicon-lock"></span> Treasury</a></li>
-        <li><a href="administration.html"><span class="glyphicon glyphicon-inbox"></span> Administration</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<script type="text/javascript" src="navbar.js"></script>
   
 <div class="container bg-3 text-center">    
   <div class="row">
@@ -122,7 +87,7 @@
 			</div>
       <form role="form">
 		  <div class="form-group">
-		    <label for="toMonitor">Monitor Account:</label>
+		    <label class="control-label col-sm-4" for="toMonitor">Monitor Account:</label>
 		    <input type="text" class="form-control" id="toMonitor" placeholder="Enter account to be monitored">
 		 </div>
 		</form>
@@ -140,10 +105,6 @@
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
-		 </div>
-		<div class="form-group">
-		    <label class="control-label col-sm-4" for="email">Email:</label>
-		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
 		 </div>
 	</form>
     <h3><span class="glyphicon glyphicon-piggy-bank"></span> Assets</h3>
@@ -191,6 +152,12 @@
 		    <div class="col-sm-6"><output class="form-control" id="committedF"></output></div>
 		 </div>
 	</form>
+		
+		<h3><span class="glyphicon glyphicon-thumbs-up"></span> Endorsed Credits</h3>
+			<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
+				<div  id="listCredit"></div>	
+			<h4><span class="glyphicon glyphicon-remove"></span> Expired Credits</h4> 
+				<div id="listCreditEx"></div>
    	</div>   
    </div>
 </div>

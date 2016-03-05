@@ -18,7 +18,6 @@
 	document.getElementById('account').innerHTML = coinbase;
 	document.getElementById('isMember').innerText = commoner;
 	document.getElementById('alias').innerText = myAlias;
-	document.getElementById('email').innerText = myEmail;
 	document.getElementById('communityCUnits').innerText = myCommunityCUnits/baseUnits + " HR";
 	document.getElementById('reputation').innerText = myReputation/baseUnits + " UoT";
 	document.getElementById('credit').innerText = myCredit/baseUnits + " HR";
@@ -26,6 +25,23 @@
 	document.getElementById('moneyLender').innerText = myMoneyLender;
 	document.getElementById('unitsOfTrust').innerText = myUnitsOfTrust/baseUnits + " UoT";
 	document.getElementById('deadline').innerText = dateMyDealine;
+		
+			var credits = communityCurrency.Credit({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			credits.watch(function(error, result){
+			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
+			document.getElementById('listCredit').innerHTML = row;
+			});
+		});
+		
+		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
+			var row = "";
+			creditsExp.watch(function(error, result){
+			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
+			document.getElementById('listCreditEx').innerHTML = row;
+			});
+	  });
+		
 	}
 	</script>
     <style>
@@ -36,56 +52,8 @@
   </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-    <a class="navbar-brand" href="https://github.com/segovro/Community-Currency/wiki" target="blank"><span class="glyphicon glyphicon-hourglass"></span> Community Monetary System </a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-      <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a>
-          <ul class="dropdown-menu">
-          <li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> 
-          <li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        
-          <li><a href="exchange.html"><span class="glyphicon glyphicon-random"></span> Exchange</a></li>        
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>
-          <ul class="dropdown-menu">
-        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-ok"></span> Endorse P2P Credit</a></li> 
-        <li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> 
-        <li><a href="monitor.html"><span class="glyphicon glyphicon-eye-open"></span> Monitor account</a></li> 
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-user"></span> Commoner</a>
-          <ul class="dropdown-menu">
-          <li><a href="civilService.html"><span class="glyphicon glyphicon-hourglass"></span> Community Service</a></li>        
-          <li><a href="funding.html"><span class="glyphicon glyphicon-cloud-upload"></span> Community Funding</a></li>        
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="commune.html"><span class="glyphicon glyphicon-cloud"></span> Community</a>
-          <ul class="dropdown-menu">
-        <li><a href="commonersList.html"><span class="glyphicon glyphicon-user"></span> Commoners List</a></li> 
-        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Finances</a></li> 
-        <li><a href="commune.html"><span class="glyphicon glyphicon-home"></span> Commune</a></li> 
-        <li><a href="treasury.html"><span class="glyphicon glyphicon-lock"></span> Treasury</a></li>
-        <li><a href="administration.html"><span class="glyphicon glyphicon-inbox"></span> Administration</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
+<script type="text/javascript" src="navbar.js"></script>
   
 <div class="container bg-3 text-center">  
 
@@ -94,7 +62,7 @@
     <small><p id="me"></p></small>
 	<h2><p id="community"></p></h2>
 	   <p id="comune"></p>
-	<h3><a href="qr.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-qrcode"></span></a> <span class="glyphicon glyphicon-user"></span> My Account</h3>
+	<h3><a href="qr.html" class="btn btn-default" role="button"><span class="glyphicon glyphicon-qrcode"></span></a><span class="glyphicon glyphicon-user"></span> My Account</h3>
     <form class="form-horizontal" role="form">
         <div class="form-group">
 		    <label class="control-label col-sm-4" for="account">Account:</label>
@@ -107,10 +75,6 @@
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
-		 </div>
-		<div class="form-group">
-		    <label class="control-label col-sm-4" for="email">Email:</label>
-		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
 		 </div>
 		 <div class="form-group">
 			 <a class="btn btn-default" role="button" href="mailto:desperado.theory@gmail.com?subject=CommonerRequest&Body=Indicate Alias and Ethereum Address" target="_top"><span class="	glyphicon glyphicon-envelope"></span> Ask to become Commoner</a>
@@ -150,6 +114,12 @@
 		    <div class="col-sm-6"><output class="form-control" id="deadline"></output></div>
 		 </div>
 	</form>
+		 
+		<h3><span class="glyphicon glyphicon-thumbs-up"></span> Endorsed Credits</h3>
+			<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
+				<div  id="listCredit"></div>	
+			<h4><span class="glyphicon glyphicon-remove"></span> Expired Credits</h4> 
+				<div id="listCreditEx"></div>		
    	</div>    
    </div>
 </div>

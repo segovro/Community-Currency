@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>	
   <script type="text/javascript" >	
    
@@ -26,12 +27,7 @@
 		var mtrdUnitsOfTrust = mtrdWallet[4];
 		var mtrdIsMember = mtrdWallet[5];		
 		var mtrdReputation = mtrdWallet[6];
-		var mtrdLast = mtrdWallet[7];
-		var mtrdGdpActivity = mtrdWallet[8];
-		var mtrdCommittedH = mtrdWallet[9];
-		var mtrdCommittedF = mtrdWallet[10];
-		var mtrdAlias = mtrdWallet[11];
-		var mtrdEmail = mtrdWallet[12];
+		var mtrdAlias = mtrdWallet[7];
 		var mtrdAvailable = Number(mtrdCredit) + Number(mtrdCommunityCUnits);
 		
 	if (mtrdIsMember = true) {
@@ -39,23 +35,34 @@
 	} else { 
 	    var mtrdCommoner ="Not Commoner";
 	};
-	var dateMtrdLast = new Date(mtrdLast * 1000);
-	var dateMtrdDealine = new Date(mtrdDeadline * 1000);
+
+		var dateMtrdDealine = new Date(mtrdDeadline * 1000);
 		
 		document.getElementById('isMember').innerText = mtrdCommoner;
 		document.getElementById('alias').innerText = mtrdAlias;
-		document.getElementById('email').innerText = mtrdEmail;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
-		document.getElementById('gdpActivity').innerText = mtrdGdpActivity/baseUnits + " HR/day";
 		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
-		document.getElementById('last').innerText = dateMtrdLast;
 		document.getElementById('credit').innerText = mtrdCredit/baseUnits + " HR";
 		document.getElementById('available').innerText = mtrdAvailable/baseUnits + " HR";
 		document.getElementById('moneyLender').innerText = mtrdMoneyLender;
 		document.getElementById('unitsOfTrust').innerText = mtrdUnitsOfTrust/baseUnits + " UoT";
 		document.getElementById('deadline').innerText = dateMtrdDealine;
-		document.getElementById('committedH').innerText = mtrdCommittedH/baseUnits + " HR";
-		document.getElementById('committedF').innerText = mtrdCommittedF/baseUnits + " HR";
+		
+		var credits = communityCurrency.Credit({'_MoneyLender' : monitored}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			credits.watch(function(error, result){
+			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
+			document.getElementById('listCredit').innerHTML = row;
+			});
+		});
+		
+		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : monitored}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
+			var row = "";
+			creditsExp.watch(function(error, result){
+			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
+			document.getElementById('listCreditEx').innerHTML = row;
+			});
+	  });
 		}
 	   
 	</script>
@@ -80,7 +87,7 @@
 			</div>
       <form role="form">
 		  <div class="form-group">
-		    <label for="toMonitor">Monitor Account:</label>
+		    <label class="control-label col-sm-4" for="toMonitor">Monitor Account:</label>
 		    <input type="text" class="form-control" id="toMonitor" placeholder="Enter account to be monitored">
 		 </div>
 		</form>
@@ -99,24 +106,12 @@
 		    <label class="control-label col-sm-4" for="alias">Alias:</label>
 		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
 		 </div>
-		<div class="form-group">
-		    <label class="control-label col-sm-4" for="email">Alias:</label>
-		    <div class="col-sm-6"><output class="form-control" type="email" id="email"></output></div>
-		 </div>
 	</form>
     <h3><span class="glyphicon glyphicon-piggy-bank"></span> Assets</h3>
     <form class="form-horizontal" role="form">
   	 	<div class="form-group">
 		    <label class="control-label col-sm-4" for="communityCUnits">Balance:</label>
 		    <div class="col-sm-6"><output class="form-control" id="communityCUnits"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="gdpActivity">Activity:</label>
-		    <div class="col-sm-6"><output class="form-control" id="gdpActivity"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="last">Last pay:</label>
-		    <div class="col-sm-6"><output class="form-control" id="last"></output></div>
 		 </div>
 		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="reputation">Reputation:</label>
@@ -157,6 +152,12 @@
 		    <div class="col-sm-6"><output class="form-control" id="committedF"></output></div>
 		 </div>
 	</form>
+		
+		<h3><span class="glyphicon glyphicon-thumbs-up"></span> Endorsed Credits</h3>
+			<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
+				<div  id="listCredit"></div>	
+			<h4><span class="glyphicon glyphicon-remove"></span> Expired Credits</h4> 
+				<div id="listCreditEx"></div>
    	</div>   
    </div>
 </div>

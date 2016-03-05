@@ -6,35 +6,27 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
-
   <script type="text/javascript" >	
 	window.onload = function () {
 		
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('committedH').innerText = myCommittedH/baseUnits + " HR";
 	document.getElementById('goalCommunityHours').innerText = goalCommunityHours/baseUnits + " HR";
-	document.getElementById('committedCommunityHours').innerText = committedCommunityHours/baseUnits + " HR";
 	document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits + " HR";
 	}
 	
 	var budget = communityCurrency.getBudget();
 	var goalCommunityHours = budget[2];
-	var committedCommunityHours = budget[5];
-	var realCommunityHours = budget[9];
+	var realCommunityHours = budget[6];
 	
 	function claimHours() {
 		var clHours = document.getElementById('claimH').value * baseUnits;
 		communityCurrency.claimHours(clHours);
 		location.reload();
-	}
-	
-	function commitHours() {
-		var ctHours = document.getElementById('ctHours').value * baseUnits;
-		communityCurrency.commitHours(ctHours);
-		location.reload();
-	}
-	  
+	}	
+ 
 	</script>
     <style>
     .navbar {
@@ -57,10 +49,6 @@
 			</div>
 		<form role="form">
 		  <div class="form-group">
-		    <label for="committedH">Pending Committed Hours of Service:</label>
-		    <output class="form-control" id="committedH"></output>
-		  </div>
-		  <div class="form-group">
 		    <label for="claimH">Claim provided Hours:</label>
 		    <input type="text" class="form-control" id="claimH" placeholder="Enter amount in HOURS">
 		  </div>
@@ -68,22 +56,11 @@
 		<div>
 		    <button type="submit" class="btn btn-default" onClick="claimHours();"><span class="glyphicon glyphicon-hourglass"></span> Request PAY</button>
 		</div>
-		<form role="form">
-		  <div class="form-group">
-		    <label for="ctHours">Commit New Hours of Service:</label>
-		    <input class="form-control" id="ctHours" placeholder="Enter amount in HOURS">
-		  </div>
-		</form>
-		   <button type="submit" class="btn btn-default" onClick="commitHours();"><span class="glyphicon glyphicon-hourglass"></span> Commit Hours of Service:</button>
 	<h4><span class="glyphicon glyphicon-cloud"></span> Community Service Goals</h4>
 		<form role="form">
 		  <div class="form-group">
 		    <label for="goalCommunityHours">Community Goal:</label>
 		    <output class="form-control" id="goalCommunityHours"></output>
-		  </div>
-		  <div class="form-group">
-		    <label for="committedCommunityHours">Committed but pending:</label>
-		    <output type="text" class="form-control" id="committedCommunityHours"></output>
 		  </div>
 		  <div class="form-group">
 		    <label for="realCommunityHours">Delivered so far:</label>

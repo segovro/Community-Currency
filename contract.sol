@@ -74,16 +74,15 @@ contract communityCurrency {
 		bool _isMember; 
 		uint _reputation; 
 		string _alias; 
-		string _email;
 	}
 	
 	mapping (address => Wallet) balancesOf;	
 	
 	event Transfer(uint _amount, address indexed _from, address indexed _to, uint _timeStampT);
-	event NewMember(address indexed _member, string _alias, string _email);
-	event OldMember(address indexed _exMember, string _exAlias, string _exEmail);
-	event Credit(address indexed _endorserAddress, uint _cDealine, uint _endorsedUoT, string _moneyLender);
-    event CreditExp(address indexed _exEndorserAddress, uint _oldUoT , string indexed _oldMoneyLender, bool _success, uint _timeStampCX);
+	event NewMember(address indexed _member, string _alias);
+	event OldMember(address indexed _exMember, string _exAlias);
+	event Credit(address indexed _MoneyLender, address indexed _borrowerAddress, uint _cDealine, uint _endorsedUoT);
+    event CreditExp(address indexed _MoneyLender, address indexed _exBorrowerAddress, uint _oldUoT , bool _success, uint _timeStampCX);
 	event ClaimH(address indexed _hFrom, string _servantC, int _claimedH, uint _timeStampCH);
 	event PaidH(address indexed _hTo, string _servantP, uint _paidH, uint _timeStampPH);
 	
@@ -92,16 +91,15 @@ contract communityCurrency {
 	// @param _newMember is the address of the new member
 	// @param _newAlias is the alias or human readable ID of the new member
 	// @return changed alias, initial balance in CCUs, initial reputation in UoT
-	function acceptMember (address _newMember, string _newAlias, string _newEmail) {
+	function acceptMember (address _newMember, string _newAlias) {
         if (msg.sender != _commune) return;
         balancesOf[_newMember]._isMember = true;
 		balancesOf[_newMember]._CCUs = _iniMemberCCUs;
         balancesOf[_newMember]._reputation = _iniMemberReputation;
  		balancesOf[_newMember]._alias = _newAlias;
-		balancesOf[_newMember]._email = _newEmail;
 		_totalMinted += _iniMemberCCUs;
 		_totalTrustAvailable += _iniMemberReputation; 
-		NewMember(_newMember, _newAlias, _newEmail);
+		NewMember(_newMember, _newAlias);
     }
 	
 	// @notice the community account can kick out members. The action deletes all balances
@@ -111,12 +109,11 @@ contract communityCurrency {
         if (msg.sender != _commune) return;        
         balancesOf[_oldMember]._isMember = false;
         string _oldAlias = balancesOf[_oldMember]._alias;
-        string _oldEmail = balancesOf[_oldMember]._email;
 		_totalCredit -= balancesOf[_oldMember]._credit;
 		_totalTrustAvailable -= balancesOf[_oldMember]._reputation;
 		_totalTrustCost += balancesOf[_oldMember]._unitsOfTrust;
         balancesOf[_oldMember]._credit = 0;
-        OldMember(_oldMember, _oldAlias, _oldEmail);
+        OldMember(_oldMember, _oldAlias);
     }
 	
 	// @notice get the currency parameters
@@ -211,7 +208,6 @@ contract communityCurrency {
 				bool _success = false;
 				uint _oldUoT = balancesOf[msg.sender]._unitsOfTrust;
 				address _oldMoneyLenderAddress = balancesOf[msg.sender]._moneyLender;
-				string _oldMoneyLender = balancesOf[balancesOf[msg.sender]._moneyLender]._alias;
 			// @notice if time is over reset credit to zero, deadline to zero
 				balancesOf[msg.sender]._deadline = 0;
 				_totalCredit -= balancesOf[msg.sender]._credit;
@@ -237,7 +233,7 @@ contract communityCurrency {
 				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-				CreditExp(_oldMoneyLenderAddress, _oldUoT , _oldMoneyLender, _success, now);
+				CreditExp(_oldMoneyLenderAddress, msg.sender, _oldUoT , _success, now);
 				} 
 			}
 	    
@@ -293,7 +289,7 @@ contract communityCurrency {
 				_totalCredit += _credit;
 				_totalTrustCost += _unitsOfTrust;
 				_totalTrustAvailable -= _unitsOfTrust;
-				Credit(msg.sender, _creditDeadline, _unitsOfTrust, _moneyLenderAlias);		
+				Credit(msg.sender, _borrower, _creditDeadline, _unitsOfTrust);		
 			}
 		}}
 	}
@@ -313,7 +309,7 @@ contract communityCurrency {
 	// @return _getReputation is the reputation in UoTs
 	// @return _getLast is the date of the last transaction
 	// @return _getGdpActivity is the average activity
-	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, string _getAlias, string _getEmail) {
+	function monitorWallet(address _monitored) constant returns (int _getCCUs, uint _getCredit, uint _getDeadline, address _getMoneyLender, uint _getUnitsOfTrust, bool _getIsMember, uint _getReputation, string _getAlias) {
 		if ((_monitored == msg.sender) || (msg.sender == _commune) || (msg.sender == balancesOf[_monitored]._moneyLender)) {
     	_getCCUs = balancesOf[_monitored]._CCUs;	
 		_getCredit = balancesOf[_monitored]._credit;
@@ -323,7 +319,6 @@ contract communityCurrency {
 		_getIsMember = balancesOf[_monitored]._isMember;		
 		_getReputation = balancesOf[_monitored]._reputation;
 		_getAlias = balancesOf[_monitored]._alias;
-		_getEmail = balancesOf[_monitored]._email;
 		}
     	}
   	

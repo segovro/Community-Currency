@@ -5,16 +5,16 @@
 		
 		{
 			"contentType" : "text/html",
-			"file" : "index.html",
-			"hash" : "08471df9c8bc0f36cfec7dfa9c669b1208731216e1557829eff36e5e40ad7aea",
-			"path" : "/"
+			"file" : "access.html",
+			"hash" : "c0743290705efb33d4d9068f79f7763518ec6962b3e34cb12665e0c839b96fba",
+			"path" : "/access.html"
 		},
 		
 		{
 			"contentType" : "text/html",
-			"file" : "civilService.html",
-			"hash" : "9d37ba9ae4d660c4ea3eb9b00aa35e5b2f99724ad1b763ed803fd1276a622422",
-			"path" : "/civilService.html"
+			"file" : "administration.html",
+			"hash" : "c0006d972916155c3e1bddf43124c3e1ba06470bece2878b60cc4e47f3263637",
+			"path" : "/administration.html"
 		},
 		
 		{
@@ -26,37 +26,37 @@
 		
 		{
 			"contentType" : "text/html",
-			"file" : "endorseCredit.html",
-			"hash" : "2927f28cadd09230b5e3bf04e801ef231145eead7348571a2a4827dae7851330",
-			"path" : "/endorseCredit.html"
+			"file" : "budget.html",
+			"hash" : "1c1eca685067bab9ae699e34eb2d5eec37fe434dd16079a385c58830f881a095",
+			"path" : "/budget.html"
 		},
 		
 		{
 			"contentType" : "application/javascript",
 			"file" : "cc.js",
-			"hash" : "d6419350a81c5b8ba56f7fd49dc750a78d9ff867243d7d3ed899521414102b8a",
+			"hash" : "878dc906e2560cc4e1c859d8772798cf7117bb115ffa5d98dda7c515edfe4346",
 			"path" : "/cc.js"
 		},
 		
 		{
 			"contentType" : "text/html",
-			"file" : "qr.html",
-			"hash" : "18027610a1739ef6d258343d9da9a42ceef240dae716744ef057114e599d9838",
-			"path" : "/qr.html"
+			"file" : "civilService.html",
+			"hash" : "ad030fc644c4a7d9d75fd7fa724b3241b8b85b646e09c4169489fa7c4331f663",
+			"path" : "/civilService.html"
 		},
 		
 		{
 			"contentType" : "text/html",
-			"file" : "administration.html",
-			"hash" : "cc07c941d061f28092611b559a447a64fe3588dab96aa6d81a59c433b198bc35",
-			"path" : "/administration.html"
+			"file" : "commonersList.html",
+			"hash" : "91952d6b162a70a8c3f1f60fa8f0b0d1edbdfd7c4fed8b857eaa3b8c77bdd96e",
+			"path" : "/commonersList.html"
 		},
 		
 		{
 			"contentType" : "text/html",
-			"file" : "funding.html",
-			"hash" : "cba3265661b3b4e1dcc14f4da2048a90db794d30687b5dcc8c8c7e4ed959d00d",
-			"path" : "/funding.html"
+			"file" : "commune.html",
+			"hash" : "1ced068c7097c8e310be96cd6505b41286e48f55ef2dada1312196ebcbd8e9b3",
+			"path" : "/commune.html"
 		},
 		
 		{
@@ -67,31 +67,38 @@
 		},
 		
 		{
+			"contentType" : "text/html",
+			"file" : "endorseCredit.html",
+			"hash" : "2492a750c01e7d5d959dada0c2403ff5827f8afc332d6e1d96166dac659708bb",
+			"path" : "/endorseCredit.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "exchange.html",
+			"hash" : "9077caab1ea7f83603dfd4cfb1ff8e77a0b8fc59198c83254f96d8915ef24667",
+			"path" : "/exchange.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "funding.html",
+			"hash" : "d0bfc649c9b944de43115c352b9753233f95a15e644d4d15ae9b0f909bd8e974",
+			"path" : "/funding.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "index.html",
+			"hash" : "ce41ebd80ecbdfa6e8815fcfd3d2207582ab0381ea7b5b14d746aba003e8d0ec",
+			"path" : "/"
+		},
+		
+		{
 			"contentType" : "text/plain",
-			"file" : "web3.js.map",
-			"hash" : "07a274d032e04284d3e40ec360b0b3c91d5a4410143b1f13a2e2de4f3b5f7be6",
-			"path" : "/web3.js.map"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "payment.html",
-			"hash" : "c149173dec99a972b243cfa7e7d25c89aa74d1be7d59ec041b4e6436a2e70e1a",
-			"path" : "/payment.html"
-		},
-		
-		{
-			"contentType" : "text/x-markdown",
-			"file" : "README.md",
-			"hash" : "0cadd67812031c1ed6826e02417ac8e5e4752d5152bb8a74fbf6ff2eba46407b",
-			"path" : "/README.md"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "budget.html",
-			"hash" : "38629de5ed9bf303ec71773f1c2a74ed52e58040e113f7a43d207d4f1d7a5d6b",
-			"path" : "/budget.html"
+			"file" : "interface.json",
+			"hash" : "3665d49f7c378b93b74acf8c7b806aba3845327e278c7c1bb28b28ef7260aabe",
+			"path" : "/interface.json"
 		},
 		
 		{
@@ -103,30 +110,51 @@
 		
 		{
 			"contentType" : "text/html",
-			"file" : "exchange.html",
-			"hash" : "469ae7796f30ffe8113da76a52913e5ad4f806cd96a22337c3cda16a42c4bd36",
-			"path" : "/exchange.html"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "commune.html",
-			"hash" : "08df8f8d591fa9ea0a7ed863a2deeebd90c4f831ac54018a1a3ca8306ad50351",
-			"path" : "/commune.html"
+			"file" : "monitor.html",
+			"hash" : "cc745f208f0f3c64a17669e722150fc5352acf2dd8d8987c64b7ed02a18eab3a",
+			"path" : "/monitor.html"
 		},
 		
 		{
 			"contentType" : "application/javascript",
 			"file" : "navbar.js",
-			"hash" : "8161d382c2cf39d1b1c3e4b948cd8f3ea81dc7bf9b21c04a5d023370865b1922",
+			"hash" : "878cbbe4074b53f24c616377efb89bfcbba6254d9d4154a7d77ecf079f769307",
 			"path" : "/navbar.js"
 		},
 		
 		{
 			"contentType" : "text/html",
-			"file" : "access.html",
-			"hash" : "6a4042624f4afc50b98e96e85d8a8eefa124b10f8c856484e42dfdcc105f03db",
-			"path" : "/access.html"
+			"file" : "payment.html",
+			"hash" : "c83f2d0d9c3e5406d82c75e5fc09b5be448909cbcdaf37d0c030df1b0627dbc9",
+			"path" : "/payment.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "qr.html",
+			"hash" : "6070b037d957563b28f0239287a75a779b18c23c74104aa7f90448bd66264d69",
+			"path" : "/qr.html"
+		},
+		
+		{
+			"contentType" : "text/x-markdown",
+			"file" : "README.md",
+			"hash" : "0cadd67812031c1ed6826e02417ac8e5e4752d5152bb8a74fbf6ff2eba46407b",
+			"path" : "/README.md"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "transactions.html",
+			"hash" : "af185e3285d1d9e7c306b772d40c83be992c2080362aae114ed05eb2ed79bc4c",
+			"path" : "/transactions.html"
+		},
+		
+		{
+			"contentType" : "text/html",
+			"file" : "treasury.html",
+			"hash" : "52a4b0f59b99f68c8fd16ae9f833f59edf0bf5c7285c65b1a2dc906cd53ad362",
+			"path" : "/treasury.html"
 		},
 		
 		{
@@ -137,31 +165,10 @@
 		},
 		
 		{
-			"contentType" : "text/html",
-			"file" : "treasury.html",
-			"hash" : "130230ba1f13bcd65ebff9d526f59aaa05761bc79ad6c5e4c90d9a5dd70dbbbd",
-			"path" : "/treasury.html"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "monitor.html",
-			"hash" : "1cab1851e0ffd67e0b633b78d50aaffe3ee5a6a9cdd372e8182ae6523c00f760",
-			"path" : "/monitor.html"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "commonersList.html",
-			"hash" : "fe91115560c65559abe8bf377871087e688bc7484a52096d99e1095690e166cc",
-			"path" : "/commonersList.html"
-		},
-		
-		{
-			"contentType" : "text/html",
-			"file" : "transactions.html",
-			"hash" : "0e19d79663190ad31badf816b0e9a9bf2d4568eef8a9f0cebb02be7854dd48e0",
-			"path" : "/transactions.html"
+			"contentType" : "text/plain",
+			"file" : "web3.js.map",
+			"hash" : "07a274d032e04284d3e40ec360b0b3c91d5a4410143b1f13a2e2de4f3b5f7be6",
+			"path" : "/web3.js.map"
 		}
 	]
 }

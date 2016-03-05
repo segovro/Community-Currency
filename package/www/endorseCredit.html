@@ -6,13 +6,32 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript" >	
 	window.onload = function () {
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	document.getElementById('reputation').innerHTML = myReputation/baseUnits +" UoT";
+		
+		var credits = communityCurrency.Credit({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+			var row = "";
+			credits.watch(function(error, result){
+			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
+			document.getElementById('listCredit').innerHTML = row;
+			});
+		});
+		
+		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
+			var row = "";
+			creditsExp.watch(function(error, result){
+			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
+			document.getElementById('listCreditEx').innerHTML = row;
+			});
+	  });
 	}
+	
+	
 
 	function showCost () {
 		var borrower = document.getElementById('borrower').value;
@@ -43,8 +62,9 @@
   
 <div class="container bg-3 text-center">    
   <div class="row">
-    <div class="col-sm-4"> 
+    <div class="col-sm-6"> 
       <small><p id="me"></p></small>
+	
           <h3><span class="glyphicon glyphicon-ok"></span> Endorse Credit</h3>
 			<div class="alert alert-warning">
 			  <small>This page only available to Commoners</small>
@@ -77,6 +97,13 @@
 		  <div>	
 		    <button type="submit" class="btn btn-default" onClick="endorseCredit();"><span class="glyphicon glyphicon-ok"></span> Endorse Credit</button>
 		  </div>
+	
+		<h3><span class="glyphicon glyphicon-thumbs-up"></span> Endorsed Credits</h3>
+			<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
+				<div  id="listCredit"></div>	
+			<h4><span class="glyphicon glyphicon-remove"></span> Expired Credits</h4> 
+				<div id="listCreditEx"></div>		
+		
 
     </div>
   </div>

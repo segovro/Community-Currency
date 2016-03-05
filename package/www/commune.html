@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
@@ -37,8 +38,7 @@
 	function acceptMember () {
 		var newAddress = document.getElementById('newAddress').value;
 		var newAlias = document.getElementById('newAlias').value;
-		var newEmail = document.getElementById('newEmail').value;
-		communityCurrency.acceptMember (newAddress, newAlias, newEmail)
+		communityCurrency.acceptMember (newAddress, newAlias)
 		location.reload();
 	}
 	  
@@ -121,10 +121,6 @@
 		    <label for="aliasNew">Alias</label>
 		    <input type="text" class="form-control" id="aliasNew" placeholder="Enter alias new commoner">
 		  </div>
-			<div class="form-group">
-		    <label for="emailNew">Alias</label>
-		    <input type="text" type="email" class="form-control" id="emailNew" placeholder="Enter email new commoner">
-		  </div>
 	</form>
 		    <button type="submit" class="btn btn-default" onClick="acceptMember();"><span class="glyphicon glyphicon-ok"></span> Accept</button>
 
@@ -154,17 +150,16 @@
        	
 		<div class="col-sm-4"> 
 		
-		<h4><span class="glyphicon glyphicon-print"></span> Change Treasury address</h4>    
+		<h4><span class="glyphicon glyphicon-lock"></span> Change Treasury address</h4>    
        	<form role="form">
 		  <div class="form-group">
 		    <p id="oldTreasury"></p>
 		    <input type="text" class="form-control" id="newTreasury" placeholder="Enter the new Treasury address">
 		  </div>
 		</form>
-		    <button type="submit" class="btn btn-default" onClick="newTreasury();"><span class="glyphicon glyphicon-print"></span> Change Treasury address</button>
+		    <button type="submit" class="btn btn-default" onClick="newTreasury();"><span class="glyphicon glyphicon-lock"></span> Change Treasury address</button>
 
-      	</div>
-    	
+      	</div>    	
   </div>
 </div>
 

@@ -13,7 +13,7 @@ document.write(
 		'      <ul class="nav navbar-nav">'+
 		'      <li><a href="index.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>'+
 		'      <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="payment.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a>'+
 		'          <ul class="dropdown-menu">'+
 		'          <li><a href="payment.html"><span class="glyphicon glyphicon-send"></span> Payment</a></li> '+
 		'          <li><a href="transactions.html"><span class="glyphicon glyphicon-transfer"></span> Transactions</a></li>        '+
@@ -21,7 +21,7 @@ document.write(
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="endorseCredit.html"><span class="glyphicon glyphicon-thumbs-up"></span> P2P Credits</a>'+
 		'          <ul class="dropdown-menu">'+
 		'        <li><a href="endorseCredit.html"><span class="glyphicon glyphicon-ok"></span> Endorse P2P Credit</a></li> '+
 		'        <li><a href="access.html"><span class="glyphicon glyphicon-log-in"></span> Give access</a></li> '+
@@ -29,14 +29,14 @@ document.write(
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="monitor.html"><span class="glyphicon glyphicon-user"></span> Commoner</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="civilService.html"><span class="glyphicon glyphicon-user"></span> Commoner</a>'+
 		'          <ul class="dropdown-menu">'+
 		'          <li><a href="civilService.html"><span class="glyphicon glyphicon-hourglass"></span> Community Service</a></li>        '+
 		'          <li><a href="funding.html"><span class="glyphicon glyphicon-cloud-upload"></span> Community Funding</a></li>        '+
 		'          </ul>'+
 		'        </li>'+
 		'        <li class="dropdown">'+
-		'          <a class="dropdown-toggle" data-toggle="dropdown" href="commune.html"><span class="glyphicon glyphicon-cloud"></span> Community</a>'+
+		'          <a class="dropdown-toggle" data-toggle="dropdown" href="budget.html"><span class="glyphicon glyphicon-cloud"></span> Community</a>'+
 		'          <ul class="dropdown-menu">'+
 		'        <li><a href="commonersList.html"><span class="glyphicon glyphicon-user"></span> Commoners List</a></li> '+
 		'        <li><a href="budget.html"><span class="glyphicon glyphicon-th-list"></span> Commons Finances</a></li> '+

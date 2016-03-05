@@ -6,12 +6,13 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
-		
-		var claimedH = communityCurrency.ClaimH({'_from' : null}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+	
+		var claimedH = communityCurrency.ClaimH({}, function(error, result) {
 			var row = "";
 			claimedH.watch(function(error, result){
 			row += Date(result.args._timeStamCH) + "&emsp;<b>" + result.args._servantC + "</b>&emsp;" + result.args._hFrom + "&emsp;<span class=\"badge\">" + result.args._claimedH/baseUnits + " HR</span><br/>";
@@ -19,23 +20,20 @@
 			});
 		});
 
-
-		var paidH = communityCurrency.PaidH({'_from' : null}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+		var paidH = communityCurrency.PaidH({}, function(error, result) {
 			var row = "";
 			paidH.watch(function(error, result){
-			row += Date(result.args._timeStampPH) + "&emsp;<b>" + result.args._servantC + "</b>&emsp;<span class=\"badge\">" + result.args.__paidH/baseUnits + " HR</span><br/>";
+			row += Date(result.args._timeStampPH) + "&emsp;<b>" + result.args._servantP + "</b>&emsp;" + result.args._hTo  + "</b>&emsp;<span class=\"badge\">" + result.args.__paidH/baseUnits + " HR</span><br/>";
 			document.getElementById('listPaidHours').innerHTML = row;
 			});
 		});
 		
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('committedE').innerHTML = committedExpenses/baseUnits + " HR";
 	document.getElementById('communeWallet').innerHTML = communeBalance/baseUnits + " HR";
 	}
 	
 	var budget = communityCurrency.getBudget();
-		var committedExpenses = budget[6];
-		var communeBalance = budget[11];
+		var communeBalance = budget[8];
 		
 	function payHours() {
 		var servant = document.getElementById('servant').value;
@@ -49,14 +47,8 @@
 		var expenses = document.getElementById('expenses').value * baseUnits;
 		communityCurrency.payExpenses(contractor, expenses)
 		location.reload();
-	}
-	
-	function commitExpenses() {
-		var ctE = document.getElementById('ctE').value * baseUnits;
-		communityCurrency.commitExpenses(ctE);
-		location.reload();
-	}
-	  
+	}	
+  
 	</script>
     <style>
     .navbar {
@@ -101,11 +93,6 @@
    <div class="col-sm-4">     
 
     <h3><span class="glyphicon glyphicon-cloud-download"></span> Community Expenses</h3>
-
-		  <div class="form-group">
-		    <label for="committedE">Pending Committed Expenses:</label>
-		    <output class="form-control" id="committedE"></output>
-		  </div>
 		  
 		<form role="form">		  
 		  <div class="form-group">
@@ -118,14 +105,6 @@
 		  </div>
 		 </form>
 		    <button type="submit" class="btn btn-default" onClick="payExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Pay Expenses</button>
-
-		<form role="form">
-		  <div class="form-group">
-		    <label for="ctE">Commit Expenses:</label>
-		    <input class="form-control" id="ctE" placeholder="Enter amount in HR">
-		  </div>
-		 </form>
-		    <button type="submit" class="btn btn-default" onClick="commitExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Commit New Expenses</button>
 
     </div>
     

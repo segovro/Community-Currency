@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
@@ -15,15 +16,12 @@
 		var goalCrowdFundig = budget[1];
 		var goalCommunityHours = budget[2];
 		var goalExpenses = budget[3];
-		var committedCrowdFundig = budget[4];
-		var committedCommunityHours = budget[5];
-		var committedExpenses = budget[6];
-		var realDemurrage = budget[7];
-		var realCrowdFundig = budget[8];
-		var realCommunityHours = budget[9];
-		var realExpenses = budget[10];
-		var communeBalance = budget[11];
-		var treasuryBalance = budget[12];
+		var realDemurrage = budget[4];
+		var realCrowdFundig = budget[5];
+		var realCommunityHours = budget[6];
+		var realExpenses = budget[7];
+		var communeBalance = budget[8];
+		var treasuryBalance = budget[9];
 		
 	var MoneyTotals = communityCurrency.getMoneyTotals();
 		var totalMinted = MoneyTotals[0];
@@ -31,37 +29,18 @@
 		var totalTrustCost = MoneyTotals[2];
 		var totalTrustAvailable = MoneyTotals[3];
 
-		var credits = communityCurrency.Credit({'_from' : null},{fromBlock: 0, toBlock: 'latest'});
-			var row = "";
-			credits.watch(function(error, result){
-			row += Date(result.args.__cDealine) + "&emsp;" + result.args._moneyLender + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
-			document.getElementById('listCredit').innerHTML = row;
-			});
-		
-		var creditsExp = communityCurrency.CreditExp({'_from' : null},{fromBlock: 0, toBlock: 'latest'});
-			var row = "";
-			creditsExp.watch(function(error, result){
-			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._oldMoneyLender + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
-			document.getElementById('listCreditEx').innerHTML = row;
-			});
-
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	document.getElementById('goalDemurrage').innerText = goalDemurrage/baseUnits + " HR";
 	document.getElementById('goalCrowdFundig').innerText = goalCrowdFundig/baseUnits + " HR";
 	document.getElementById('goalCommunityHours').innerText = goalCommunityHours/baseUnits + " HR";
 	document.getElementById('goalExpenses').innerText = goalExpenses/baseUnits + " HR";
-	document.getElementById('committedCrowdFundig').innerText = committedCrowdFundig/baseUnits + " HR";
-	document.getElementById('committedCommunityHours').innerText = committedCommunityHours/baseUnits + " HR";
-	document.getElementById('committedExpenses').innerText = committedExpenses/baseUnits + " HR";
 	document.getElementById('realDemurrage').innerText = realDemurrage/baseUnits + " HR";
 	document.getElementById('realCrowdFundig').innerText = realCrowdFundig/baseUnits + " HR";
 	document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits + " HR";
 	document.getElementById('realExpenses').innerText = realExpenses/baseUnits + " HR";
 	document.getElementById('goalITotal').innerText = (Number(goalDemurrage) + Number(goalCrowdFundig))/baseUnits + " HR";
-	document.getElementById('committedITotal').innerText = committedCrowdFundig/baseUnits + " HR";
 	document.getElementById('realITotal').innerText = (Number(realDemurrage) + Number(realCrowdFundig))/baseUnits + " HR";
 	document.getElementById('goalETotal').innerText = (Number(goalCommunityHours) + Number(goalExpenses))/baseUnits + " HR";
-	document.getElementById('committedETotal').innerText = (Number(committedCommunityHours) + Number(committedExpenses))/baseUnits + " HR";
 	document.getElementById('realETotal').innerText = (Number(realCommunityHours) + Number(realExpenses))/baseUnits + " HR";
 	document.getElementById('communeBalance').innerText = communeBalance/baseUnits + " HR";
 	document.getElementById('treasuryBalance').innerText = treasuryBalance/baseUnits + " HR";
@@ -90,7 +69,7 @@
 <script type="text/javascript" src="navbar.js"></script>
 
 <div class="container bg-3 text-center">  
-  <div class="col-sm-8"> 
+  <div class="col-sm-6"> 
     <small><p id="me"></p></small>  
 	<h3><span class="glyphicon glyphicon-th-list"></span> Commons Finances</h3>
 		<div class="alert alert-warning">
@@ -101,59 +80,50 @@
     <thead>
       <tr>
         <th>Concept</th>
-        <th>Goal</th>     
-        <th>Committed</th>                
-        <th>Actual</th>
+        <th>Goal</th>
+		<th>Actual</th>
       </tr>
     </thead>
     <tbody>
 			<tr>
 				<td><b>Incomes</b></td>
 				<td>Goal</td>
-				<td>Committed</td>
 				<td>Received</td>
 			</tr>
 			<tr>
 				<td>Demurrage</td>
 				<td><output class="form-control" id="goalDemurrage"></output></td>
-				<td></td>
 				<td><output class="form-control" id="realDemurrage"></output></td>
 			</tr>
 			<tr>
 				<td>Crowd-funding</td>
 				<td><output class="form-control" id="goalCrowdFundig"></output></td>
-				<td><output class="form-control" id="committedCrowdFundig"></output></td>
 				<td><output class="form-control" id="realCrowdFundig"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
 				<td><output class="form-control" id="goalITotal"></output></td>
-				<td><output class="form-control" id="committedITotal"></output></td>
 				<td><output class="form-control" id="realITotal"></output></td>
 			</tr>
 			<tr>
 				<td><b>Payments</b></td>
 				<td>Goal</td>
-				<td>Committed</td>
 				<td>Paid</td>
 
 			</tr>
 			<tr>
 				<td>Community Services</td>
 				<td><output class="form-control" id="goalCommunityHours"></output></td>
-				<td><output class="form-control" id="committedCommunityHours"></output></td>
 				<td><output class="form-control" id="realCommunityHours"></output></td>
 			</tr>
 			<tr>
 				<td>Other Expenses</td>
 				<td><output class="form-control" id="goalExpenses"></output></td>
-				<td><output class="form-control" id="committedExpenses"></output></td>
 				<td><output class="form-control" id="realExpenses"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
 				<td><output class="form-control" id="goalETotal"></output></td>
-				<td><output class="form-control" id="committedETotal"></output></td>
 				<td><output class="form-control" id="realETotal"></output></td>
 		</tr>
       </tbody>
@@ -235,15 +205,8 @@
 		  </div>
 		</form>
 
-	<h4><span class="glyphicon glyphicon-thumbs-up"></span> Credits</h4>
-	<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits by Authorizer</h4> 
-		<div  id="listCredit"></div>	
-	<h4><span class="glyphicon glyphicon-remove"></span> Expired Credits by Authorizer</h4> 
-		<div id="listCreditEx"></div>	
+
 	</div>
 	</div>
-
-
-
 </body>
 </html>

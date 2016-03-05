@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+  <script type="text/javascript" src="web3.js"></script>
+  <script type="text/javascript" src="bignumber.js"></script>
   <script type="text/javascript" src="cc.js"></script>	
   <script type="text/javascript" >	
 	 
@@ -26,13 +27,8 @@
 		var newIniCCUs = document.getElementById('iniMemberCCUs').value * baseUnits;
 		var newIniRep = document.getElementById('iniMemberReputation').value * baseUnits;
 		communityCurrency.newParameters(newDemurrage, newRewardRate, newIniCCUs, newIniRep);
-	}
-	  
-	function mintH () {
-		var mintHRs = document.getElementById('mint').value;	
-		communityCurrency.mintCCUs(mintHRs);
-	}
-	  
+	}	  
+
 	function newExchangeRate () {
 		var newExchange = document.getElementById('newExchange').value;
 		communityCurrency.setExchange(newExchange);
@@ -57,7 +53,7 @@
   
 <div class="container bg-3 text-center">  
       <small><p id="me"></p></small>   
-<h3><span class="glyphicon glyphicon-print"></span> Treasury functions</h3>
+<h3><span class="glyphicon glyphicon-lock"></span> Treasury functions</h3>
 		<div class="alert alert-warning">
 			<small>This page only available to the Treasury Account</small>
 		</div>
@@ -93,18 +89,8 @@
   </div>
   
   <div class="col-sm-4"> 
-	<h4><span class="glyphicon glyphicon-print"></span> Mint HR</h4>
-		
-    <form role="form">
- 		  <div class="form-group">
-		    <label for="mint">Mint and send to the Commune account:</label>
-		    <input type="text" class="form-control" id="mint" placeholder="Enter amount in HR">
-		  </div>
-		    <button type="submit" class="btn btn-default" onClick="mintH();"><span class="glyphicon glyphicon-print"></span> Send HR to Commune</button>
-		</form>  
 			
-	<h4><span class="glyphicon glyphicon-random"></span> Exchange Rate</h4>
-		
+	<h4><span class="glyphicon glyphicon-random"></span> Exchange Rate</h4>		
     <form role="form">
  		  <div class="form-group">
 		    <p id="oldEx"></p>

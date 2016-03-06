@@ -17,7 +17,7 @@
 		var credits = communityCurrency.Credit({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
 			var row = "";
 			credits.watch(function(error, result){
-			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT + " UoT</span><br/>";
+			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT/baseUnits + " UoT</span><br/>";
 			document.getElementById('listCredit').innerHTML = row;
 			});
 		});
@@ -25,7 +25,7 @@
 		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
 			var row = "";
 			creditsExp.watch(function(error, result){
-			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
+			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT/baseUnits + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";
 			document.getElementById('listCreditEx').innerHTML = row;
 			});
 	  });

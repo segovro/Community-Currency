@@ -17,7 +17,7 @@
 	
 	function monitor() {
 		var monitored = document.getElementById('toMonitor').value;	
-		document.getElementById('account').innerHTML = monitored;
+		document.getElementById('account').innerHTML = "<b>Account: </b>" + monitored;
 		
 		var mtrdWallet = communityCurrency.monitorWallet(monitored);
 		var mtrdCommunityCUnits = mtrdWallet[0];
@@ -38,15 +38,15 @@
 
 		var dateMtrdDealine = new Date(mtrdDeadline * 1000);
 		
-		document.getElementById('isMember').innerText = mtrdCommoner;
-		document.getElementById('alias').innerText = mtrdAlias;
+		document.getElementById('isMember').innerHTML = "<b>Commomer: </b>" + mtrdCommoner;
+		document.getElementById('alias').innerHTML = "<b>Alias: </b>" + mtrdAlias;
 		document.getElementById('communityCUnits').innerText = mtrdCommunityCUnits/baseUnits + " HR";
 		document.getElementById('reputation').innerText = mtrdReputation/baseUnits + " UoT";
 		document.getElementById('credit').innerText = mtrdCredit/baseUnits + " HR";
 		document.getElementById('available').innerText = mtrdAvailable/baseUnits + " HR";
-		document.getElementById('moneyLender').innerText = mtrdMoneyLender;
+		document.getElementById('moneyLender').innerText = "Endorser: " + mtrdMoneyLender;
 		document.getElementById('unitsOfTrust').innerText = mtrdUnitsOfTrust/baseUnits + " UoT";
-		document.getElementById('deadline').innerText = dateMtrdDealine;
+		document.getElementById('deadline').innerText = "Deadline: " + dateMtrdDealine;
 		
 		var credits = communityCurrency.Credit({'_MoneyLender' : monitored}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
 			var row = "";
@@ -97,20 +97,9 @@
 	</form>
 		  <button type="submit" class="btn btn-default" onClick="monitor();"><span class="glyphicon glyphicon-eye-open"></span> Monitor</button>
 	<h3><span class="glyphicon glyphicon-user"></span> Account</h3>
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-		    <label class="control-label col-sm-4" for="account">Account:</label>
-		    <div class="col-sm-6"><output class="form-control" id="account"></output></div>
-		 </div>
-    	<div class="form-group">
-		    <label class="control-label col-sm-4" for="isMember">Commoner:</label>
-		    <div class="col-sm-6"><output class="form-control" id="isMember"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="alias">Alias:</label>
-		    <div class="col-sm-6"><output class="form-control" id="alias"></output></div>
-		 </div>
-	</form>
+	   <p id="account"></p>
+	   <p id="isMember"></p>
+	   <p id="alias"></p>
     <h3><span class="glyphicon glyphicon-piggy-bank"></span> Assets</h3>
     <form class="form-horizontal" role="form">
   	 	<div class="form-group">
@@ -133,30 +122,12 @@
 		    <div class="col-sm-6"><output class="form-control" id="available"></output></div>
 		 </div>
 		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="moneyLender">Endorser:</label>
-		    <div class="col-sm-6"><output class="form-control" id="moneyLender"></output></div>
-		 </div>
-		 <div class="form-group">
 		    <label class="control-label col-sm-4" for="unitsOfTrust">Endorsed Trust:</label>
 		    <div class="col-sm-6"><output class="form-control" id="unitsOfTrust"></output></div>
 		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="deadline">Deadline:</label>
-		    <div class="col-sm-6"><output class="form-control" id="deadline"></output></div>
-		 </div>
 	</form>
-	<h3><span class="glyphicon glyphicon-cloud"></span> Committments</h3>
-	<form class="form-horizontal" role="form">
-  	 	<div class="form-group">
-		    <label class="control-label col-sm-4" for="committedH">Service Hours:</label>
-		    <div class="col-sm-6"><output class="form-control" id="committedH"></output></div>
-		 </div>
-		 <div class="form-group">
-		    <label class="control-label col-sm-4" for="committedF">Crowd-funding:</label>
-		    <div class="col-sm-6"><output class="form-control" id="committedF"></output></div>
-		 </div>
-	</form>
-		
+		 	<div id="deadline"></div>
+			<div id="moneyLender"></div>		
 		<h3><span class="glyphicon glyphicon-thumbs-up"></span> Endorsed Credits</h3>
 			<h4><span class="glyphicon glyphicon-ok"></span> Endorsed Credits</h4> 
 				<div  id="listCredit"></div>	

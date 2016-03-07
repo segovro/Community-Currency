@@ -39,6 +39,8 @@
 		document.getElementById('iniMemberReputation').innerText = iniMemberReputation/baseUnits + " UoT";
 		document.getElementById('exchange').innerText = exchangeRate + " EUR/HR";
 		
+	}
+		
 	var budget = communityCurrency.getBudget();
 		var goalDemurrage = budget[0];
 		var goalCrowdFundig = budget[1];
@@ -57,7 +59,7 @@
 		var totalTrustCost = MoneyTotals[2];
 		var totalTrustAvailable = MoneyTotals[3];
 
-	}
+
 	</script>
     <style>
      .navbar {
@@ -100,18 +102,18 @@
 			</tr>
 			<tr>
 				<td>Demurrage</td>
-				<td><output class="form-control" id="goalDemurrage"></output></td>
-				<td><output class="form-control" id="realDemurrage"></output></td>
+				<td align="right"><output class="form-control" id="goalDemurrage"></output></td>
+				<td align="right"><output class="form-control" id="realDemurrage"></output></td>
 			</tr>
 			<tr>
 				<td>Crowd-funding</td>
-				<td><output class="form-control" id="goalCrowdFundig"></output></td>
-				<td><output class="form-control" id="realCrowdFundig"></output></td>
+				<td align="right"><output class="form-control" id="goalCrowdFundig"></output></td>
+				<td align="right"><output class="form-control" id="realCrowdFundig"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
-				<td><output class="form-control" id="goalITotal"></output></td>
-				<td><output class="form-control" id="realITotal"></output></td>
+				<td align="right"><output class="form-control" id="goalITotal"></output></td>
+				<td align="right"><output class="form-control" id="realITotal"></output></td>
 			</tr>
 			<tr>
 				<td><b>Payments</b></td>
@@ -121,18 +123,18 @@
 			</tr>
 			<tr>
 				<td>Community Services</td>
-				<td><output class="form-control" id="goalCommunityHours"></output></td>
-				<td><output class="form-control" id="realCommunityHours"></output></td>
+				<td align="right"><output class="form-control" id="goalCommunityHours"></output></td>
+				<td align="right"><output class="form-control" id="realCommunityHours"></output></td>
 			</tr>
 			<tr>
 				<td>Other Expenses</td>
-				<td><output class="form-control" id="goalExpenses"></output></td>
-				<td><output class="form-control" id="realExpenses"></output></td>
+				<td align="right"><output class="form-control" id="goalExpenses"></output></td>
+				<td align="right"><output class="form-control" id="realExpenses"></output></td>
 			</tr>
 			<tr>
 				<td><b><i>total</i></b></td>
-				<td><output class="form-control" id="goalETotal"></output></td>
-				<td><output class="form-control" id="realETotal"></output></td>
+				<td align="right"><output class="form-control" id="goalETotal"></output></td>
+				<td align="right"><output class="form-control" id="realETotal"></output></td>
 		</tr>
       </tbody>
      </table>
@@ -148,12 +150,12 @@
     <tbody>
 			<tr>
 				<td>Commune Wallet</td>
-				<td><output class="form-control" id="communeBalance"></output></td>
+				<td align="right"><output class="form-control" id="communeBalance"></output></td>
 
 			</tr>
 			<tr>
 				<td>Treasury Wallet</td>
-				<td><output class="form-control" id="treasuryBalance"></output></td>
+				<td align="right"><output class="form-control" id="treasuryBalance"></output></td>
 			</tr>
 	</tbody>
 	</table>

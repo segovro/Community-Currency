@@ -1,5 +1,7 @@
 #Community-Currency
 A community currency **template** with zero reserve mutual credit and adjustable parameters  
+Blockchain transactions at https://live.ether.camp/account/d870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2
+JSON at https://live.ether.camp/account/d870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2/contract 
 
 #Purpose  
 This is not intended to be a global currency. It is intended to become an ecosystem of community currencies using this template, each of them with different parameters according to the needs of each community.  
@@ -50,37 +52,86 @@ The community can access this indicator
 However, the indicator is not used mechanically to take any decision through an algorithm, for example authorize a credit. We assume always a human intermediation to interpret the results. 
 
 #Functions
-##acceptMember
-the community account can accept accounts as members  
-a community can opt to name the community account as member or not and therefore give credits or not from that account
-##kickOutMember
-the community account can kick out members
-##newCommunity
-the treasury account can change the community delegate address
-##newParameters  
+##function acceptMember
+the community account can accept accounts as members. The Community should ensure the unique correspondence to a real person 
+a community can opt to name itself member or not and therefore give credits or not
+_newMember is the address of the new member
+_newAlias is the alias or human readable ID of the new member
+changed alias, initial balance in CCUs, initial reputation in UoT
+##function kickOutMember 
+the community account can kick out members. The action deletes all balances
+_oldMember is the address of the member to be kicked out
+isMember turned to false, all other account balances to zero, except _CCUs
+##function getBudget
+get Commune budget state
+##function getParameters
+get the currency parameters
+##function getMoneyTotals
+get the monetary Totals
+##function newParameters 
 the treasury account can change the currency parameters
-##newTreasury
-the community delegate account can change the treasury address
-##mintAssignCCUs
-the treasury account can issue as much communityCurrency it likes and send it to any Member  
-warning: it increases the monetary mass 
-##mintAssignReputation
-the community account can issue as much Reputation it likes and send it to any Member 
-##transfer
-make a payment: anybody can make a payment if he has sufficient CCUs and / or credit  
-every payment will update the credit status
-##credit
+_newDemurrage is the new demurrage rate. % x 100
+_newrewardRate is the new reward rate for successful credits. % x 100
+_newIniCCUs is the new initial Community Currency Units given to any new member
+_newIniR is the new initial Reputation given to any new member
+new demurrage, reward rate, initial CCUs and initial reputation for new members
+##function newCommune
+the treasury account can change to a new community address
+_newCommunity is the new address holding the Community permissions
+new community address
+##function newTreasury 
+the community account can change to a new treasury address
+_newTreasury is the new address holding the Community permissions
+new treasury address
+##function setNewBudget 	
+set new rolling Commune budget
+##function setExchange
+set new exchange
+##function creditUpdate
+update the credit status
+check if deadline is over
+if time is over reset credit to zero, deadline to zero
+if balance is negative the credit was not returned, the money lender balanceReputation is not restored and is penalized with a 20%, as regards the borrower will not be able to make any new transfer until future incomes cover the debts, money lender reputation penalized
+if balance is not negative the credit was returned, the money lender balanceReputation is restored and is rewardRateed with a 20%, money lender reputation rewarded
+##function transfer
+function make a payment
+anybody with an ethereum account can make a payment if he has sufficient CCUs in the balance
+any member can add to the amount available at the balance, what remains unused in the credit line
+_payee is the account to be credited
+_payment is the amount in CCUs to be send
+balance of payee increased
+balance of sender decreased
+if necessary, available credit decreased	
+credit information updated
+pay with the CCUs available at the balance and the credit
+_available is the spending limit of an account, given the account balance in _CCUs and the _credit
+##function credit
+function authorize a credit
 only members can authorize or get a credit
-##monitorWallet
-if you are authorized it gives you the account data. The community account has access to all accounts
-- _communityCUnits	
-- _credit
-- _deadline
-- _moneyLender
-- _reputation
-- _unitsOfTrust
-- _isMember
-- _last
-- _gdpActivity
-##accessMyWallet  
-authorize monitoring my wallet to a particular account. Normally, the authorization to monitor own accounts is given to a candidate money lender. During a credit, only the money lender and the community have access. 
+_borrower is the address of the credit borrower
+_credit is the amount of the credit line in CCUs
+_daysAfter is the deadline of the credit line in number of days from today
+##function monitorWallet	
+monitor Wallet
+the borrower candidate has given access to monitor all relevant parameters of his account to the money lender
+the community can also monitor all accounts
+_monitored is the address to be monitored
+_getCCUs is the balance in CCUs 
+_getCredit is the remaining credit
+_getDeadline is the credit deadline
+_getMoneyLender is the address of the current money lender or the candidate money lender
+_getUnitsOfTrust is the cost in reputation of the credit
+_getIsMember is boolean if the account is a member
+_getAlias is the alias
+_getReputation is the reputation in UoTs
+_getLast is the date of the last transaction
+##function accessMyWallet	
+authorize monitoring
+##function claimHours	
+claim Hours to paid from Community
+##function payHours
+the Commune pays Hours
+##function payFunding	
+a Commoner pays CrowdFunding
+##function payExpenses	
+the Commune pays Expenses

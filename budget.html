@@ -11,6 +11,34 @@
   <script type="text/javascript" src="cc.js"></script>
   <script type="text/javascript">
 	window.onload = function () {
+		
+		document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+		document.getElementById('goalDemurrage').innerText = goalDemurrage/baseUnits + " HR";
+		document.getElementById('goalCrowdFundig').innerText = goalCrowdFundig/baseUnits + " HR";
+		document.getElementById('goalCommunityHours').innerText = goalCommunityHours/baseUnits + " HR";
+		document.getElementById('goalExpenses').innerText = goalExpenses/baseUnits + " HR";
+		document.getElementById('realDemurrage').innerText = realDemurrage/baseUnits + " HR";
+		document.getElementById('realCrowdFundig').innerText = realCrowdFundig/baseUnits + " HR";
+		document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits + " HR";
+		document.getElementById('realExpenses').innerText = realExpenses/baseUnits + " HR";
+		document.getElementById('goalITotal').innerText = (Number(goalDemurrage) + Number(goalCrowdFundig))/baseUnits + " HR";
+		document.getElementById('realITotal').innerText = (Number(realDemurrage) + Number(realCrowdFundig))/baseUnits + " HR";
+		document.getElementById('goalETotal').innerText = (Number(goalCommunityHours) + Number(goalExpenses))/baseUnits + " HR";
+		document.getElementById('realETotal').innerText = (Number(realCommunityHours) + Number(realExpenses))/baseUnits + " HR";
+		document.getElementById('communeBalance').innerText = communeBalance/baseUnits + " HR";
+		document.getElementById('treasuryBalance').innerText = treasuryBalance/baseUnits + " HR";
+		document.getElementById('totalMinted').innerText = totalMinted/baseUnits + " HR";
+		document.getElementById('totalCreditEndorsed').innerText = totalCredit/baseUnits + " HR";
+		document.getElementById('totalMonetaryMass').innerText = (Number(totalMinted) + Number(totalCredit))/baseUnits + " HR";
+		document.getElementById('totalTrustUsed').innerText = totalTrustCost/baseUnits + " UoT";
+		document.getElementById('totalTrustAvailable').innerText = totalTrustAvailable/baseUnits + " UoT";
+		document.getElementById('totalTrustMass').innerText = (Number(totalTrustCost) + Number(totalTrustAvailable))/baseUnits + " UoT";
+		document.getElementById('demurrage').innerText = demurrage + " %";
+		document.getElementById('rewardRate').innerText = rewardRate + " %";
+		document.getElementById('iniMemberCCUs').innerText = iniMemberCCUs/baseUnits + " HR";
+		document.getElementById('iniMemberReputation').innerText = iniMemberReputation/baseUnits + " UoT";
+		document.getElementById('exchange').innerText = exchangeRate + " EUR/HR";
+		
 	var budget = communityCurrency.getBudget();
 		var goalDemurrage = budget[0];
 		var goalCrowdFundig = budget[1];
@@ -29,32 +57,6 @@
 		var totalTrustCost = MoneyTotals[2];
 		var totalTrustAvailable = MoneyTotals[3];
 
-	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	document.getElementById('goalDemurrage').innerText = goalDemurrage/baseUnits + " HR";
-	document.getElementById('goalCrowdFundig').innerText = goalCrowdFundig/baseUnits + " HR";
-	document.getElementById('goalCommunityHours').innerText = goalCommunityHours/baseUnits + " HR";
-	document.getElementById('goalExpenses').innerText = goalExpenses/baseUnits + " HR";
-	document.getElementById('realDemurrage').innerText = realDemurrage/baseUnits + " HR";
-	document.getElementById('realCrowdFundig').innerText = realCrowdFundig/baseUnits + " HR";
-	document.getElementById('realCommunityHours').innerText = realCommunityHours/baseUnits + " HR";
-	document.getElementById('realExpenses').innerText = realExpenses/baseUnits + " HR";
-	document.getElementById('goalITotal').innerText = (Number(goalDemurrage) + Number(goalCrowdFundig))/baseUnits + " HR";
-	document.getElementById('realITotal').innerText = (Number(realDemurrage) + Number(realCrowdFundig))/baseUnits + " HR";
-	document.getElementById('goalETotal').innerText = (Number(goalCommunityHours) + Number(goalExpenses))/baseUnits + " HR";
-	document.getElementById('realETotal').innerText = (Number(realCommunityHours) + Number(realExpenses))/baseUnits + " HR";
-	document.getElementById('communeBalance').innerText = communeBalance/baseUnits + " HR";
-	document.getElementById('treasuryBalance').innerText = treasuryBalance/baseUnits + " HR";
-	document.getElementById('totalMinted').innerText = totalMinted/baseUnits + " HR";
-	document.getElementById('totalCreditEndorsed').innerText = totalCredit/baseUnits + " HR";
-	document.getElementById('totalMonetaryMass').innerText = (Number(totalMinted) + Number(totalCredit))/baseUnits + " HR";
-	document.getElementById('totalTrustUsed').innerText = totalTrustCost/baseUnits + " UoT";
-	document.getElementById('totalTrustAvailable').innerText = totalTrustAvailable/baseUnits + " UoT";
-	document.getElementById('totalTrustMass').innerText = (Number(totalTrustCost) + Number(totalTrustAvailable))/baseUnits + " UoT";
-	document.getElementById('demurrage').innerText = demurrage + " %";
-	document.getElementById('rewardRate').innerText = rewardRate + " %";
-	document.getElementById('iniMemberCCUs').innerText = iniMemberCCUs/baseUnits + " HR";
-	document.getElementById('iniMemberReputation').innerText = iniMemberReputation/baseUnits + " UoT";
-	document.getElementById('exchange').innerText = exchangeRate + " EUR/HR";
 	}
 	</script>
     <style>
@@ -65,15 +67,18 @@
   </style>
 </head>
 <body>
+
 <div class=container">
      <div class="col-sm-3"> 
      <script type="text/javascript" src="navbar.js"></script>
      </div>
 </div>
 
-<div class="container bg-3 text-center">  
-  <div class="col-sm-6"> 
-    <small><p id="me"></p></small>  
+<div class="container bg-3 text-center">    
+  <div class="row">
+    <div class="col-sm-6"> 
+      <small><p id="me"></p></small>
+    
 	<h3><span class="glyphicon glyphicon-th-list"></span> Commons Finances</h3>
 		<div class="alert alert-warning">
 			<small>This page only available to the Commoners</small>
@@ -209,6 +214,7 @@
 		</form>
 
 
+	</div>
 	</div>
 	</div>
 </body>

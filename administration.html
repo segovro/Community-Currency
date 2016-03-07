@@ -59,7 +59,11 @@
 </head>
 <body>
 
-<script type="text/javascript" src="navbar.js"></script>
+<div class=container">
+     <div class="col-sm-3"> 
+     <script type="text/javascript" src="navbar.js"></script>
+     </div>
+</div>
   
 <div class="container bg-3 text-center"> 
       <small><p id="me"></p></small>   
@@ -70,6 +74,13 @@
    <div class="row">   
 
     <div class="col-sm-4">   
+         <h3><span class="glyphicon glyphicon-piggy-bank"></span> Commune Wallet</h3>
+		 <form role="from" id="payData">
+		  <div class="form-group">
+		    <label for="communeWallet">Commune Balance:</label>
+		    <output class="form-control" id="communeWallet"></output>
+		  </div>
+    	 </form> 
         <h3><span class="glyphicon glyphicon-hourglass"></span> Payment of Service Hours</h3>
 		<form role="from" id="payData">
 		  <div class="form-group">
@@ -82,44 +93,26 @@
 		  </div>
     	</form>
 			<button type="submit" class="btn btn-default" onClick="payHours();"><span class="glyphicon glyphicon-hourglass"></span> Pay Hours</button>
-  </div>
-  
-   <div class="col-sm-4">
-    <h3><span class="glyphicon glyphicon-cloud-download"></span> Community Expenses</h3>		  
-		<form role="form">		  
-		  <div class="form-group">
-		    <label for="contractor">Contractor account:</label>
-		    <input type="text" class="form-control" id="contractor" placeholder="Enter contractor account">
-		  </div>
-		  <div class="form-group">
-		    <label for="expenses">Expenses:</label>
-		    <input type="text" class="form-control" id="expenses" placeholder="Enter amount in HR">
-		  </div>
-		 </form>
-		    <button type="submit" class="btn btn-default" onClick="payExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Pay Expenses</button>
-    </div>
-    
-    <div class="col-sm-4">   
-        <h3><span class="glyphicon glyphicon-piggy-bank"></span> Commune Wallet</h3>
-		<form role="from" id="payData">
-		  <div class="form-group">
-		    <label for="communeWallet">Commune Balance:</label>
-		    <output class="form-control" id="communeWallet"></output>
-		 </div>
-    	</form>  
-    </div>
-    	
-  </div>
-</div>
-
-<div class="container bg-3 text-center"> 
-   <div class="row">   
-    <div class="col-sm-10"> 
-        <h3><span class="glyphicon glyphicon-hourglass"></span> Service hours</h4>
-	<h4> Claimed</h4> 
-		<div  id="listClaimedHours"></div>	
-	<h4> Paid</h4> 
-		<div id="listPaidHours"></div>	
+	    <h3><span class="glyphicon glyphicon-cloud-download"></span> Community Expenses</h3>		  
+			<form role="form">		  
+			  <div class="form-group">
+			    <label for="contractor">Contractor account:</label>
+			    <input type="text" class="form-control" id="contractor" placeholder="Enter contractor account">
+			  </div>
+			  <div class="form-group">
+			    <label for="expenses">Expenses:</label>
+			    <input type="text" class="form-control" id="expenses" placeholder="Enter amount in HR">
+			  </div>
+			 </form>
+			    <button type="submit" class="btn btn-default" onClick="payExpenses();"><span class="glyphicon glyphicon-cloud-download"></span> Pay Expenses</button>
+	</div>
+ 
+    <div class="col-sm-4"> 
+	    <h3><span class="glyphicon glyphicon-hourglass"></span> Service hours</h4>
+		<h4> Claimed</h4> 
+			<div  id="listClaimedHours"></div>	
+		<h4> Paid</h4> 
+			<div id="listPaidHours"></div>	
 	</div>
 	</div>
 </div>

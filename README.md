@@ -34,7 +34,7 @@ Members have a **Reputation** as "Money Lenders". Members can authorise a p2p Cr
 Once the credit is approved the system generates the necessary Community Currency Units and adds them to the CCUs balance of the borrower. The Money Lender pays with a reputation cost measured in endorsed **Units of Trust**. The Units of Trust needed to endorse the credit is proportional to the amount and the time of the credit.   
 When the deadline is over:
 * if the credit has been returned, and the balance of the borrower is again positive, the Money Lender gets back the Reputation Cost and a reward in Reputation. In the future he will be able to authorize larger credits.
-* if the credit has not been returned, and the balance of the borrower is still negative, the Money Lender loses the Reputation Cost and a fine in Reputation. In the future he will be able to authorize only smaller credits. The borrower gets the account blocked until the debt is covered by future incomes. The Community has the option to kick this member out.  
+* if the credit has not been returned, and the balance of the borrower is still negative, the Money Lender loses the Reputation Cost and a fine in Reputation. In the future he will be able to authorize only smaller credits. The borrower gets the account blocked until the debt is covered by future incomes. The Community has the option to kick this member out. 
 
 #Adjustable Parameters
 - **treasury**; the address of the treasury of the DAO. The creator and minter of the currency  
@@ -45,11 +45,6 @@ When the deadline is over:
 - **iniMemberCCUs**; initial Community Currency Units given to any new member. The monetary mass is automatically increased with any new member. By default, the total monetary mass is proportional to the number of members
 - **iniMemberReputation**; initial Reputation given to any new member
 
-#Indicators
-Each account has an **activity indicator** showing the average GDP it is moving. It is using the basic monetarist formula of M x C average over time. In practice gdpActivity = AVERAGE (payment/timeDelta)  
-The to-be money lender can access this indicator  
-The community can access this indicator  
-However, the indicator is not used mechanically to take any decision through an algorithm, for example authorize a credit. We assume always a human intermediation to interpret the results. 
 
 #Functions
 ##function acceptMember

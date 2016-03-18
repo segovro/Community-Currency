@@ -1,7 +1,7 @@
 #Community-Currency
 A community currency **template** with zero reserve mutual credit and adjustable parameters  
 Blockchain transactions at https://live.ether.camp/account/d870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2  
-JSON at https://live.ether.camp/account/d870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2/contract 
+JSON at https://live.ether.camp/account/d870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2/contract   
 HTML Dapp at http://communitycurrency.website/
 
 #Purpose  

@@ -8,31 +8,29 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="web3.js"></script>
   <script type="text/javascript" src="bignumber.js"></script>
-  <script type="text/javascript" src="cc.js"></script>	
+  <script type="text/javascript" src="cc.js"></script>  
   <script type="text/javascript" >
-	
-	var transfersRec = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
-		var row= "";
-		transfersRec.watch(function(error, result){
-		row += Date(result.args._timeStampT) + "&emsp;" + result.args._from + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";
-		document.getElementById('listRec').innerHTML = row;
-		});
-	});
-
-
-	var transfersSent = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
-		var row= "";
-		transfersSent.watch(function(error, result){
-		row += Date(result.args._timeStampT) + "&emsp;" + result.args._to + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";
-		document.getElementById('listSent').innerHTML = row;
-		});
-	});
-		
-	window.onload = function () {
-	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
-	};
-	
-	</script>
+    
+    var transfersRec = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+        var row= "";
+        transfersRec.watch(function(error, result){
+        row += Date(result.args._timeStampT) + "&emsp;" + result.args._from + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";
+        document.getElementById('listRec').innerHTML = row;
+        });
+    });
+    var transfersSent = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+        var row= "";
+        transfersSent.watch(function(error, result){
+        row += Date(result.args._timeStampT) + "&emsp;" + result.args._to + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";
+        document.getElementById('listSent').innerHTML = row;
+        });
+    });
+        
+    window.onload = function () {
+    document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
+    };
+    
+    </script>
     <style>
     .navbar {
       margin-bottom: 0;
@@ -51,16 +49,15 @@
 <div class="container bg-3 text-center">  
 <div class="row">
     <div class="col-sm-8"> 
-		<small><p id="me"></p></small>
-	<h3><span class="glyphicon glyphicon-transfer"></span> Transactions</h3> 
-	<h4><span class="glyphicon glyphicon-arrow-right"></span> Received from</h4> 
-		<div  id="listRec"></div>	
-	<h4><span class="glyphicon glyphicon-arrow-left"></span> Sent to</h4> 
-		<div id="listSent"></div>	
-	</div>
+        <small><p id="me"></p></small>
+    <h3><span class="glyphicon glyphicon-transfer"></span> Transactions</h3> 
+    <h4><span class="glyphicon glyphicon-arrow-right"></span> Received from</h4> 
+        <div  id="listRec"></div>   
+    <h4><span class="glyphicon glyphicon-arrow-left"></span> Sent to</h4> 
+        <div id="listSent"></div>   
+    </div>
 </div>
 </div>
 <br/>
-
 </body>
 </html>

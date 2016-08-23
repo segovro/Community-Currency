@@ -441,9 +441,11 @@ var communitycurrencyContract = web3.eth.contract(
 
 var communityCurrency = communitycurrencyContract.at("0xd870e20d6b2ad29a3a68f6a3ddd27d6a79bd61a2");
 
-web3.eth.defaultAccount = web3.eth.coinbase;
+var accounts = web3.eth.accounts;
+var nrAcc = accounts.length;
 
-var coinbase = web3.eth.coinbase;
+web3.eth.defaultAccount = accounts[0];
+var coinbase = web3.eth.defaultAccount;
 
 var myWallet = communityCurrency.monitorWallet(coinbase);
 var myCommunityCUnits = myWallet[0];

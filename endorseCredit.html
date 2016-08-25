@@ -14,7 +14,7 @@
 	document.getElementById('me').innerHTML = "alias: " + myAlias + "<br/> account: " + coinbase;
 	document.getElementById('reputation').innerHTML = myReputation/baseUnits +" UoT";
 		
-		var credits = communityCurrency.Credit({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+		var credits = communityCurrency.Credit({'_MoneyLender' : coinbase}, {fromBlock: 1800000, toBlock: 'latest'}, function(error, result) {
 			var row = "";
 			credits.watch(function(error, result){
 			row += Date(result.args.__cDealine) + "&emsp;" + result.args._borrowerAddress + "&emsp;<span class=\"badge\">" + result.args._endorsedUoT/baseUnits + " UoT</span><br/>";
@@ -22,7 +22,7 @@
 			});
 		});
 		
-		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : coinbase}, {fromBlock: 0, toBlock: 'latest'},  function(error, result) {
+		var creditsExp = communityCurrency.CreditExp({'_MoneyLender' : coinbase}, {fromBlock: 1800000, toBlock: 'latest'},  function(error, result) {
 			var row = "";
 			creditsExp.watch(function(error, result){
 			row += Date(result.args._timeStampCX) + "&emsp;" + result.args._exBorrowerAddress + "&emsp;<span class=\"badge\">" + result.args._oldUoT/baseUnits + " UoT</span> success <span class=\"badge\">" + result.args._success +  "<span><br/>";

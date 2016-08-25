@@ -11,14 +11,14 @@
   <script type="text/javascript" src="cc.js"></script>  
   <script type="text/javascript" >
     
-    var transfersRec = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+    var transfersRec = communityCurrency.Transfer({'_to' : coinbase}, {fromBlock: 1800000, toBlock: 'latest'}, function(error, result) {
         var row= "";
         transfersRec.watch(function(error, result){
         row += Date(result.args._timeStampT) + "&emsp;" + result.args._from + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";
         document.getElementById('listRec').innerHTML = row;
         });
     });
-    var transfersSent = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+    var transfersSent = communityCurrency.Transfer({'_from' : coinbase}, {fromBlock: 1800000, toBlock: 'latest'}, function(error, result) {
         var row= "";
         transfersSent.watch(function(error, result){
         row += Date(result.args._timeStampT) + "&emsp;" + result.args._to + "&emsp;<span class=\"badge\">" + result.args._amount/baseUnits + " HR</span><br/>";

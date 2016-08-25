@@ -17,7 +17,7 @@
 	document.getElementById('commune').innerText = commune;
 	document.getElementById('treasury').innerText = treasury;
 		
-	var newMembers = communityCurrency.NewMember({'_member' : null}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+	var newMembers = communityCurrency.NewMember({'_member' : null}, {fromBlock: 1800000, toBlock: 'latest'}, function(error, result) {
 		var row = "";
 		newMembers.watch(function(error, result){
 	    row += "<span class=\"badge\">" + result.args._alias + "</span>&emsp;" + result.args._member + "<br>";
@@ -25,7 +25,7 @@
 			});
 		});
 			
-	var oldMembers = communityCurrency.OldMember({'_exMember' : null}, {fromBlock: 0, toBlock: 'latest'}, function(error, result) {
+	var oldMembers = communityCurrency.OldMember({'_exMember' : null}, {fromBlock: 1800000, toBlock: 'latest'}, function(error, result) {
 		var row = "";
 		oldMembers.watch(function(error, result){
 	    row += "<span class=\"badge\">" + result.args._exAlias + "</span>&emsp;" + result.args._exMember + "<br>";

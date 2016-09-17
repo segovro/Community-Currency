@@ -1,18 +1,18 @@
-/*! bignumber.js v2.1.3 https://github.com/MikeMcl/bignumber.js/LICENCE */
+/*! bignumber.js v2.4.0 https://github.com/MikeMcl/bignumber.js/LICENCE */
 
 ;(function (globalObj) {
     'use strict';
 
     /*
-      bignumber.js v2.1.3
+      bignumber.js v2.4.0
       A JavaScript library for arbitrary-precision arithmetic.
       https://github.com/MikeMcl/bignumber.js
-      Copyright (c) 2015 Michael Mclaughlin <M8ch88l@gmail.com>
+      Copyright (c) 2016 Michael Mclaughlin <M8ch88l@gmail.com>
       MIT Expat Licence
     */
 
 
-    var cryptoObj, parseNumeric,
+    var BigNumber, cryptoObj, parseNumeric,
         isNumeric = /^-?(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i,
         mathceil = Math.ceil,
         mathfloor = Math.floor,
@@ -260,7 +260,9 @@
 
                 // Disallow numbers with over 15 significant digits if number type.
                 // 'new BigNumber() number type has more than 15 significant digits: {n}'
-                if ( num && ERRORS && len > 15 ) raise( id, tooManyDigits, x.s * n );
+                if ( num && ERRORS && len > 15 && ( n > MAX_SAFE_INTEGER || n !== mathfloor(n) ) ) {
+                    raise( id, tooManyDigits, x.s * n );
+                }
 
                 e = e - i - 1;
 
@@ -808,7 +810,7 @@
                       // Return NaN if either NaN, or both Infinity or 0.
                       !x.s || !y.s || ( xc ? yc && xc[0] == yc[0] : !yc ) ? NaN :
 
-                        // Return Â±0 if x is Â±0 or y is Â±Infinity, or return Â±Infinity as y is Â±0.
+                        // Return ±0 if x is ±0 or y is ±Infinity, or return ±Infinity as y is ±0.
                         xc && xc[0] == 0 || !yc ? s * 0 : s / 0
                     );
                 }
@@ -1140,7 +1142,7 @@
                 var base,
                     s = num ? str : str.replace( whitespaceOrPlus, '' );
 
-                // No exception on Â±Infinity or NaN.
+                // No exception on ±Infinity or NaN.
                 if ( isInfinityOrNaN.test(s) ) {
                     x.s = isNaN(s) ? null : s < 0 ? -1 : 1;
                 } else {
@@ -1411,7 +1413,7 @@
 
         /*
          * Return the number of decimal places of the value of this BigNumber, or null if the value
-         * of this BigNumber is Â±Infinity or NaN.
+         * of this BigNumber is ±Infinity or NaN.
          */
         P.decimalPlaces = P.dp = function () {
             var n, v,
@@ -1808,7 +1810,7 @@
 
             if ( !xe || !ye ) {
 
-                // Return Â±Infinity if either Â±Infinity.
+                // Return ±Infinity if either ±Infinity.
                 if ( !xc || !yc ) return new BigNumber( a / 0 );
 
                 // Either zero?
@@ -1924,7 +1926,7 @@
          *
          * k {number} Integer, -MAX_SAFE_INTEGER to MAX_SAFE_INTEGER inclusive.
          *
-         * If k is out of range and ERRORS is false, the result will be Â±0 if k < 0, or Â±Infinity
+         * If k is out of range and ERRORS is false, the result will be ±0 if k < 0, or ±Infinity
          * otherwise.
          *
          * 'shift() argument not an integer: {k}'
@@ -2080,7 +2082,7 @@
                 xc = x.c,
                 yc = ( id = 17, y = new BigNumber( y, b ) ).c;
 
-            // Either NaN, Â±Infinity or Â±0?
+            // Either NaN, ±Infinity or ±0?
             if ( !xc || !yc || !xc[0] || !yc[0] ) {
 
                 // Return NaN if either is NaN, or one is 0 and the other is Infinity.
@@ -2089,11 +2091,11 @@
                 } else {
                     y.s *= x.s;
 
-                    // Return Â±Infinity if either is Â±Infinity.
+                    // Return ±Infinity if either is ±Infinity.
                     if ( !xc || !yc ) {
                         y.c = y.e = null;
 
-                    // Return Â±0 if either is Â±0.
+                    // Return ±0 if either is ±0.
                     } else {
                         y.c = [0];
                         y.e = 0;
@@ -2361,50 +2363,85 @@
 
         /*
          * Return a BigNumber whose value is the value of this BigNumber raised to the power n.
+         * If m is present, return the result modulo m.
          * If n is negative round according to DECIMAL_PLACES and ROUNDING_MODE.
-         * If POW_PRECISION is not 0, round to POW_PRECISION using ROUNDING_MODE.
+         * If POW_PRECISION is non-zero and m is not present, round to POW_PRECISION using
+         * ROUNDING_MODE.
          *
-         * n {number} Integer, -9007199254740992 to 9007199254740992 inclusive.
-         * (Performs 54 loop iterations for n of 9007199254740992.)
+         * The modular power operation works efficiently when x, n, and m are positive integers,
+         * otherwise it is equivalent to calculating x.toPower(n).modulo(m) (with POW_PRECISION 0).
+         *
+         * n {number} Integer, -MAX_SAFE_INTEGER to MAX_SAFE_INTEGER inclusive.
+         * [m] {number|string|BigNumber} The modulus.
          *
          * 'pow() exponent not an integer: {n}'
          * 'pow() exponent out of range: {n}'
+         *
+         * Performs 54 loop iterations for n of 9007199254740991.
          */
-        P.toPower = P.pow = function (n) {
-            var k, y,
+        P.toPower = P.pow = function ( n, m ) {
+            var k, y, z,
                 i = mathfloor( n < 0 ? -n : +n ),
                 x = this;
 
-            // Pass Â±Infinity to Math.pow if exponent is out of range.
-            if ( !isValidInt( n, -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER, 23, 'exponent' ) &&
-              ( !isFinite(n) || i > MAX_SAFE_INTEGER && ( n /= 0 ) ||
-                parseFloat(n) != n && !( n = NaN ) ) ) {
-                return new BigNumber( Math.pow( +x, n ) );
+            if ( m != null ) {
+                id = 23;
+                m = new BigNumber(m);
             }
 
-            // Truncating each coefficient array to a length of k after each multiplication equates
-            // to truncating significant digits to POW_PRECISION + [28, 41], i.e. there will be a
-            // minimum of 28 guard digits retained. (Using + 1.5 would give [9, 21] guard digits.)
-            k = POW_PRECISION ? mathceil( POW_PRECISION / LOG_BASE + 2 ) : 0;
+            // Pass ±Infinity to Math.pow if exponent is out of range.
+            if ( !isValidInt( n, -MAX_SAFE_INTEGER, MAX_SAFE_INTEGER, 23, 'exponent' ) &&
+              ( !isFinite(n) || i > MAX_SAFE_INTEGER && ( n /= 0 ) ||
+                parseFloat(n) != n && !( n = NaN ) ) || n == 0 ) {
+                k = Math.pow( +x, n );
+                return new BigNumber( m ? k % m : k );
+            }
+
+            if (m) {
+                if ( n > 1 && x.gt(ONE) && x.isInt() && m.gt(ONE) && m.isInt() ) {
+                    x = x.mod(m);
+                } else {
+                    z = m;
+
+                    // Nullify m so only a single mod operation is performed at the end.
+                    m = null;
+                }
+            } else if (POW_PRECISION) {
+
+                // Truncating each coefficient array to a length of k after each multiplication
+                // equates to truncating significant digits to POW_PRECISION + [28, 41],
+                // i.e. there will be a minimum of 28 guard digits retained.
+                // (Using + 1.5 would give [9, 21] guard digits.)
+                k = mathceil( POW_PRECISION / LOG_BASE + 2 );
+            }
+
             y = new BigNumber(ONE);
 
             for ( ; ; ) {
-
                 if ( i % 2 ) {
                     y = y.times(x);
                     if ( !y.c ) break;
-                    if ( k && y.c.length > k ) y.c.length = k;
+                    if (k) {
+                        if ( y.c.length > k ) y.c.length = k;
+                    } else if (m) {
+                        y = y.mod(m);
+                    }
                 }
 
                 i = mathfloor( i / 2 );
                 if ( !i ) break;
-
                 x = x.times(x);
-                if ( k && x.c && x.c.length > k ) x.c.length = k;
+                if (k) {
+                    if ( x.c && x.c.length > k ) x.c.length = k;
+                } else if (m) {
+                    x = x.mod(m);
+                }
             }
 
+            if (m) return y;
             if ( n < 0 ) y = ONE.div(y);
-            return k ? round( y, POW_PRECISION, ROUNDING_MODE ) : y;
+
+            return z ? y.mod(z) : k ? round( y, POW_PRECISION, ROUNDING_MODE ) : y;
         };
 
 
@@ -2677,13 +2714,17 @@
     // EXPORT
 
 
-   // AMD.
+    BigNumber = constructorFactory();
+    BigNumber.default = BigNumber.BigNumber = BigNumber;
+
+
+    // AMD.
     if ( typeof define == 'function' && define.amd ) {
-        define( function () { return constructorFactory(); } );
+        define( function () { return BigNumber; } );
 
     // Node.js and other environments that support module.exports.
     } else if ( typeof module != 'undefined' && module.exports ) {
-        module.exports = constructorFactory();
+        module.exports = BigNumber;
 
         // Split string stops browserify adding crypto shim.
         if ( !cryptoObj ) try { cryptoObj = require('cry' + 'pto'); } catch (e) {}
@@ -2691,6 +2732,6 @@
     // Browser.
     } else {
         if ( !globalObj ) globalObj = typeof self != 'undefined' ? self : Function('return this')();
-        globalObj.BigNumber = constructorFactory();
+        globalObj.BigNumber = BigNumber;
     }
 })(this);

@@ -3,11 +3,11 @@ contract communityCurrency {
 	// @title Community Currency
 	// @author Rogelio SEGOVIA	
 	// @notice register 
-	// @param name the name of the currency
+	// @param currencyName the name of the currency
 	// @param symbol the symbol of the currency
 	// @param baseUnits is the number of units before the comma 
     uint baseUnits;
-    string name;
+    string currencyName;
     string symbol;
 	string communityName;
 
@@ -48,7 +48,7 @@ contract communityCurrency {
 		_treasury = msg.sender;  
 		_commune = msg.sender;  
 		baseUnits = 100;
-    	name = "HOURS";
+    	currencyName = "HOURS";
     	symbol = "HR";
 		communityName = "DESPERADO";
 	}
@@ -125,7 +125,7 @@ contract communityCurrency {
 		_getIniMemberCCUs = _iniMemberCCUs;
 		_getIniMemberReputation = _iniMemberReputation;
 		_getExchange = _exchange;
-		getName = name;
+		getName = currencyName;
 		getSymbol = symbol;
 		getCommunityName = communityName;
 		getBaseUnits = baseUnits;

@@ -1,3 +1,5 @@
+pragma solidity ^0.4.11;
+
 contract communityCurrency {
 	
 	// @title Community Currency
@@ -283,7 +285,6 @@ contract communityCurrency {
 				balancesOf[_borrower]._moneyLender = msg.sender;
 				// @notice the _deadline is established as a number of days ahead
 				uint _creditDeadline = now + _daysAfter * 1 days; 
-				string _moneyLenderAlias = balancesOf[msg.sender]._alias;
 				balancesOf[_borrower]._deadline = _creditDeadline; 
 				balancesOf[_borrower]._unitsOfTrust = _unitsOfTrust;
 				_totalCredit += _credit;

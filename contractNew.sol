@@ -101,7 +101,7 @@ contract communityCurrency {
  		balancesOf[_newMember]._alias = _newAlias;
 		_totalMinted += _iniMemberCCUs;
 		_totalTrustAvailable += _iniMemberReputation; 
-		NewMember(_newMember, _newAlias);
+		emit NewMember(_newMember, _newAlias);
     }
 	
 	// @notice the community account can kick out members. The action deletes all balances
@@ -115,7 +115,7 @@ contract communityCurrency {
 		_totalTrustAvailable -= balancesOf[_oldMember]._reputation;
 		_totalTrustCost += balancesOf[_oldMember]._unitsOfTrust;
         balancesOf[_oldMember]._credit = 0;
-        OldMember(_oldMember, _oldAlias);
+        emit OldMember(_oldMember, _oldAlias);
     }
 	
 	// @notice get the currency parameters
@@ -235,7 +235,7 @@ contract communityCurrency {
 				// @notice close access to monitor the account to money lender
 				balancesOf[msg.sender]._moneyLender = msg.sender; 
 				balancesOf[msg.sender]._unitsOfTrust = 0;
-				CreditExp(_oldMoneyLenderAddress, msg.sender, _oldUoT , _success, now);
+				emit CreditExp(_oldMoneyLenderAddress, msg.sender, _oldUoT , _success, now);
 				} 
 			}
 	    
@@ -265,7 +265,7 @@ contract communityCurrency {
 			balancesOf[_payee]._CCUs -= _amountCCUs * _demurrage/100;
 			balancesOf[_commune]._CCUs += _amountCCUs * _demurrage/100;
 			_realDemurrage += _amountCCUs * _demurrage/100;
-			Transfer(_payment, msg.sender, _payee, now);
+			emit Transfer(_payment, msg.sender, _payee, now);
 		}
 	}
 
@@ -290,7 +290,7 @@ contract communityCurrency {
 				_totalCredit += _credit;
 				_totalTrustCost += _unitsOfTrust;
 				_totalTrustAvailable -= _unitsOfTrust;
-				Credit(msg.sender, _borrower, _creditDeadline, _unitsOfTrust);		
+				emit Credit(msg.sender, _borrower, _creditDeadline, _unitsOfTrust);		
 			}
 		}}
 	}
@@ -334,7 +334,7 @@ contract communityCurrency {
 	// @notice claim Hours to paid from Community
 	function claimHours (int _claimH) public {
 		string storage myAlias = balancesOf[msg.sender]._alias;
-		ClaimH(msg.sender, myAlias, _claimH, now);
+		emit ClaimH(msg.sender, myAlias, _claimH, now);
 		}
 
 	// @notice pay Hours
@@ -344,7 +344,7 @@ contract communityCurrency {
     	transfer (_servant, _payH);
 		_realCommunityHours += int(_payH);
 		string storage _servantAlias = balancesOf[_servant]._alias;
-		PaidH(_servant, _servantAlias, _payH, now);
+		emit PaidH(_servant, _servantAlias, _payH, now);
 	}
 	
 	// @notice pay Funding

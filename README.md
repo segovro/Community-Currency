@@ -131,3 +131,4 @@ the Commune pays Hours
 a Commoner pays CrowdFunding
 ##function payExpenses	
 the Commune pays Expenses
+--
